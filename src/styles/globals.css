@@ -2,10 +2,10 @@
 @import "@fontsource-variable/lora";
 
 /* ──────────────────────────────────────────────────────────────
- * FluxA — Apple Glassmorphism 风格
+ * FluxA — Monochrome 极简单色风
  * 字体：Lora Variable (new-api theme.css 第 2 个 font token)
- * 配色：白底 + visionOS 彩色 mesh 渐变 + 玻璃质感
- * 字体保留 Lora 衬线 editorial（跟 Apple 玻璃感混搭 = editorial × spatial）
+ * 配色：白底 + 黑/灰阶文字 + 1px 浅边 + 极轻阴影
+ * 唯一 accent：保留 RetroArch 橙红 (logo 品牌色，不滥用)
  * ────────────────────────────────────────────────────────────── */
 @theme {
   --font-sans:
@@ -19,25 +19,26 @@
     "JetBrains Mono", "SF Mono", "Menlo", "Consolas", "Liberation Mono",
     monospace;
 
-  --color-background: #fbfbfd;
-  --color-foreground: #1d1d1f;          /* Apple 近黑 */
-  --color-surface: #f5f5f7;             /* Apple 浅灰 */
-  --color-surface-2: #ebebed;
-  --color-card: rgba(255, 255, 255, 0.7);
-  --color-card-foreground: #1d1d1f;
-  --color-muted: #ececef;
-  --color-muted-foreground: #6e6e73;
-  --color-primary: #0071e3;             /* Apple 蓝 */
+  --color-background: #ffffff;
+  --color-foreground: #0a0a0a;
+  --color-surface: #fafafa;
+  --color-surface-2: #f4f4f5;
+  --color-card: #ffffff;
+  --color-card-foreground: #0a0a0a;
+  --color-muted: #f4f4f5;
+  --color-muted-foreground: #71717a;
+  --color-primary: #0a0a0a;
   --color-primary-foreground: #ffffff;
-  --color-accent: #ff6b35;              /* RetroArch 橙红（保留 logo 配色） */
+  --color-secondary: #f4f4f5;
+  --color-secondary-foreground: #0a0a0a;
+  --color-accent: #ff6b35;              /* 仅用于 logo */
   --color-accent-foreground: #ffffff;
-  --color-violet: #8b5cf6;
-  --color-pink: #ec4899;
-  --color-orange: #f97316;
-  --color-cyan: #06b6d4;
-  --color-border: rgba(0, 0, 0, 0.08);
-  --color-input: rgba(0, 0, 0, 0.1);
-  --color-ring: #0071e3;
+  --color-border: #e4e4e7;
+  --color-input: #e4e4e7;
+  --color-ring: #0a0a0a;
+  --color-destructive: #0a0a0a;
+  --color-success: #0a0a0a;
+  --color-warning: #0a0a0a;
 }
 
 @layer base {
@@ -69,77 +70,16 @@
     text-underline-offset: 3px;
   }
 
-  /* visionOS 风格满屏彩色 mesh 渐变 */
-  .mesh-bg {
-    background:
-      radial-gradient(at 15% 20%, rgba(139, 92, 246, 0.35) 0px, transparent 45%),
-      radial-gradient(at 85% 15%, rgba(236, 72, 153, 0.30) 0px, transparent 45%),
-      radial-gradient(at 75% 80%, rgba(249, 115, 22, 0.25) 0px, transparent 45%),
-      radial-gradient(at 20% 75%, rgba(6, 182, 212, 0.30) 0px, transparent 45%),
-      radial-gradient(at 50% 50%, rgba(59, 130, 246, 0.18) 0px, transparent 60%),
-      linear-gradient(180deg, #f5f3ff 0%, #fff5f5 35%, #fff8f0 65%, #f0f9ff 100%);
-  }
-
-  /* Apple 风格 hero mesh（更鲜艳） */
-  .hero-mesh {
-    background:
-      radial-gradient(at 20% 25%, rgba(139, 92, 246, 0.55) 0px, transparent 50%),
-      radial-gradient(at 80% 20%, rgba(236, 72, 153, 0.50) 0px, transparent 50%),
-      radial-gradient(at 70% 75%, rgba(249, 115, 22, 0.45) 0px, transparent 50%),
-      radial-gradient(at 25% 80%, rgba(6, 182, 212, 0.50) 0px, transparent 50%);
-  }
-
-  /* Apple 风格浅色 mesh（柔和） */
-  .mesh-soft {
-    background:
-      radial-gradient(at 30% 20%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
-      radial-gradient(at 70% 30%, rgba(236, 72, 153, 0.12) 0px, transparent 50%),
-      radial-gradient(at 60% 80%, rgba(249, 115, 22, 0.10) 0px, transparent 50%);
-  }
-
-  /* visionOS 玻璃卡 */
-  .glass {
-    background: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(28px) saturate(180%);
-    -webkit-backdrop-filter: blur(28px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+  /* 极简阴影（无彩色） */
+  .shadow-ink {
     box-shadow:
       0 1px 2px rgba(0, 0, 0, 0.04),
+      0 4px 12px rgba(0, 0, 0, 0.04);
+  }
+  .shadow-ink-lg {
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.04),
       0 8px 24px rgba(0, 0, 0, 0.06),
-      inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  }
-
-  /* 深色玻璃（用于 hero 等彩色背景上） */
-  .glass-dark {
-    background: rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(28px) saturate(200%);
-    -webkit-backdrop-filter: blur(28px) saturate(200%);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.12),
-      inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  }
-
-  /* Apple 风格柔和阴影 */
-  .shadow-apple {
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.04),
-      0 4px 12px rgba(0, 0, 0, 0.04),
-      0 12px 32px rgba(0, 0, 0, 0.06);
-  }
-  .shadow-apple-lg {
-    box-shadow:
-      0 4px 12px rgba(0, 0, 0, 0.06),
-      0 16px 40px rgba(0, 0, 0, 0.10),
-      0 24px 64px rgba(0, 0, 0, 0.08);
-  }
-
-  /* 渐变文字（Apple 风） */
-  .text-gradient {
-    background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 35%, #f97316 70%, #06b6d4 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
+      0 12px 32px rgba(0, 0, 0, 0.04);
   }
 }

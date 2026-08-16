@@ -5,16 +5,14 @@ import Icon from '@/components/icon.astro';
 
 const services = await getCollection('services');
 ---
-<section class="py-20 bg-[#fbfbfd] relative">
+<section class="py-20 bg-[#fafafa] border-y border-zinc-200">
   <div class="container mx-auto max-w-6xl px-4">
     <div class="text-center max-w-2xl mx-auto">
-      <div class="inline-flex items-center gap-2 rounded-full bg-white/80 border border-black/5 px-3 py-1 text-[12px] text-zinc-600 mb-5 shadow-apple">
-        <span class="h-1.5 w-1.5 rounded-full bg-[#ff6b35]"></span>
+      <div class="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1 text-[12px] text-zinc-700 mb-5">
+        <span class="h-1.5 w-1.5 rounded-full bg-zinc-900"></span>
         4 大核心业务
       </div>
-      <h2 class="text-3xl md:text-[44px] leading-[1.15] font-semibold text-zinc-900 tracking-[-0.02em] text-balance">
-        覆盖所有 <span class="text-gradient">AI 服务</span> 场景
-      </h2>
+      <h2 class="text-3xl md:text-[44px] leading-[1.15] font-semibold text-zinc-900 tracking-[-0.02em] text-balance">覆盖所有 AI 服务场景</h2>
       <p class="mt-4 text-zinc-600 text-base max-w-xl mx-auto leading-relaxed">
         从个人订阅到团队拼车，从单一模型到聚合平台，官方价直充 + 透明服务费
       </p>
@@ -22,9 +20,9 @@ const services = await getCollection('services');
 
     <div class="mt-14 grid gap-5 md:grid-cols-2">
       {services.map((s) => (
-        <article class="group glass rounded-3xl p-7 hover:bg-white/70 transition-all">
+        <article class="group bg-white border border-zinc-200 rounded-2xl p-7 hover:border-zinc-900 hover:shadow-ink transition-all">
           <div class="flex items-start gap-4">
-            <div class="shrink-0 h-12 w-12 rounded-2xl bg-gradient-to-br from-[#8b5cf6] to-[#ec4899] flex items-center justify-center shadow-apple">
+            <div class="shrink-0 h-12 w-12 rounded-xl bg-zinc-900 flex items-center justify-center">
               <Icon name={s.data.icon} class="text-white" size={22} />
             </div>
             <div class="flex-1 min-w-0">
@@ -36,7 +34,7 @@ const services = await getCollection('services');
           <ul class="mt-5 space-y-2.5">
             {s.data.highlights.map((h) => (
               <li class="flex items-start gap-2.5 text-[13px]">
-                <div class="shrink-0 mt-0.5 h-4 w-4 rounded bg-gradient-to-br from-[#8b5cf6] to-[#ec4899] flex items-center justify-center">
+                <div class="shrink-0 mt-0.5 h-4 w-4 rounded bg-zinc-900 flex items-center justify-center">
                   <Icon name={h.icon} class="text-white" size={10} />
                 </div>
                 <div class="text-zinc-700">
@@ -49,7 +47,7 @@ const services = await getCollection('services');
 
           <div class="mt-6 flex justify-end">
             <a href={`/services/${s.data.slug}`}>
-              <Button variant="ghost" className="rounded-full text-[13px] text-[#0071e3] hover:text-[#0077ed] hover:bg-[#0071e3]/10 px-3">
+              <Button variant="ghost" className="rounded-full text-[13px] text-zinc-900 hover:bg-zinc-100 px-3">
                 查看详情 →
               </Button>
             </a>

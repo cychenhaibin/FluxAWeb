@@ -15,40 +15,40 @@ interface Tier {
 export function PricingCard({ tier }: { tier: Tier }) {
   return (
     <div
-      className={`rounded-3xl p-7 transition-all flex flex-col ${
+      className={`rounded-2xl p-7 transition-all flex flex-col ${
         tier.recommended
-          ? 'bg-gradient-to-b from-[#8b5cf6]/15 via-[#ec4899]/10 to-white/60 border-2 border-[#8b5cf6]/50 shadow-apple-lg ring-4 ring-[#8b5cf6]/10'
-          : 'glass hover:bg-white/70'
+          ? 'bg-zinc-900 text-white border-2 border-zinc-900 shadow-ink-lg'
+          : 'bg-white border border-zinc-200 hover:border-zinc-900 hover:shadow-ink'
       }`}
     >
       {tier.recommended && (
-        <Badge className="mb-3 self-start bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] text-white border-0 text-[11px] font-medium uppercase tracking-wider">
+        <Badge className="mb-3 self-start bg-white text-zinc-900 border-0 text-[11px] font-medium uppercase tracking-wider">
           推荐
         </Badge>
       )}
-      <h3 className="text-lg font-semibold text-zinc-900 tracking-tight">{tier.name}</h3>
+      <h3 className={`text-lg font-semibold tracking-tight ${tier.recommended ? 'text-white' : 'text-zinc-900'}`}>{tier.name}</h3>
       <div className="mt-4 flex items-baseline gap-1">
-        <span className="text-[44px] font-semibold text-zinc-900 tracking-[-0.005em] tnum leading-none">{tier.price}</span>
-        <span className="text-zinc-500 text-[14px]">{tier.period}</span>
+        <span className={`text-[44px] font-semibold tracking-[-0.005em] tnum leading-none ${tier.recommended ? 'text-white' : 'text-zinc-900'}`}>{tier.price}</span>
+        <span className={`text-[14px] ${tier.recommended ? 'text-zinc-400' : 'text-zinc-500'}`}>{tier.period}</span>
       </div>
       {tier.originalPrice && (
-        <div className="mt-2 text-[12px] text-zinc-500 tnum">{tier.originalPrice}</div>
+        <div className={`mt-2 text-[12px] tnum ${tier.recommended ? 'text-zinc-400' : 'text-zinc-500'}`}>{tier.originalPrice}</div>
       )}
-      <ul className="mt-6 space-y-3 text-[14px] text-zinc-700 flex-1">
+      <ul className={`mt-6 space-y-3 text-[14px] flex-1 ${tier.recommended ? 'text-zinc-300' : 'text-zinc-700'}`}>
         {tier.features.map((f, i) => (
           <li key={i} className="flex gap-2.5">
-            <Check size={16} className="text-[#0071e3] shrink-0 mt-0.5" strokeWidth={2.5} />
+            <Check size={16} className={`shrink-0 mt-0.5 ${tier.recommended ? 'text-white' : 'text-zinc-900'}`} strokeWidth={2.5} />
             <span>{f}</span>
           </li>
         ))}
       </ul>
       <a href="/contact" className="block mt-7">
         <Button
-          variant={tier.recommended ? 'default' : 'outline'}
+          variant={tier.recommended ? 'secondary' : 'default'}
           className={`w-full rounded-full h-11 text-[13.5px] font-medium ${
             tier.recommended
-              ? 'bg-gradient-to-r from-[#8b5cf6] via-[#ec4899] to-[#f97316] text-white hover:opacity-90 shadow-apple'
-              : 'border-black/10 bg-white text-zinc-900 hover:bg-zinc-50'
+              ? 'bg-white text-zinc-900 hover:bg-zinc-100'
+              : 'bg-zinc-900 text-white hover:bg-zinc-800'
           }`}
         >
           {tier.ctaLabel}
