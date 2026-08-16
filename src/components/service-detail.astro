@@ -49,7 +49,7 @@ const startingPrice = startingTier
     <div class="inline-flex h-16 w-16 rounded-2xl bg-white border border-indigo-100 shadow-stripe items-center justify-center mb-7">
       <Icon name={service.icon} class="text-indigo-600" size={32} />
     </div>
-    <h1 class="text-[clamp(2rem,5vw,3.75rem)] leading-[1.05] font-semibold text-zinc-900 tracking-[-0.035em] text-balance">{service.name}</h1>
+    <h1 class="text-[clamp(2rem,5vw,3.75rem)] leading-[1.25] font-semibold text-zinc-900 tracking-[-0.015em] text-balance">{service.name}</h1>
     <p class="mt-5 text-base md:text-lg text-zinc-600 max-w-2xl mx-auto leading-relaxed text-pretty">{service.tagline}</p>
 
     {(startingPrice || tierCount > 0) && (
@@ -88,7 +88,7 @@ const startingPrice = startingTier
 
 <section class="py-16 bg-zinc-50">
   <div class="container mx-auto max-w-5xl px-4">
-    <h2 class="text-2xl md:text-[28px] leading-[1.15] font-semibold text-zinc-900 text-center tracking-[-0.025em]">核心亮点</h2>
+    <h2 class="text-2xl md:text-[28px] leading-[1.25] font-semibold text-zinc-900 text-center tracking-[-0.01em]">核心亮点</h2>
     <p class="mt-2.5 text-center text-zinc-600 text-[14px]">为什么选择 {service.name}</p>
     <div class="mt-10 grid gap-5 sm:grid-cols-2">
       {service.highlights.map((h) => (

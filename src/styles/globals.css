@@ -1,65 +1,69 @@
 @import "tailwindcss";
-@import "@fontsource-variable/inter";
+@import "@fontsource-variable/lora";
 
 /* ──────────────────────────────────────────────────────────────
- * FluxA — Stripe 风格设计 token
- * 字体：Inter Variable (new-api theme.css 第 3 个 font token)
+ * FluxA — Stripe 风格设计 token（serif editorial 版）
+ * 字体：Lora Variable (new-api theme.css 第 2 个 font token)
  * 主色：紫蓝 Stripe-inspired (#5b6cff) + 青蓝 accent
  * 整体：白底 / 浅灰底 section 交替 / 阴影柔和 / 大量留白
  * ────────────────────────────────────────────────────────────── */
 @theme {
   --font-sans:
-    "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue",
-    Arial, sans-serif;
+    "Lora Variable", "Lora", "Source Serif Pro", "Source Serif 4",
+    "Noto Serif SC", "Noto Serif TC", "Noto Serif JP", "Noto Serif KR",
+    "Source Han Serif SC", "Source Han Serif TC", "Source Han Serif",
+    "Songti SC", "STSong", "STSongti-SC-Regular", "PingFang SC", "SimSun",
+    "NSimSun", "宋体", "FangSong", "仿宋", "KaiTi", "楷体", Georgia,
+    "Times New Roman", Cambria, "Liberation Serif", serif;
+  --font-serif: var(--font-sans);
   --font-mono:
     "JetBrains Mono", "SF Mono", "Menlo", "Consolas", "Liberation Mono",
     monospace;
 
   --color-background: #ffffff;
-  --color-foreground: #0a2540;        /* Stripe navy */
-  --color-surface: #f6f9fc;           /* 浅灰底 section */
-  --color-surface-2: #eef2f6;
+  --color-foreground: #1a1a1a;        /* editorial ink */
+  --color-surface: #f7f5f0;           /* warm paper */
+  --color-surface-2: #efece4;
   --color-card: #ffffff;
-  --color-card-foreground: #0a2540;
-  --color-muted: #f6f9fc;
-  --color-muted-foreground: #425466;  /* 浅文本 */
+  --color-card-foreground: #1a1a1a;
+  --color-muted: #f4f1ea;
+  --color-muted-foreground: #5a5a5a;
   --color-primary: #5b6cff;           /* Stripe 紫蓝 */
   --color-primary-foreground: #ffffff;
   --color-accent: #06b6d4;            /* 青蓝 */
   --color-accent-foreground: #ffffff;
-  --color-pink: #ec4899;              /* mesh 渐变点缀 */
-  --color-border: #e3e8ee;
-  --color-input: #e3e8ee;
+  --color-pink: #ec4899;
+  --color-border: #e5e1d8;
+  --color-input: #e5e1d8;
   --color-ring: #5b6cff;
   --color-success: #0fb27e;
-  --color-warning: #f5a623;
-  --color-destructive: #e74c3c;
+  --color-warning: #c08a1a;
+  --color-destructive: #c0392b;
 
   --text-display-2xl: 4.5rem;
   --text-display-2xl--line-height: 1.05;
-  --text-display-2xl--letter-spacing: -0.04em;
+  --text-display-2xl--letter-spacing: -0.02em;
   --text-display-xl: 3.75rem;
-  --text-display-xl--line-height: 1.05;
-  --text-display-xl--letter-spacing: -0.035em;
+  --text-display-xl--line-height: 1.08;
+  --text-display-xl--letter-spacing: -0.018em;
   --text-display-lg: 3rem;
-  --text-display-lg--line-height: 1.1;
-  --text-display-lg--letter-spacing: -0.03em;
+  --text-display-lg--line-height: 1.12;
+  --text-display-lg--letter-spacing: -0.015em;
   --text-display-md: 2.25rem;
-  --text-display-md--line-height: 1.15;
-  --text-display-md--letter-spacing: -0.025em;
+  --text-display-md--line-height: 1.18;
+  --text-display-md--letter-spacing: -0.012em;
   --text-display-sm: 1.875rem;
-  --text-display-sm--line-height: 1.2;
-  --text-display-sm--letter-spacing: -0.02em;
+  --text-display-sm--line-height: 1.22;
+  --text-display-sm--letter-spacing: -0.01em;
 }
 
 @layer base {
   html {
     font-family: var(--font-sans);
     font-feature-settings:
-      "cv11" on,
-      "ss01" on,
-      "ss03" on;
+      "liga" on,
+      "kern" on,
+      "calt" on;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -72,10 +76,11 @@
     font-feature-settings: "tnum" on, "lnum" on;
     background: var(--color-background);
     color: var(--color-foreground);
+    line-height: 1.65;
   }
 
   .tnum {
-    font-feature-settings: "tnum" on, "cv11" on;
+    font-feature-settings: "tnum" on;
     font-variant-numeric: tabular-nums lining-nums;
   }
 
@@ -83,32 +88,31 @@
     text-underline-offset: 3px;
   }
 
-  /* Stripe 风 mesh 渐变背景 */
+  /* Stripe 风 mesh 渐变背景（暖色调，跟 serif 配） */
   .mesh-bg {
     background:
-      radial-gradient(at 27% 37%, rgba(91, 108, 255, 0.18) 0px, transparent 50%),
-      radial-gradient(at 97% 21%, rgba(236, 72, 153, 0.12) 0px, transparent 50%),
-      radial-gradient(at 52% 99%, rgba(6, 182, 212, 0.16) 0px, transparent 50%),
-      radial-gradient(at 10% 80%, rgba(139, 92, 246, 0.10) 0px, transparent 50%),
-      radial-gradient(at 97% 89%, rgba(91, 108, 255, 0.10) 0px, transparent 50%);
+      radial-gradient(at 27% 37%, rgba(91, 108, 255, 0.16) 0px, transparent 50%),
+      radial-gradient(at 97% 21%, rgba(236, 72, 153, 0.10) 0px, transparent 50%),
+      radial-gradient(at 52% 99%, rgba(6, 182, 212, 0.12) 0px, transparent 50%),
+      radial-gradient(at 10% 80%, rgba(139, 92, 246, 0.08) 0px, transparent 50%),
+      radial-gradient(at 97% 89%, rgba(91, 108, 255, 0.08) 0px, transparent 50%);
   }
 
-  /* Stripe 风柔阴影 */
   .shadow-stripe {
     box-shadow:
-      0 1px 1px rgba(10, 37, 64, 0.04),
-      0 2px 4px rgba(10, 37, 64, 0.04),
-      0 4px 8px rgba(10, 37, 64, 0.04);
+      0 1px 1px rgba(26, 26, 26, 0.04),
+      0 2px 4px rgba(26, 26, 26, 0.04),
+      0 4px 8px rgba(26, 26, 26, 0.04);
   }
   .shadow-stripe-lg {
     box-shadow:
-      0 2px 5px rgba(10, 37, 64, 0.04),
-      0 5px 15px rgba(10, 37, 64, 0.06),
-      0 10px 30px rgba(10, 37, 64, 0.08);
+      0 2px 5px rgba(26, 26, 26, 0.04),
+      0 5px 15px rgba(26, 26, 26, 0.06),
+      0 10px 30px rgba(26, 26, 26, 0.08);
   }
   .shadow-stripe-hover {
     box-shadow:
-      0 4px 12px rgba(10, 37, 64, 0.06),
-      0 8px 24px rgba(10, 37, 64, 0.08);
+      0 4px 12px rgba(26, 26, 26, 0.06),
+      0 8px 24px rgba(26, 26, 26, 0.08);
   }
 }
