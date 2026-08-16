@@ -36,26 +36,26 @@ const channels: Channel[] = [
   },
 ];
 ---
-<section class="py-20 bg-white">
+<section class="py-20 bg-[#0e0e10] border-t border-white/5 relative">
   <div class="container mx-auto max-w-6xl px-4">
     <div class="text-center max-w-2xl mx-auto">
-      <div class="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-[#fafafa] px-3 py-1 text-[12px] text-zinc-700 mb-5">
-        <span class="h-1.5 w-1.5 rounded-full bg-zinc-900"></span>
+      <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[12px] text-zinc-300 mb-5 backdrop-blur-md">
+        <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
         真人值守
       </div>
-      <h2 class="text-3xl md:text-[44px] leading-[1.15] font-semibold text-zinc-900 tracking-[-0.02em] text-balance">联系我们</h2>
-      <p class="mt-4 text-zinc-600 text-base">三种方式挑一个最方便的，7×24 都有真人</p>
+      <h2 class="text-3xl md:text-[44px] leading-[1.1] font-semibold text-white tracking-[-0.02em] text-balance">联系我们</h2>
+      <p class="mt-4 text-zinc-400 text-base">三种方式挑一个最方便的，7×24 都有真人</p>
     </div>
 
-    <div class="mt-14 grid gap-5 sm:grid-cols-3">
+    <div class="mt-14 grid gap-4 sm:grid-cols-3">
       {channels.map((c) => {
         const body = (
-          <article class="h-full bg-white border border-zinc-200 rounded-2xl p-6 flex flex-col items-start hover:border-zinc-900 hover:shadow-ink transition-all">
-            <div class="h-11 w-11 rounded-xl bg-zinc-900 flex items-center justify-center">
-              <Icon name={c.iconName} class="text-white" size={22} />
+          <article class="h-full card rounded-xl p-6 flex flex-col items-start hover:border-[#5e6ad2]/50 transition-all">
+            <div class="h-10 w-10 rounded-lg bg-[#5e6ad2]/15 border border-[#5e6ad2]/25 flex items-center justify-center">
+              <Icon name={c.iconName} class="text-[#5e6ad2]" size={20} />
             </div>
-            <h3 class="mt-3.5 text-[15px] font-semibold text-zinc-900 tracking-tight">{c.name}</h3>
-            <p class="mt-1.5 text-[13px] text-zinc-600 flex-1 leading-relaxed">{c.detail}</p>
+            <h3 class="mt-3.5 text-[15px] font-semibold text-white tracking-tight">{c.name}</h3>
+            <p class="mt-1.5 text-[13px] text-zinc-400 flex-1 leading-relaxed">{c.detail}</p>
           </article>
         );
         return c.href ? (
@@ -75,7 +75,7 @@ const channels: Channel[] = [
 
     <div class="mt-12 flex justify-center">
       <a href="/contact">
-        <Button size="lg" className="rounded-full h-11 px-6 text-[13px] font-medium bg-zinc-900 text-white hover:bg-zinc-800">
+        <Button size="lg" className="rounded-lg h-11 px-5 text-[13px] font-medium bg-[#5e6ad2] text-white hover:bg-[#7173f3] shadow-purple">
           联系我们
         </Button>
       </a>

@@ -1,53 +1,52 @@
 @import "tailwindcss";
-@import "@fontsource-variable/lora";
+@import "@fontsource-variable/inter";
 
 /* ──────────────────────────────────────────────────────────────
- * FluxA — Monochrome 极简单色风
- * 字体：Lora Variable (new-api theme.css 第 2 个 font token)
- * 配色：白底 + 黑/灰阶文字 + 1px 浅边 + 极轻阴影
- * 唯一 accent：保留 RetroArch 橙红 (logo 品牌色，不滥用)
+ * FluxA — Linear.app 风格
+ * 字体：Inter Variable (new-api theme.css 第 3 个 font token)
+ * 配色：深紫黑 #08090a + Linear 紫蓝 #5e6ad2
  * ────────────────────────────────────────────────────────────── */
 @theme {
   --font-sans:
-    "Lora Variable", "Lora", "Source Serif Pro", "Source Serif 4",
-    "Noto Serif SC", "Noto Serif TC", "Noto Serif JP", "Noto Serif KR",
-    "Source Han Serif SC", "Source Han Serif TC", "Source Han Serif",
-    "Songti SC", "STSong", "STSongti-SC-Regular", "PingFang SC", "SimSun",
-    "NSimSun", "宋体", "FangSong", "仿宋", "KaiTi", "楷体", Georgia,
-    "Times New Roman", Cambria, "Liberation Serif", serif;
+    "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue",
+    Arial, sans-serif;
   --font-mono:
     "JetBrains Mono", "SF Mono", "Menlo", "Consolas", "Liberation Mono",
     monospace;
 
-  --color-background: #ffffff;
-  --color-foreground: #0a0a0a;
-  --color-surface: #fafafa;
-  --color-surface-2: #f4f4f5;
-  --color-card: #ffffff;
-  --color-card-foreground: #0a0a0a;
-  --color-muted: #f4f4f5;
-  --color-muted-foreground: #71717a;
-  --color-primary: #0a0a0a;
+  --color-background: #08090a;
+  --color-foreground: #f7f8f8;
+  --color-surface: #0e0e10;
+  --color-surface-2: #151517;
+  --color-card: #0e0e10;
+  --color-card-foreground: #f7f8f8;
+  --color-popover: #151517;
+  --color-popover-foreground: #f7f8f8;
+  --color-muted: #151517;
+  --color-muted-foreground: #8a8f98;
+  --color-primary: #5e6ad2;            /* Linear 紫蓝 */
   --color-primary-foreground: #ffffff;
-  --color-secondary: #f4f4f5;
-  --color-secondary-foreground: #0a0a0a;
-  --color-accent: #ff6b35;              /* 仅用于 logo */
-  --color-accent-foreground: #ffffff;
-  --color-border: #e4e4e7;
-  --color-input: #e4e4e7;
-  --color-ring: #0a0a0a;
-  --color-destructive: #0a0a0a;
-  --color-success: #0a0a0a;
-  --color-warning: #0a0a0a;
+  --color-secondary: #151517;
+  --color-secondary-foreground: #f7f8f8;
+  --color-accent: #c4c5f5;             /* 浅紫 */
+  --color-accent-foreground: #08090a;
+  --color-destructive: #eb5757;
+  --color-destructive-foreground: #ffffff;
+  --color-success: #4cb782;
+  --color-warning: #f2c94c;
+  --color-border: #1d1d20;
+  --color-input: #1d1d20;
+  --color-ring: #5e6ad2;
 }
 
 @layer base {
   html {
     font-family: var(--font-sans);
     font-feature-settings:
-      "liga" on,
-      "kern" on,
-      "calt" on;
+      "cv11" on,
+      "ss01" on,
+      "ss03" on;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -58,7 +57,7 @@
     font-feature-settings: "tnum" on, "lnum" on;
     background: var(--color-background);
     color: var(--color-foreground);
-    line-height: 1.65;
+    line-height: 1.6;
   }
 
   .tnum {
@@ -70,16 +69,45 @@
     text-underline-offset: 3px;
   }
 
-  /* 极简阴影（无彩色） */
-  .shadow-ink {
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.04),
-      0 4px 12px rgba(0, 0, 0, 0.04);
+  /* Linear 风格 mesh 渐变（紫蓝） */
+  .mesh-bg {
+    background:
+      radial-gradient(at 25% 20%, rgba(94, 106, 210, 0.30) 0px, transparent 50%),
+      radial-gradient(at 75% 30%, rgba(139, 92, 246, 0.20) 0px, transparent 50%),
+      radial-gradient(at 50% 80%, rgba(94, 106, 210, 0.15) 0px, transparent 50%);
   }
-  .shadow-ink-lg {
+
+  /* Linear 风格 mesh 偏蓝（variation） */
+  .mesh-soft {
+    background:
+      radial-gradient(at 30% 20%, rgba(94, 106, 210, 0.10) 0px, transparent 50%),
+      radial-gradient(at 70% 60%, rgba(139, 92, 246, 0.08) 0px, transparent 50%);
+  }
+
+  /* Linear 风格深色玻璃 */
+  .glass {
+    background: rgba(14, 14, 16, 0.6);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* Linear 风格卡片（无玻璃，纯深色） */
+  .card {
+    background: #0e0e10;
+    border: 1px solid #1d1d20;
+    border-radius: 12px;
+  }
+
+  /* Linear 紫蓝 glow */
+  .shadow-purple {
     box-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.04),
-      0 8px 24px rgba(0, 0, 0, 0.06),
-      0 12px 32px rgba(0, 0, 0, 0.04);
+      0 4px 14px rgba(94, 106, 210, 0.25),
+      0 10px 30px rgba(94, 106, 210, 0.15);
+  }
+  .shadow-purple-lg {
+    box-shadow:
+      0 8px 24px rgba(94, 106, 210, 0.30),
+      0 20px 50px rgba(94, 106, 210, 0.18);
   }
 }

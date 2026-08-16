@@ -8,12 +8,12 @@ export default function PricingTabs({ services, pricingByService }: { services: 
   return (
     <Tabs defaultValue={services[0].slug}>
       <div className="flex justify-center">
-        <TabsList className="inline-flex bg-zinc-100 p-1 rounded-full">
+        <TabsList className="inline-flex bg-white/5 backdrop-blur-md p-1 rounded-lg border border-white/10">
           {services.map((s) => (
             <TabsTrigger
               key={s.slug}
               value={s.slug}
-              className="rounded-full px-4 text-[13.5px] font-medium text-zinc-600 data-[state=active]:bg-white data-[state=active]:text-zinc-900 data-[state=active]:shadow-ink"
+              className="rounded-md px-4 text-[13.5px] font-medium text-zinc-400 data-[state=active]:bg-[#5e6ad2] data-[state=active]:text-white data-[state=active]:shadow-purple"
             >
               {s.name}
             </TabsTrigger>
@@ -22,7 +22,7 @@ export default function PricingTabs({ services, pricingByService }: { services: 
       </div>
       {services.map((s) => (
         <TabsContent key={s.slug} value={s.slug}>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
             {(pricingByService[s.slug]?.tiers ?? []).map((tier, i) => (
               <PricingCard key={i} tier={tier} />
             ))}

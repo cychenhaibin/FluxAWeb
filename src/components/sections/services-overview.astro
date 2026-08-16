@@ -5,40 +5,40 @@ import Icon from '@/components/icon.astro';
 
 const services = await getCollection('services');
 ---
-<section class="py-20 bg-[#fafafa] border-y border-zinc-200">
+<section class="py-20 bg-[#08090a] relative">
   <div class="container mx-auto max-w-6xl px-4">
     <div class="text-center max-w-2xl mx-auto">
-      <div class="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1 text-[12px] text-zinc-700 mb-5">
-        <span class="h-1.5 w-1.5 rounded-full bg-zinc-900"></span>
+      <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[12px] text-zinc-300 mb-5 backdrop-blur-md">
+        <span class="h-1.5 w-1.5 rounded-full bg-[#5e6ad2]"></span>
         4 大核心业务
       </div>
-      <h2 class="text-3xl md:text-[44px] leading-[1.15] font-semibold text-zinc-900 tracking-[-0.02em] text-balance">覆盖所有 AI 服务场景</h2>
-      <p class="mt-4 text-zinc-600 text-base max-w-xl mx-auto leading-relaxed">
+      <h2 class="text-3xl md:text-[44px] leading-[1.1] font-semibold text-white tracking-[-0.02em] text-balance">覆盖所有 AI 服务场景</h2>
+      <p class="mt-4 text-zinc-400 text-base max-w-xl mx-auto leading-relaxed">
         从个人订阅到团队拼车，从单一模型到聚合平台，官方价直充 + 透明服务费
       </p>
     </div>
 
-    <div class="mt-14 grid gap-5 md:grid-cols-2">
+    <div class="mt-14 grid gap-4 md:grid-cols-2">
       {services.map((s) => (
-        <article class="group bg-white border border-zinc-200 rounded-2xl p-7 hover:border-zinc-900 hover:shadow-ink transition-all">
+        <article class="group card rounded-xl p-7 hover:border-[#5e6ad2]/50 hover:bg-[#151517] transition-all">
           <div class="flex items-start gap-4">
-            <div class="shrink-0 h-12 w-12 rounded-xl bg-zinc-900 flex items-center justify-center">
-              <Icon name={s.data.icon} class="text-white" size={22} />
+            <div class="shrink-0 h-11 w-11 rounded-lg bg-[#5e6ad2]/15 border border-[#5e6ad2]/25 flex items-center justify-center group-hover:bg-[#5e6ad2]/25 transition-all">
+              <Icon name={s.data.icon} class="text-[#5e6ad2]" size={22} />
             </div>
             <div class="flex-1 min-w-0">
-              <h3 class="text-lg font-semibold text-zinc-900 tracking-tight">{s.data.name}</h3>
-              <p class="mt-1.5 text-[13.5px] text-zinc-600 leading-relaxed">{s.data.description}</p>
+              <h3 class="text-lg font-semibold text-white tracking-tight">{s.data.name}</h3>
+              <p class="mt-1.5 text-[13.5px] text-zinc-400 leading-relaxed">{s.data.description}</p>
             </div>
           </div>
 
           <ul class="mt-5 space-y-2.5">
             {s.data.highlights.map((h) => (
               <li class="flex items-start gap-2.5 text-[13px]">
-                <div class="shrink-0 mt-0.5 h-4 w-4 rounded bg-zinc-900 flex items-center justify-center">
-                  <Icon name={h.icon} class="text-white" size={10} />
+                <div class="shrink-0 mt-0.5 h-4 w-4 rounded bg-[#5e6ad2]/15 flex items-center justify-center">
+                  <Icon name={h.icon} class="text-[#5e6ad2]" size={10} />
                 </div>
-                <div class="text-zinc-700">
-                  <span class="font-medium text-zinc-900">{h.title}</span>
+                <div class="text-zinc-300">
+                  <span class="font-medium text-white">{h.title}</span>
                   <span class="text-zinc-500"> · {h.description}</span>
                 </div>
               </li>
@@ -47,7 +47,7 @@ const services = await getCollection('services');
 
           <div class="mt-6 flex justify-end">
             <a href={`/services/${s.data.slug}`}>
-              <Button variant="ghost" className="rounded-full text-[13px] text-zinc-900 hover:bg-zinc-100 px-3">
+              <Button variant="ghost" className="rounded-lg text-[13px] text-[#5e6ad2] hover:text-[#c4c5f5] hover:bg-[#5e6ad2]/10 px-3">
                 查看详情 →
               </Button>
             </a>
