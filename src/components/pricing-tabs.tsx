@@ -8,12 +8,12 @@ export default function PricingTabs({ services, pricingByService }: { services: 
   return (
     <Tabs defaultValue={services[0].slug}>
       <div className="flex justify-center">
-        <TabsList className="inline-flex bg-white/5 backdrop-blur-md p-1 rounded-full border border-white/10">
+        <TabsList className="inline-flex glass rounded-full p-1">
           {services.map((s) => (
             <TabsTrigger
               key={s.slug}
               value={s.slug}
-              className="rounded-full px-4 text-[13.5px] font-medium text-zinc-400 data-[state=active]:bg-[#ff6b35] data-[state=active]:text-white data-[state=active]:shadow-orange"
+              className="rounded-full px-4 text-[13.5px] font-medium text-zinc-600 data-[state=active]:bg-white data-[state=active]:text-zinc-900 data-[state=active]:shadow-apple"
             >
               {s.name}
             </TabsTrigger>

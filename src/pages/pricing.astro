@@ -14,18 +14,18 @@ const pricingList = await getCollection('pricing');
 const pricingByService = Object.fromEntries(pricingList.map((p) => [p.data.service.id, p.data]));
 ---
 <BaseLayout title="价格 - FluxA">
-  <section class="relative py-24 bg-[#0a0a14] mesh-bg overflow-hidden">
+  <section class="relative py-24 hero-mesh overflow-hidden">
     <div class="container mx-auto max-w-6xl px-4 relative">
       <div class="text-center max-w-3xl mx-auto">
-        <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[12px] text-zinc-300 mb-5 backdrop-blur-md">
-          <span class="h-1.5 w-1.5 rounded-full bg-[#ff6b35]"></span>
+        <div class="inline-flex items-center gap-2 rounded-full glass-dark px-3 py-1 text-[12px] text-white mb-5">
+          <span class="h-1.5 w-1.5 rounded-full bg-white"></span>
           官方价透明
         </div>
-        <h1 class="text-4xl md:text-[56px] font-semibold text-white tracking-[-0.015em] leading-[1.15] text-balance">价格方案</h1>
-        <p class="mt-5 text-base md:text-lg text-zinc-400">每档套餐仅加 $3 人工费，5 分钟开通</p>
+        <h1 class="text-4xl md:text-[56px] font-semibold text-white tracking-[-0.02em] leading-[1.1] text-balance drop-shadow-sm">价格方案</h1>
+        <p class="mt-5 text-base md:text-lg text-white/90">每档套餐仅加 $3 人工费，5 分钟开通</p>
       </div>
 
-      <div class="mt-10 mx-auto max-w-3xl rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4 text-sm text-amber-200 flex items-start gap-3 backdrop-blur-md">
+      <div class="mt-10 mx-auto max-w-3xl rounded-2xl border border-amber-300/50 bg-amber-50/90 p-4 text-sm text-amber-900 flex items-start gap-3 shadow-apple">
         <span class="text-base">⚠️</span>
         <div>
           <strong class="font-semibold">价格说明：</strong>

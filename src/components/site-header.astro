@@ -2,23 +2,23 @@
 import { siteConfig } from '@/lib/site-config';
 import { Button } from '@/components/ui/button';
 ---
-<header class="sticky top-0 z-50 backdrop-blur-xl bg-[#0a0a14]/70 border-b border-white/5">
+<header class="sticky top-0 z-50 backdrop-blur-xl bg-white/70 border-b border-black/5">
   <div class="container mx-auto max-w-6xl px-4 h-16 flex items-center justify-between">
-    <a href="/" class="flex items-center gap-3 text-[15px] font-semibold text-white tracking-[-0.01em]">
-      <span class="inline-flex h-8 w-8 rounded-lg bg-[#ff6b35]/10 border border-[#ff6b35]/30 items-center justify-center shadow-orange">
+    <a href="/" class="flex items-center gap-3 text-[15px] font-semibold text-zinc-900 tracking-[-0.01em]">
+      <span class="inline-flex h-8 w-8 rounded-lg bg-white border border-black/5 items-center justify-center shadow-apple">
         <img src="/retroarch.svg" alt="FluxA" class="h-5 w-5" />
       </span>
       {siteConfig.brand.name}
     </a>
     <nav class="hidden md:flex items-center gap-8 text-[13.5px]">
       {siteConfig.nav.map((item) => (
-        <a href={item.href} class="text-zinc-400 hover:text-white transition-colors">
+        <a href={item.href} class="text-zinc-600 hover:text-zinc-900 transition-colors">
           {item.label}
         </a>
       ))}
     </nav>
     <a href="/contact">
-      <Button className="rounded-full h-9 px-4 text-[13px] font-medium bg-[#ff6b35] text-white hover:bg-[#ff8255] shadow-orange">
+      <Button className="rounded-full h-9 px-4 text-[13px] font-medium bg-zinc-900 text-white hover:bg-zinc-800">
         立即购买
       </Button>
     </a>
