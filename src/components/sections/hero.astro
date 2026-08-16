@@ -6,32 +6,34 @@ import { getCollection } from 'astro:content';
 
 const services = await getCollection('services');
 ---
-<section class="relative pt-32 pb-24 bg-white mesh-bg overflow-hidden">
+<section class="relative pt-32 pb-24 bg-[#0a0a14] mesh-bg overflow-hidden">
+  <div class="absolute inset-0 pixel-grid opacity-50 -z-10"></div>
+
   <div class="container mx-auto max-w-5xl px-4 text-center relative">
     <!-- Badge -->
-    <div class="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3.5 py-1.5 text-[13px] text-zinc-700 mb-8 shadow-stripe">
+    <div class="inline-flex items-center gap-2 rounded-full border border-[#ff6b35]/30 bg-[#ff6b35]/10 px-3.5 py-1.5 text-[13px] text-[#ff6b35] mb-8 backdrop-blur-md">
       <span class="relative flex h-1.5 w-1.5">
-        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-        <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#ff6b35] opacity-75"></span>
+        <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#ff6b35]"></span>
       </span>
       官方价直充 · 仅加 $3 人工费
     </div>
 
-    <h1 class="text-[clamp(2.5rem,7vw,5rem)] leading-[1.15] font-semibold text-zinc-900 tracking-[-0.02em] text-balance">
+    <h1 class="text-[clamp(2.5rem,7vw,5rem)] leading-[1.15] font-semibold text-white tracking-[-0.02em] text-balance">
       {siteConfig.brand.slogan}
     </h1>
-    <p class="mt-7 text-base md:text-lg text-zinc-600 max-w-2xl mx-auto leading-relaxed text-pretty">
+    <p class="mt-7 text-base md:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed text-pretty">
       FluxA 提供 ChatGPT / Claude / Max 拼车 / AI 聚合等 AI 服务<br class="hidden md:block" />
       官方价透明计费，5 分钟极速到账，7×24 客服
     </p>
     <div class="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
       <a href="/pricing">
-        <Button size="lg" className="rounded-full h-11 px-6 text-[13px] font-medium bg-indigo-600 text-white hover:bg-indigo-700 shadow-stripe">
+        <Button size="lg" className="rounded-full h-11 px-6 text-[13px] font-medium bg-[#ff6b35] text-white hover:bg-[#ff8255] shadow-orange">
           查看套餐价格
         </Button>
       </a>
       <a href="/contact">
-        <Button size="lg" variant="outline" className="rounded-full h-11 px-6 text-[13px] font-medium border-zinc-300 bg-white text-zinc-900 hover:bg-zinc-50">
+        <Button size="lg" variant="outline" className="rounded-full h-11 px-6 text-[13px] font-medium border-white/15 bg-white/5 text-white hover:bg-white/10 backdrop-blur-md">
           联系客服
         </Button>
       </a>
@@ -40,26 +42,26 @@ const services = await getCollection('services');
       {services.map((s) => (
         <a
           href={`/services/${s.data.slug}`}
-          class="group bg-white border border-zinc-200 rounded-xl p-4 hover:border-indigo-300 hover:shadow-stripe-hover transition-all"
+          class="group glass-card rounded-xl p-4 hover:border-[#ff6b35]/40 hover:shadow-orange transition-all"
         >
-          <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-indigo-50 border border-indigo-100 mx-auto group-hover:bg-indigo-100 transition-all">
-            <Icon name={s.data.icon} class="text-indigo-600" size={20} />
+          <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-[#ff6b35]/10 border border-[#ff6b35]/30 mx-auto group-hover:bg-[#ff6b35]/20 transition-all">
+            <Icon name={s.data.icon} class="text-[#ff6b35]" size={20} />
           </div>
-          <div class="mt-2.5 text-[13px] font-medium text-zinc-900 text-center tracking-tight">{s.data.name}</div>
+          <div class="mt-2.5 text-[13px] font-medium text-white text-center tracking-tight">{s.data.name}</div>
         </a>
       ))}
     </div>
     <div class="mt-12 flex items-center justify-center gap-6 text-[12px] text-zinc-500">
       <span class="flex items-center gap-1.5">
-        <svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+        <svg class="h-3.5 w-3.5 text-[#ff6b35]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
         官方价直充
       </span>
       <span class="flex items-center gap-1.5">
-        <svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+        <svg class="h-3.5 w-3.5 text-[#ff6b35]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
         5 分钟到账
       </span>
       <span class="flex items-center gap-1.5">
-        <svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+        <svg class="h-3.5 w-3.5 text-[#ff6b35]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
         7×24 客服
       </span>
     </div>

@@ -2,10 +2,10 @@
 @import "@fontsource-variable/lora";
 
 /* ──────────────────────────────────────────────────────────────
- * FluxA — Stripe 风格设计 token（serif editorial 版）
+ * FluxA — Retro Arcade 风格 (RetroArch logo 配色驱动)
  * 字体：Lora Variable (new-api theme.css 第 2 个 font token)
- * 主色：紫蓝 Stripe-inspired (#5b6cff) + 青蓝 accent
- * 整体：白底 / 浅灰底 section 交替 / 阴影柔和 / 大量留白
+ * 配色：深紫黑底 + RetroArch 橙红主色 + 霓虹青 accent
+ * 视觉：macOS 玻璃卡 + 渐变光晕 + 暖纸 surface 替换
  * ────────────────────────────────────────────────────────────── */
 @theme {
   --font-sans:
@@ -15,46 +15,33 @@
     "Songti SC", "STSong", "STSongti-SC-Regular", "PingFang SC", "SimSun",
     "NSimSun", "宋体", "FangSong", "仿宋", "KaiTi", "楷体", Georgia,
     "Times New Roman", Cambria, "Liberation Serif", serif;
-  --font-serif: var(--font-sans);
   --font-mono:
     "JetBrains Mono", "SF Mono", "Menlo", "Consolas", "Liberation Mono",
     monospace;
 
-  --color-background: #ffffff;
-  --color-foreground: #1a1a1a;        /* editorial ink */
-  --color-surface: #f7f5f0;           /* warm paper */
-  --color-surface-2: #efece4;
-  --color-card: #ffffff;
-  --color-card-foreground: #1a1a1a;
-  --color-muted: #f4f1ea;
-  --color-muted-foreground: #5a5a5a;
-  --color-primary: #5b6cff;           /* Stripe 紫蓝 */
+  --color-background: #0a0a14;
+  --color-foreground: #f5f5f7;
+  --color-surface: #14121f;
+  --color-surface-2: #1c1a2b;
+  --color-card: #14121f;
+  --color-card-foreground: #f5f5f7;
+  --color-popover: #1c1a2b;
+  --color-popover-foreground: #f5f5f7;
+  --color-muted: #1c1a2b;
+  --color-muted-foreground: #9ca3af;
+  --color-primary: #ff6b35;            /* RetroArch 橙红 */
   --color-primary-foreground: #ffffff;
-  --color-accent: #06b6d4;            /* 青蓝 */
-  --color-accent-foreground: #ffffff;
-  --color-pink: #ec4899;
-  --color-border: #e5e1d8;
-  --color-input: #e5e1d8;
-  --color-ring: #5b6cff;
+  --color-secondary: #1c1a2b;
+  --color-secondary-foreground: #f5f5f7;
+  --color-accent: #00d4ff;             /* 霓虹青 */
+  --color-accent-foreground: #0a0a14;
+  --color-destructive: #ff4757;
+  --color-destructive-foreground: #ffffff;
   --color-success: #0fb27e;
-  --color-warning: #c08a1a;
-  --color-destructive: #c0392b;
-
-  --text-display-2xl: 4.5rem;
-  --text-display-2xl--line-height: 1.05;
-  --text-display-2xl--letter-spacing: -0.02em;
-  --text-display-xl: 3.75rem;
-  --text-display-xl--line-height: 1.08;
-  --text-display-xl--letter-spacing: -0.018em;
-  --text-display-lg: 3rem;
-  --text-display-lg--line-height: 1.12;
-  --text-display-lg--letter-spacing: -0.015em;
-  --text-display-md: 2.25rem;
-  --text-display-md--line-height: 1.18;
-  --text-display-md--letter-spacing: -0.012em;
-  --text-display-sm: 1.875rem;
-  --text-display-sm--line-height: 1.22;
-  --text-display-sm--letter-spacing: -0.01em;
+  --color-warning: #ffa502;
+  --color-border: #2a2a3a;
+  --color-input: #2a2a3a;
+  --color-ring: #ff6b35;
 }
 
 @layer base {
@@ -67,8 +54,10 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    color: var(--color-foreground);
-    background: var(--color-background);
+  }
+
+  .dark {
+    color-scheme: dark;
   }
 
   body {
@@ -88,31 +77,47 @@
     text-underline-offset: 3px;
   }
 
-  /* Stripe 风 mesh 渐变背景（暖色调，跟 serif 配） */
+  /* Retro macOS 玻璃 + 橙红光晕 mesh 背景 */
   .mesh-bg {
     background:
-      radial-gradient(at 27% 37%, rgba(91, 108, 255, 0.16) 0px, transparent 50%),
-      radial-gradient(at 97% 21%, rgba(236, 72, 153, 0.10) 0px, transparent 50%),
-      radial-gradient(at 52% 99%, rgba(6, 182, 212, 0.12) 0px, transparent 50%),
-      radial-gradient(at 10% 80%, rgba(139, 92, 246, 0.08) 0px, transparent 50%),
-      radial-gradient(at 97% 89%, rgba(91, 108, 255, 0.08) 0px, transparent 50%);
+      radial-gradient(at 20% 30%, rgba(255, 107, 53, 0.18) 0px, transparent 50%),
+      radial-gradient(at 80% 20%, rgba(0, 212, 255, 0.10) 0px, transparent 50%),
+      radial-gradient(at 60% 80%, rgba(139, 92, 246, 0.14) 0px, transparent 50%),
+      radial-gradient(at 10% 90%, rgba(255, 107, 53, 0.10) 0px, transparent 50%);
   }
 
-  .shadow-stripe {
-    box-shadow:
-      0 1px 1px rgba(26, 26, 26, 0.04),
-      0 2px 4px rgba(26, 26, 26, 0.04),
-      0 4px 8px rgba(26, 26, 26, 0.04);
+  /* 像素网格背景（retro 元素） */
+  .pixel-grid {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
-  .shadow-stripe-lg {
-    box-shadow:
-      0 2px 5px rgba(26, 26, 26, 0.04),
-      0 5px 15px rgba(26, 26, 26, 0.06),
-      0 10px 30px rgba(26, 26, 26, 0.08);
+
+  /* macOS 玻璃卡（backdrop-blur） */
+  .glass-card {
+    background: rgba(28, 26, 43, 0.6);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
-  .shadow-stripe-hover {
+
+  /* 暖光阴影（橙红 glow） */
+  .shadow-orange {
     box-shadow:
-      0 4px 12px rgba(26, 26, 26, 0.06),
-      0 8px 24px rgba(26, 26, 26, 0.08);
+      0 4px 14px rgba(255, 107, 53, 0.25),
+      0 10px 30px rgba(255, 107, 53, 0.15);
+  }
+  .shadow-orange-lg {
+    box-shadow:
+      0 8px 24px rgba(255, 107, 53, 0.30),
+      0 20px 50px rgba(255, 107, 53, 0.18);
+  }
+
+  /* 通用深色玻璃阴影 */
+  .shadow-dark {
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.4),
+      0 8px 32px rgba(0, 0, 0, 0.3);
   }
 }
