@@ -1,0 +1,52 @@
+{
+  "service": "ai-aggregator",
+  "tiers": [
+    {
+      "name": "体验包",
+      "price": "$9.9",
+      "period": "/ 一次性",
+      "originalPrice": "限时体验价",
+      "features": [
+        "AI 聚合平台 7 天体验",
+        "GPT-4o + Claude Sonnet + Gemini + 文心一言",
+        "统一 API / 统一 Web UI",
+        "自定义模型路由 + 权重",
+        "7×24 在线客服"
+      ],
+      "recommended": false,
+      "ctaLabel": "立即试用"
+    },
+    {
+      "name": "开发者包",
+      "price": "$299",
+      "period": "/ 一次性",
+      "originalPrice": "含 3 个月服务",
+      "features": [
+        "AI 聚合平台 3 个月",
+        "GPT-4o + Claude Opus + Gemini Pro + 国产大模型",
+        "统一 API / 统一 Web UI",
+        "自定义模型路由 + 权重 + 自动降级",
+        "API 调用监控 + 限流",
+        "技术对接支持 + 7×24 售后"
+      ],
+      "recommended": true,
+      "ctaLabel": "立即购买"
+    },
+    {
+      "name": "企业包",
+      "price": "联系报价",
+      "period": "",
+      "originalPrice": "按需定制",
+      "features": [
+        "AI 聚合平台 企业级",
+        "全部模型 + 私有化部署可选",
+        "SSO + 权限分级 + 审计日志",
+        "SLA 保障 + 专属客户经理",
+        "定制模型路由 + 智能降级",
+        "7×24 售后支持"
+      ],
+      "recommended": false,
+      "ctaLabel": "联系商务"
+    }
+  ]
+}

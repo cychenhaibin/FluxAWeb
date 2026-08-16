@@ -1,0 +1,51 @@
+{
+  "service": "chatgpt",
+  "tiers": [
+    {
+      "name": "Plus 月付",
+      "price": "$23",
+      "period": "/ 月",
+      "originalPrice": "官方 $20 + $3 人工费",
+      "features": [
+        "GPT-4o 无限次对话",
+        "GPT-4o mini 无限次",
+        "DALL·E 图像生成",
+        "高级数据分析（Code Interpreter）",
+        "联网搜索 + 自定义 GPTs",
+        "5 分钟开通 + 售后保障"
+      ],
+      "recommended": true,
+      "ctaLabel": "立即购买"
+    },
+    {
+      "name": "Pro 100",
+      "price": "$103",
+      "period": "/ 月",
+      "originalPrice": "官方 $100 + $3 人工费",
+      "features": [
+        "GPT-4o 无限次对话",
+        "o1 pro 模式（深度推理）",
+        "Codex 5x 用量（限时 10x）",
+        "高级研究模式（Deep Research）",
+        "优先客服 5 分钟响应"
+      ],
+      "recommended": false,
+      "ctaLabel": "立即购买"
+    },
+    {
+      "name": "Pro 200",
+      "price": "$203",
+      "period": "/ 月",
+      "originalPrice": "官方 $200 + $3 人工费",
+      "features": [
+        "GPT-4o 无限次对话",
+        "o1 pro 模式 + 完整 o 系列模型",
+        "Codex 20x 满血用量",
+        "所有模型不限速优先通道",
+        "1v1 专属客户经理 + 7×24 售后"
+      ],
+      "recommended": false,
+      "ctaLabel": "立即购买"
+    }
+  ]
+}

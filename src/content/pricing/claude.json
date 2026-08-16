@@ -1,0 +1,50 @@
+{
+  "service": "claude",
+  "tiers": [
+    {
+      "name": "Pro 月付",
+      "price": "$23",
+      "period": "/ 月",
+      "originalPrice": "官方 $20 + $3 人工费",
+      "features": [
+        "Sonnet 4.5 + Opus 4.1 全模型",
+        "Artifacts / Projects / Canvas",
+        "Claude Code（桌面 + IDE 集成）",
+        "Web 搜索 + 文件上传",
+        "5 分钟开通 + 售后保障"
+      ],
+      "recommended": true,
+      "ctaLabel": "立即购买"
+    },
+    {
+      "name": "Max 5x",
+      "price": "$103",
+      "period": "/ 月",
+      "originalPrice": "官方 $100 + $3 人工费",
+      "features": [
+        "5x Pro 用量（实测约 8.33x）",
+        "Opus 4 优先通道",
+        "高峰时段不限速",
+        "包含 Pro 全部功能",
+        "优先客服 + 用量建议"
+      ],
+      "recommended": false,
+      "ctaLabel": "立即购买"
+    },
+    {
+      "name": "Max 20x",
+      "price": "$203",
+      "period": "/ 月",
+      "originalPrice": "官方 $200 + $3 人工费",
+      "features": [
+        "20x Pro 用量",
+        "Opus 4 满血体验",
+        "所有模型优先通道",
+        "满血体验 + 高峰不限速",
+        "1v1 专属客户经理"
+      ],
+      "recommended": false,
+      "ctaLabel": "立即购买"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+---
+import {
+  Bot,
+  Sparkles,
+  Users,
+  Globe,
+  ShieldCheck,
+  Layers,
+  Zap,
+  Headphones,
+  Mail,
+  MessageCircle,
+  Ticket,
+  ChevronRight,
+  Plus,
+  ArrowUp,
+  BadgeDollarSign,
+} from 'lucide-react';
+import type { ComponentType } from 'react';
+
+// lucide-react v1.31.0 does not export a `LucideIcon` type, so use a structural
+// ComponentType that accepts the props we actually pass (`size` + `class`).
+const iconMap: Record<string, ComponentType<{ size?: number | string; class?: string }>> = {
+  Bot,
+  Sparkles,
+  Users,
+  Globe,
+  ShieldCheck,
+  Layers,
+  Zap,
+  Headphones,
+  Mail,
+  MessageCircle,
+  Ticket,
+  ChevronRight,
+  Plus,
+  ArrowUp,
+  BadgeDollarSign,
+};
+
+interface Props {
+  name: string;
+  class?: string;
+  size?: number;
+}
+
+const { name, class: className = '', size = 24 } = Astro.props;
+const IconComponent = iconMap[name];
+---
+{IconComponent && <IconComponent size={size} class={className} />}

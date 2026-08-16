@@ -1,0 +1,42 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import SiteHeader from '@/components/site-header.astro';
+import SiteFooter from '@/components/site-footer.astro';
+import { siteConfig } from '@/lib/site-config';
+import '@/styles/globals.css';
+
+interface Props { title?: string; description?: string; }
+const {
+  title = siteConfig.title,
+  description = siteConfig.description,
+} = Astro.props;
+---
+<!doctype html>
+<html lang="zh-CN" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0a0f" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/og.png" />
+    <ClientRouter />
+  </head>
+  <body>
+    <SiteHeader />
+    <main class="min-h-screen">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

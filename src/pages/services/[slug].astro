@@ -1,0 +1,21 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { siteConfig } from '@/lib/site-config';
+import ServiceDetail from '@/components/service-detail.astro';
+
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+  return services.map((service) => ({
+    params: { slug: service.id },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const data = service.data;
+const pricing = await getEntry('pricing', data.slug);
+---
+<BaseLayout title={`${data.name} - ${siteConfig.title}`} description={data.tagline}>
+  <ServiceDetail service={data} pricing={pricing?.data} />
+</BaseLayout>
