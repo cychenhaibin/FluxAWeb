@@ -1,6 +1,69 @@
 @import "tailwindcss";
+@import "@fontsource-variable/inter";
+
+/* ──────────────────────────────────────────────────────────────
+ * FluxA 字体系统 — Inter Variable (new-api theme.css 第 3 个 font token)
+ * Inter Display 风格对深色科技感 UI 友好，字重梯度清晰
+ * ────────────────────────────────────────────────────────────── */
+@theme {
+  --font-sans:
+    "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue",
+    Arial, sans-serif;
+  --font-mono:
+    "JetBrains Mono", "SF Mono", "Menlo", "Consolas", "Liberation Mono",
+    monospace;
+
+  /* 收紧的 display 字号 — Vercel/Linear 风格 */
+  --text-display-2xl: 4.5rem;       /* 72px */
+  --text-display-2xl--line-height: 1.05;
+  --text-display-2xl--letter-spacing: -0.04em;
+
+  --text-display-xl: 3.75rem;       /* 60px */
+  --text-display-xl--line-height: 1.05;
+  --text-display-xl--letter-spacing: -0.035em;
+
+  --text-display-lg: 3rem;          /* 48px */
+  --text-display-lg--line-height: 1.1;
+  --text-display-lg--letter-spacing: -0.03em;
+
+  --text-display-md: 2.25rem;       /* 36px */
+  --text-display-md--line-height: 1.15;
+  --text-display-md--letter-spacing: -0.025em;
+
+  --text-display-sm: 1.875rem;      /* 30px */
+  --text-display-sm--line-height: 1.2;
+  --text-display-sm--letter-spacing: -0.02em;
+}
 
 @layer base {
+  html {
+    font-family: var(--font-sans);
+    font-feature-settings:
+      "cv11" on,        /* Single-storey 'a' */
+      "ss01" on,        /* Open digits (alternative) */
+      "ss03" on;        /* Disambiguation of 'l', 'I', '1' */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-feature-settings: "tnum" on, "lnum" on; /* tabular + lining 数字 */
+  }
+
+  /* 数字字符 tabular 风格（价格、对比表） */
+  .tnum {
+    font-feature-settings: "tnum" on, "cv11" on;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  /* 强调链接用下划线偏移 */
+  a {
+    text-underline-offset: 3px;
+  }
+
   .dark {
     --background: 240 10% 4%;
     --foreground: 0 0% 98%;

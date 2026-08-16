@@ -1,21 +1,21 @@
 ---
 import { siteConfig } from '@/lib/site-config';
 ---
-<footer class="border-t border-zinc-800/60 bg-zinc-950 mt-24">
-  <div class="container mx-auto max-w-6xl px-4 py-16">
+<footer class="border-t border-zinc-800/60 bg-zinc-950 mt-20">
+  <div class="container mx-auto max-w-6xl px-4 py-14">
     <div class="grid gap-10 md:grid-cols-4">
       <div>
-        <div class="flex items-center gap-2 text-xl font-bold text-white tracking-tight">
-          <span class="inline-block h-7 w-7 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-500 flex items-center justify-center text-white text-sm font-bold">F</span>
+        <div class="flex items-center gap-2 text-[15px] font-semibold text-white tracking-[-0.01em]">
+          <span class="inline-block h-6 w-6 rounded-md bg-gradient-to-br from-indigo-500 to-cyan-500 flex items-center justify-center text-white text-[11px] font-bold">F</span>
           {siteConfig.brand.name}
         </div>
-        <p class="mt-3 text-sm text-zinc-400 leading-relaxed">{siteConfig.brand.slogan}</p>
-        <p class="mt-3 text-xs text-zinc-500">官方价 + 仅 $3 人工费</p>
+        <p class="mt-3 text-[13px] text-zinc-400 leading-relaxed">{siteConfig.brand.slogan}</p>
+        <p class="mt-2 text-[11px] text-zinc-500">官方价 + 仅 $3 人工费</p>
       </div>
 
       <div>
-        <div class="text-sm font-semibold text-white">快速链接</div>
-        <ul class="mt-3 space-y-2 text-sm text-zinc-400">
+        <div class="text-[13px] font-semibold text-white tracking-tight">快速链接</div>
+        <ul class="mt-3 space-y-2 text-[13px] text-zinc-400">
           {siteConfig.nav.map((item) => (
             <li>
               <a href={item.href} class="hover:text-white transition-colors">
@@ -27,8 +27,8 @@ import { siteConfig } from '@/lib/site-config';
       </div>
 
       <div>
-        <div class="text-sm font-semibold text-white">联系我们</div>
-        <ul class="mt-3 space-y-2 text-sm text-zinc-400">
+        <div class="text-[13px] font-semibold text-white tracking-tight">联系我们</div>
+        <ul class="mt-3 space-y-2.5 text-[13px] text-zinc-400">
           <li>
             <span class="text-zinc-500">{siteConfig.contact.wechat.name}：</span>
             <img
@@ -63,8 +63,8 @@ import { siteConfig } from '@/lib/site-config';
       </div>
 
       <div>
-        <div class="text-sm font-semibold text-white">为什么选 FluxA</div>
-        <ul class="mt-3 space-y-2 text-sm text-zinc-400">
+        <div class="text-[13px] font-semibold text-white tracking-tight">为什么选 FluxA</div>
+        <ul class="mt-3 space-y-2 text-[13px] text-zinc-400">
           <li class="flex items-start gap-2"><span class="text-indigo-400">✓</span>官方价透明计费</li>
           <li class="flex items-start gap-2"><span class="text-indigo-400">✓</span>5 分钟极速到账</li>
           <li class="flex items-start gap-2"><span class="text-indigo-400">✓</span>7×24 真人客服</li>
@@ -73,7 +73,7 @@ import { siteConfig } from '@/lib/site-config';
       </div>
     </div>
 
-    <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-zinc-800/60 pt-6 text-xs text-zinc-500 md:flex-row">
+    <div class="mt-10 flex flex-col items-center justify-between gap-3 border-t border-zinc-800/60 pt-5 text-[11px] text-zinc-500 md:flex-row">
       <p>© {new Date().getFullYear()} {siteConfig.brand.name}. All rights reserved.</p>
       <p>
         <a
@@ -92,7 +92,7 @@ import { siteConfig } from '@/lib/site-config';
     type="button"
     aria-label="回到顶部"
     id="back-to-top"
-    class="fixed bottom-6 right-6 z-50 hidden h-10 w-10 rounded-full border border-zinc-800 bg-zinc-900/80 backdrop-blur-md text-white shadow-lg transition-all hover:bg-zinc-800 hover:border-indigo-500/50"
+    class="fixed bottom-6 right-6 z-50 hidden h-9 w-9 rounded-full border border-zinc-800 bg-zinc-900/80 backdrop-blur-md text-white shadow-lg transition-all hover:bg-zinc-800 hover:border-indigo-500/50 text-sm"
   >
     ↑
   </button>
