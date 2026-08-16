@@ -10,7 +10,7 @@ export const siteConfig = {
     { label: 'FAQ', href: '/faq' },
   ],
   contact: {
-    wechat: { name: '客服微信', qrPlaceholder: '/wechat-qr-placeholder.svg' },
+    wechat: { name: '客服微信', qrPlaceholder: '/wechat-qr.jpg' },
     email: { name: '客服邮箱', address: 'support@fluxa.example.com' },
     ticket: { name: '在线工单', url: 'https://example.com/ticket' },
   },
