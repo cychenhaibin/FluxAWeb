@@ -2,21 +2,21 @@
 import { siteConfig } from '@/lib/site-config';
 import { Button } from '@/components/ui/button';
 ---
-<header class="sticky top-0 z-50 backdrop-blur-xl bg-zinc-950/70 border-b border-zinc-800/60">
-  <div class="container mx-auto max-w-6xl px-4 h-14 flex items-center justify-between">
-    <a href="/" class="flex items-center gap-2 text-[15px] font-semibold text-white tracking-[-0.01em]">
-      <span class="inline-block h-6 w-6 rounded-md bg-gradient-to-br from-indigo-500 to-cyan-500 flex items-center justify-center text-white text-[11px] font-bold">F</span>
+<header class="sticky top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-zinc-200/60">
+  <div class="container mx-auto max-w-6xl px-4 h-16 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2 text-[15px] font-semibold text-zinc-900 tracking-[-0.01em]">
+      <span class="inline-block h-7 w-7 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-500 flex items-center justify-center text-white text-[12px] font-bold">F</span>
       {siteConfig.brand.name}
     </a>
-    <nav class="hidden md:flex items-center gap-7 text-[13px]">
+    <nav class="hidden md:flex items-center gap-8 text-[13.5px]">
       {siteConfig.nav.map((item) => (
-        <a href={item.href} class="text-zinc-400 hover:text-white transition-colors">
+        <a href={item.href} class="text-zinc-600 hover:text-zinc-900 transition-colors">
           {item.label}
         </a>
       ))}
     </nav>
     <a href="/contact">
-      <Button className="rounded-full h-9 px-4 text-[13px] font-medium bg-white text-zinc-950 hover:bg-zinc-200">
+      <Button className="rounded-full h-9 px-4 text-[13px] font-medium bg-indigo-600 text-white hover:bg-indigo-700">
         立即购买
       </Button>
     </a>
