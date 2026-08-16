@@ -1,66 +1,151 @@
 ---
 import { siteConfig } from '@/lib/site-config';
 import { Button } from '@/components/ui/button';
-import Icon from '@/components/icon.astro';
-import { getCollection } from 'astro:content';
-
-const services = await getCollection('services');
 ---
-<section class="relative pt-32 pb-24 bg-[#08090a] mesh-bg overflow-hidden">
-  <div class="container mx-auto max-w-5xl px-4 text-center relative">
-    <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-[13px] text-zinc-300 mb-8 backdrop-blur-md">
-      <span class="relative flex h-1.5 w-1.5">
-        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#5e6ad2] opacity-75"></span>
-        <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#5e6ad2]"></span>
-      </span>
-      官方价直充 · 仅加 $3 人工费
+<section class="relative bg-[#08090a] pt-32 pb-20 overflow-hidden">
+  <div class="container mx-auto max-w-6xl px-4">
+    <div class="grid gap-12 lg:grid-cols-12 items-start">
+      <div class="lg:col-span-12">
+        <div class="flex items-end justify-between gap-8">
+          <h1 class="text-[clamp(2.5rem,6.5vw,5.5rem)] leading-[0.95] font-semibold text-white tracking-[-0.04em] text-balance max-w-4xl">
+            {siteConfig.brand.slogan}
+          </h1>
+          <div class="hidden md:flex items-center gap-1.5 text-[13px] text-zinc-400 shrink-0 pb-3">
+            <span class="px-1.5 py-0.5 rounded-md bg-[#5e6ad2] text-white text-[11px] font-medium uppercase tracking-wider">New</span>
+            <span>Max 拼车 →</span>
+          </div>
+        </div>
+        <p class="mt-6 text-[15px] md:text-base text-zinc-400 leading-relaxed text-pretty max-w-2xl">
+          官方价直充 ChatGPT / Claude / Max 拼车 / AI 聚合。<br />
+          为 AI 时代打造的高速、稳定、可观测的 AI 服务基础设施。
+        </p>
+      </div>
     </div>
 
-    <h1 class="text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.05] font-semibold text-white tracking-[-0.03em] text-balance">
-      {siteConfig.brand.slogan}
-    </h1>
-    <p class="mt-7 text-base md:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed text-pretty">
-      FluxA 提供 ChatGPT / Claude / Max 拼车 / AI 聚合等 AI 服务<br class="hidden md:block" />
-      官方价透明计费，5 分钟极速到账，7×24 客服
-    </p>
-    <div class="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
+    <!-- 产品 mockup：模仿 Linear 的 issue 列表 -->
+    <div class="mt-16 relative">
+      <div class="rounded-xl border border-white/10 bg-[#0e0e10] overflow-hidden shadow-2xl">
+        <!-- 顶部 toolbar -->
+        <div class="flex items-center gap-2 px-4 h-10 border-b border-white/5 bg-[#0a0a0c]">
+          <div class="flex gap-1.5">
+            <div class="h-2.5 w-2.5 rounded-full bg-zinc-700"></div>
+            <div class="h-2.5 w-2.5 rounded-full bg-zinc-700"></div>
+            <div class="h-2.5 w-2.5 rounded-full bg-zinc-700"></div>
+          </div>
+          <div class="flex-1 flex items-center justify-center">
+            <div class="px-3 h-6 rounded-md bg-[#151517] border border-white/5 flex items-center gap-2 text-[12px] text-zinc-500 min-w-[200px]">
+              <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <span>搜索套餐 / 服务 / 订单号</span>
+              <span class="ml-auto text-[10px] text-zinc-600">⌘K</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 text-[12px] text-zinc-500">
+            <div class="h-6 w-6 rounded-full bg-gradient-to-br from-[#5e6ad2] to-[#8b5cf6]"></div>
+          </div>
+        </div>
+        <!-- 主体内容 -->
+        <div class="grid grid-cols-12 min-h-[400px]">
+          <!-- 侧边栏 -->
+          <div class="col-span-3 border-r border-white/5 p-3 space-y-1">
+            <div class="flex items-center gap-2 px-2 py-1.5 text-[13px] text-white">
+              <span class="text-[#5e6ad2]">◆</span>
+              <span>FluxA</span>
+              <span class="ml-auto text-zinc-600">⌘1</span>
+            </div>
+            <div class="mt-3 space-y-0.5">
+              <div class="flex items-center gap-2 px-2 py-1.5 text-[13px] text-zinc-300 rounded-md">
+                <span>📥</span><span>收件箱</span>
+              </div>
+              <div class="flex items-center gap-2 px-2 py-1.5 text-[13px] text-zinc-300 rounded-md">
+                <span>📋</span><span>我的订阅</span>
+              </div>
+              <div class="flex items-center gap-2 px-2 py-1.5 text-[13px] text-zinc-300 rounded-md">
+                <span>🔍</span><span>订单</span>
+              </div>
+            </div>
+            <div class="mt-4 px-2 text-[10px] uppercase tracking-wider text-zinc-600 font-semibold">业务</div>
+            <div class="mt-1 space-y-0.5">
+              <div class="flex items-center gap-2 px-2 py-1.5 text-[13px] text-zinc-300 rounded-md hover:bg-white/5">
+                <span class="h-1.5 w-1.5 rounded-full bg-[#5e6ad2]"></span><span>ChatGPT 充值</span>
+              </div>
+              <div class="flex items-center gap-2 px-2 py-1.5 text-[13px] text-zinc-300 rounded-md hover:bg-white/5">
+                <span class="h-1.5 w-1.5 rounded-full bg-[#ec4899]"></span><span>Claude 充值</span>
+              </div>
+              <div class="flex items-center gap-2 px-2 py-1.5 text-[13px] text-white bg-white/5 rounded-md">
+                <span class="h-1.5 w-1.5 rounded-full bg-[#f97316]"></span><span>Max 拼车</span>
+              </div>
+              <div class="flex items-center gap-2 px-2 py-1.5 text-[13px] text-zinc-300 rounded-md hover:bg-white/5">
+                <span class="h-1.5 w-1.5 rounded-full bg-[#06b6d4]"></span><span>AI 聚合</span>
+              </div>
+            </div>
+          </div>
+          <!-- 套餐列表 -->
+          <div class="col-span-6 p-6">
+            <div class="flex items-center gap-2 mb-4">
+              <h2 class="text-[15px] font-semibold text-white">Max 5x 拼车</h2>
+              <span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[10px] font-medium">热门</span>
+              <span class="text-[12px] text-zinc-500 ml-1">12 / 24</span>
+              <div class="ml-auto flex items-center gap-1">
+                <span class="h-1.5 w-1.5 rounded-full bg-amber-400"></span>
+                <span class="text-[12px] text-zinc-400">进行中</span>
+              </div>
+            </div>
+            <div class="space-y-1">
+              {[
+                { id: 'MAX-128', title: 'Max 5x 拼车 (2人)', price: '$53/月', status: '已发货', color: 'bg-emerald-500' },
+                { id: 'MAX-127', title: 'Max 5x 拼车 (3人)', price: '$36/月', status: '待付款', color: 'bg-amber-500' },
+                { id: 'MAX-126', title: 'Max 5x 拼车 (4人)', price: '$28/月', status: '处理中', color: 'bg-blue-500' },
+                { id: 'MAX-125', title: '官方价+人工费 透明', price: '—', status: '已完成', color: 'bg-zinc-500' },
+                { id: 'MAX-124', title: '订单查询 / 续费 / 退款', price: '—', status: '已关闭', color: 'bg-zinc-700' },
+              ].map((row) => (
+                <div class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/5 text-[13px]">
+                  <span class={`h-1.5 w-1.5 rounded-full ${row.color}`}></span>
+                  <span class="text-zinc-500 font-mono text-[12px] w-16">{row.id}</span>
+                  <span class="text-zinc-200 flex-1">{row.title}</span>
+                  <span class="text-zinc-500 text-[12px] tnum">{row.price}</span>
+                  <span class="text-zinc-500 text-[12px]">{row.status}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <!-- 详情面板 -->
+          <div class="col-span-3 border-l border-white/5 p-4 space-y-3">
+            <div>
+              <div class="text-[10px] uppercase tracking-wider text-zinc-600 font-semibold mb-1">详情</div>
+              <div class="text-[13px] text-white font-medium">Max 5x 拼车 (2人)</div>
+              <div class="text-[12px] text-zinc-500 mt-0.5">MAX-128 · 2人共享</div>
+            </div>
+            <div class="grid grid-cols-2 gap-2 pt-2">
+              <div class="rounded-md bg-white/5 p-2">
+                <div class="text-[10px] text-zinc-500">价格</div>
+                <div class="text-[13px] text-white font-mono">$53/月</div>
+              </div>
+              <div class="rounded-md bg-white/5 p-2">
+                <div class="text-[10px] text-zinc-500">5x用量/人</div>
+                <div class="text-[13px] text-white font-mono">2.5x</div>
+              </div>
+            </div>
+            <div class="pt-2 border-t border-white/5">
+              <div class="text-[10px] uppercase tracking-wider text-zinc-600 font-semibold mb-1">活动</div>
+              <div class="text-[12px] text-zinc-400">· 客户已支付 · 12min ago</div>
+              <div class="text-[12px] text-zinc-400">· 账号已发货 · 8min ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 flex flex-col sm:flex-row gap-3 items-start">
       <a href="/pricing">
-        <Button size="lg" className="rounded-lg h-11 px-5 text-[13px] font-medium bg-[#5e6ad2] text-white hover:bg-[#7173f3] shadow-purple">
+        <Button size="lg" className="rounded-md h-10 px-4 text-[13px] font-medium bg-[#5e6ad2] text-white hover:bg-[#7173f3]">
           查看套餐价格
         </Button>
       </a>
       <a href="/contact">
-        <Button size="lg" variant="outline" className="rounded-lg h-11 px-5 text-[13px] font-medium border-white/15 bg-white/5 text-white hover:bg-white/10 backdrop-blur-md">
+        <Button size="lg" variant="outline" className="rounded-md h-10 px-4 text-[13px] font-medium border-white/15 bg-white/5 text-white hover:bg-white/10">
           联系客服
         </Button>
       </a>
-    </div>
-    <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto">
-      {services.map((s) => (
-        <a
-          href={`/services/${s.data.slug}`}
-          class="group card rounded-xl p-4 hover:border-[#5e6ad2]/50 hover:bg-[#151517] transition-all"
-        >
-          <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-[#5e6ad2]/10 border border-[#5e6ad2]/20 mx-auto group-hover:bg-[#5e6ad2]/15 transition-all">
-            <Icon name={s.data.icon} class="text-[#5e6ad2]" size={20} />
-          </div>
-          <div class="mt-2.5 text-[13px] font-medium text-white text-center tracking-tight">{s.data.name}</div>
-        </a>
-      ))}
-    </div>
-    <div class="mt-12 flex items-center justify-center gap-6 text-[12px] text-zinc-500">
-      <span class="flex items-center gap-1.5">
-        <svg class="h-3.5 w-3.5 text-[#5e6ad2]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
-        官方价直充
-      </span>
-      <span class="flex items-center gap-1.5">
-        <svg class="h-3.5 w-3.5 text-[#5e6ad2]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
-        5 分钟到账
-      </span>
-      <span class="flex items-center gap-1.5">
-        <svg class="h-3.5 w-3.5 text-[#5e6ad2]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
-        7×24 客服
-      </span>
     </div>
   </div>
 </section>

@@ -1,26 +1,23 @@
 ---
 import { siteConfig } from '@/lib/site-config';
-import { Button } from '@/components/ui/button';
 ---
-<header class="sticky top-0 z-50 backdrop-blur-xl bg-[#08090a]/70 border-b border-white/5">
+<header class="sticky top-0 z-50 backdrop-blur-md bg-[#08090a]/80 border-b border-white/5">
   <div class="container mx-auto max-w-6xl px-4 h-14 flex items-center justify-between">
-    <a href="/" class="flex items-center gap-2.5 text-[14px] font-semibold text-white tracking-[-0.01em]">
-      <span class="inline-flex h-7 w-7 rounded-md bg-white/5 border border-white/10 items-center justify-center">
+    <a href="/" class="flex items-center gap-2.5 text-[15px] font-semibold text-white tracking-[-0.01em]">
+      <span class="inline-flex h-7 w-7 rounded-md bg-white items-center justify-center">
         <img src="/retroarch.svg" alt="FluxA" class="h-4 w-4" />
       </span>
       {siteConfig.brand.name}
     </a>
-    <nav class="hidden md:flex items-center gap-7 text-[13.5px]">
-      {siteConfig.nav.map((item) => (
+    <nav class="hidden md:flex items-center gap-8 text-[14px]">
+      {siteConfig.nav.slice(0, 6).map((item) => (
         <a href={item.href} class="text-zinc-400 hover:text-white transition-colors">
           {item.label}
         </a>
       ))}
     </nav>
-    <a href="/contact">
-      <Button className="rounded-lg h-8 px-3.5 text-[13px] font-medium bg-[#5e6ad2] text-white hover:bg-[#7173f3]">
-        立即购买
-      </Button>
+    <a href="/contact" class="inline-flex items-center justify-center h-8 px-3.5 rounded-full bg-white text-[#08090a] text-[13px] font-medium hover:bg-zinc-200 transition-colors">
+      立即购买
     </a>
   </div>
 </header>
