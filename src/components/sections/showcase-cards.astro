@@ -12,20 +12,6 @@ const svcMax = services.find((s) => s.data.slug === 'minimax');
 const svcChatGPT = services.find((s) => s.data.slug === 'chatgpt');
 const svcClaude = services.find((s) => s.data.slug === 'claude');
 const svcAI = services.find((s) => s.data.slug === 'ai-aggregator');
-
-// gradient map (minimaxi.com 风格: 紫 / 蓝 / 赤土 / 粉橙)
-const gradientMap: Record<string, string> = {
-  chatgpt: 'gradient-blue',
-  claude: 'gradient-purple',
-  minimax: 'gradient-pink',
-  'ai-aggregator': 'bg-[#181E25]',
-};
-const gradientTextMap: Record<string, string> = {
-  chatgpt: 'gradient-blue-text',
-  claude: 'gradient-purple-text',
-  minimax: 'gradient-pink-text',
-  'ai-aggregator': 'text-white',
-};
 ---
 <section class="py-24 bg-white">
   <div class="container-fluid">
