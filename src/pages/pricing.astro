@@ -5,7 +5,7 @@ import { siteConfig } from '@/lib/site-config';
 import PricingTabs from '@/components/pricing-tabs';
 
 const navOrder = siteConfig.nav
-  .filter((n) => n.href.startsWith('/services/'))
+  .filter((n): n is { label: string; href: string } => Boolean(n.href?.startsWith('/services/')))
   .map((n) => n.href.split('/').pop());
 const services = (await getCollection('services')).sort(
   (a, b) => navOrder.indexOf(a.data.slug) - navOrder.indexOf(b.data.slug)

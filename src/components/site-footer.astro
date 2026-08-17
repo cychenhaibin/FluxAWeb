@@ -29,11 +29,13 @@ import { siteConfig } from '@/lib/site-config';
         <div>
           <div class="text-[12px] font-semibold text-white/40 uppercase tracking-[0.15em]">业务</div>
           <ul class="mt-4 space-y-2.5 text-[14px] text-white/80">
-            {siteConfig.nav.filter((n) => n.href.startsWith('/services/')).map((item) => (
-              <li>
-                <a href={item.href} class="hover:text-white transition-colors">{item.label}</a>
-              </li>
-            ))}
+            {siteConfig.nav
+              .filter((n): n is { label: string; href: string } => Boolean(n.href?.startsWith('/services/')))
+              .map((item) => (
+                <li>
+                  <a href={item.href} class="hover:text-white transition-colors">{item.label}</a>
+                </li>
+              ))}
           </ul>
         </div>
         <div>
