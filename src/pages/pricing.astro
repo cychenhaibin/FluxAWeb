@@ -14,32 +14,29 @@ const pricingList = await getCollection('pricing');
 const pricingByService = Object.fromEntries(pricingList.map((p) => [p.data.service.id, p.data]));
 ---
 <BaseLayout title="价格 - FluxA">
-  <section class="relative bg-[#08090a] pt-32 pb-12 overflow-hidden">
-    <div class="container mx-auto max-w-6xl px-4">
-      <div class="flex items-end justify-between gap-8">
-        <h1 class="text-[clamp(2.5rem,6.5vw,5rem)] leading-[0.95] font-semibold text-white tracking-[-0.04em] text-balance max-w-3xl">价格方案</h1>
-        <div class="hidden md:flex items-center gap-1.5 text-[13px] text-zinc-400 shrink-0 pb-3">
-          <span class="px-1.5 py-0.5 rounded-md bg-[#5e6ad2] text-white text-[11px] font-medium uppercase tracking-wider">Pricing</span>
-        </div>
-      </div>
-      <p class="mt-6 text-[15px] md:text-base text-zinc-400 leading-relaxed text-pretty max-w-2xl">
+  <section class="relative bg-white pt-24 pb-12 overflow-hidden">
+    <div class="container mx-auto max-w-6xl px-4 text-center">
+      <h1 class="text-[clamp(2.5rem,7vw,5rem)] leading-[1.05] font-bold text-[#181E25] tracking-[-0.04em] text-balance">
+        <span class="gradient-purple-text">价格</span> 方案
+      </h1>
+      <p class="mt-6 text-[16px] md:text-[18px] text-[#6E7782] leading-relaxed max-w-2xl mx-auto">
         4 块业务 · 11 个套餐可选。<br />
         所有套餐均为官方价 + $3 人工费，5 分钟极速到账。
       </p>
     </div>
   </section>
 
-  <section class="bg-[#08090a] pb-24">
+  <section class="bg-white pb-24">
     <div class="container mx-auto max-w-6xl px-4">
-      <div class="mx-auto max-w-3xl rounded-md border border-amber-500/30 bg-amber-500/10 p-4 text-sm text-amber-200 flex items-start gap-3">
-        <span class="text-base">⚠️</span>
+      <div class="mx-auto max-w-3xl rounded-2xl border border-[#FAAD14]/40 bg-[#FFFBE6] p-5 text-sm text-[#181E25] flex items-start gap-3">
+        <span class="text-lg">⚠️</span>
         <div>
-          <strong class="font-semibold">价格说明：</strong>
+          <strong class="font-semibold text-[#D48806]">价格说明：</strong>
           所有套餐均为官方价 + $3 人工费。下单前请确认账号状态，下单后 5 分钟内开通。如对价格有疑问，请联系客服。
         </div>
       </div>
 
-      <div class="mt-10">
+      <div class="mt-12">
         <PricingTabs client:visible services={services.map(s => ({slug: s.data.slug, name: s.data.name}))} pricingByService={pricingByService} />
       </div>
     </div>

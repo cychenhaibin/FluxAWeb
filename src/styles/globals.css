@@ -2,42 +2,44 @@
 @import "@fontsource-variable/inter";
 
 /* ──────────────────────────────────────────────────────────────
- * FluxA — Linear.app 风格
- * 字体：Inter Variable (new-api theme.css 第 3 个 font token)
- * 配色：深紫黑 #08090a + Linear 紫蓝 #5e6ad2
+ * FluxA — MiniMax 官网风格
+ * 参考：https://www.minimaxi.com/
+ * 字体：Inter Variable (latin) + Noto Sans SC (中文)
+ * 配色：白底 #fff + 紫渐变 #7A27FF→#A36AFF + 粉橙渐变 #FF276F→#FF7038 + 天蓝渐变 #1BA4FF→#38CDFF
+ * 布局：居中 + 大量留白 + 大圆角 + 大字号 + tracking-[-0.04em]
  * ────────────────────────────────────────────────────────────── */
 @theme {
   --font-sans:
-    "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue",
-    Arial, sans-serif;
+    "Noto Sans SC", "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+    "Helvetica Neue", Arial, sans-serif;
   --font-mono:
     "JetBrains Mono", "SF Mono", "Menlo", "Consolas", "Liberation Mono",
     monospace;
 
-  --color-background: #08090a;
-  --color-foreground: #f7f8f8;
-  --color-surface: #0e0e10;
-  --color-surface-2: #151517;
-  --color-card: #0e0e10;
-  --color-card-foreground: #f7f8f8;
-  --color-popover: #151517;
-  --color-popover-foreground: #f7f8f8;
-  --color-muted: #151517;
-  --color-muted-foreground: #8a8f98;
-  --color-primary: #5e6ad2;            /* Linear 紫蓝 */
+  --color-background: #ffffff;
+  --color-foreground: #181e25;
+  --color-surface: #f7f8fa;
+  --color-surface-2: #f2f3f5;
+  --color-card: #ffffff;
+  --color-card-foreground: #181e25;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #181e25;
+  --color-muted: #f5f6f7;
+  --color-muted-foreground: #6e7782;
+  --color-primary: #7a27ff;            /* 紫 */
   --color-primary-foreground: #ffffff;
-  --color-secondary: #151517;
-  --color-secondary-foreground: #f7f8f8;
-  --color-accent: #c4c5f5;             /* 浅紫 */
-  --color-accent-foreground: #08090a;
-  --color-destructive: #eb5757;
+  --color-secondary: #f2f3f5;
+  --color-secondary-foreground: #181e25;
+  --color-accent: #ff276f;             /* 粉 */
+  --color-accent-foreground: #ffffff;
+  --color-destructive: #ff4d4f;
   --color-destructive-foreground: #ffffff;
-  --color-success: #4cb782;
-  --color-warning: #f2c94c;
-  --color-border: #1d1d20;
-  --color-input: #1d1d20;
-  --color-ring: #5e6ad2;
+  --color-success: #00b96b;
+  --color-warning: #faad14;
+  --color-border: #e4e7eb;
+  --color-input: #e4e7eb;
+  --color-ring: #7a27ff;
 }
 
 @layer base {
@@ -69,45 +71,60 @@
     text-underline-offset: 3px;
   }
 
-  /* Linear 风格 mesh 渐变（紫蓝） */
-  .mesh-bg {
+  /* 渐变 utility (MiniMax 风格三色) */
+  .gradient-purple {
+    background: linear-gradient(135deg, #7a27ff 0%, #a36aff 100%);
+  }
+  .gradient-purple-text {
+    background: linear-gradient(135deg, #7a27ff 0%, #a36aff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .gradient-pink {
+    background: linear-gradient(135deg, #ff276f 0%, #ff7038 100%);
+  }
+  .gradient-pink-text {
+    background: linear-gradient(135deg, #ff276f 0%, #ff7038 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .gradient-blue {
+    background: linear-gradient(135deg, #1ba4ff 0%, #38cdff 100%);
+  }
+  .gradient-blue-text {
+    background: linear-gradient(135deg, #1ba4ff 0%, #38cdff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* 柔和的彩色 mesh（很弱，作为背景用） */
+  .mesh-purple {
     background:
-      radial-gradient(at 25% 20%, rgba(94, 106, 210, 0.30) 0px, transparent 50%),
-      radial-gradient(at 75% 30%, rgba(139, 92, 246, 0.20) 0px, transparent 50%),
-      radial-gradient(at 50% 80%, rgba(94, 106, 210, 0.15) 0px, transparent 50%);
+      radial-gradient(at 20% 30%, rgba(122, 39, 255, 0.08) 0px, transparent 50%),
+      radial-gradient(at 80% 70%, rgba(163, 106, 255, 0.06) 0px, transparent 50%);
   }
-
-  /* Linear 风格 mesh 偏蓝（variation） */
-  .mesh-soft {
+  .mesh-pink {
     background:
-      radial-gradient(at 30% 20%, rgba(94, 106, 210, 0.10) 0px, transparent 50%),
-      radial-gradient(at 70% 60%, rgba(139, 92, 246, 0.08) 0px, transparent 50%);
+      radial-gradient(at 25% 25%, rgba(255, 39, 111, 0.10) 0px, transparent 50%),
+      radial-gradient(at 75% 75%, rgba(255, 112, 56, 0.08) 0px, transparent 50%);
   }
 
-  /* Linear 风格深色玻璃 */
-  .glass {
-    background: rgba(14, 14, 16, 0.6);
-    backdrop-filter: blur(20px) saturate(150%);
-    -webkit-backdrop-filter: blur(20px) saturate(150%);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-  }
-
-  /* Linear 风格卡片（无玻璃，纯深色） */
+  /* 卡片 (MiniMax 风格：白底 + 浅边 + 大圆角) */
   .card {
-    background: #0e0e10;
-    border: 1px solid #1d1d20;
-    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid #e4e7eb;
+    border-radius: 16px;
+    transition: all 0.2s ease;
   }
-
-  /* Linear 紫蓝 glow */
-  .shadow-purple {
-    box-shadow:
-      0 4px 14px rgba(94, 106, 210, 0.25),
-      0 10px 30px rgba(94, 106, 210, 0.15);
+  .card-hover {
+    transition: all 0.2s ease;
   }
-  .shadow-purple-lg {
-    box-shadow:
-      0 8px 24px rgba(94, 106, 210, 0.30),
-      0 20px 50px rgba(94, 106, 210, 0.18);
+  .card-hover:hover {
+    border-color: #cdd1d6;
+    box-shadow: 0 4px 20px rgba(24, 30, 37, 0.06);
+    transform: translateY(-2px);
   }
 }

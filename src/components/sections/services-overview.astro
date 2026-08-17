@@ -4,56 +4,69 @@ import { Button } from '@/components/ui/button';
 import Icon from '@/components/icon.astro';
 
 const services = await getCollection('services');
+
+// 给每个业务分配渐变（按 slug 固定）
+const gradientMap: Record<string, { card: string; text: string; icon: string }> = {
+  chatgpt: { card: 'gradient-blue', text: 'gradient-blue-text', icon: '#1BA4FF' },
+  claude: { card: 'gradient-purple', text: 'gradient-purple-text', icon: '#7A27FF' },
+  minimax: { card: 'gradient-pink', text: 'gradient-pink-text', icon: '#FF276F' },
+  'ai-aggregator': { card: 'bg-[#181E25]', text: 'text-white', icon: '#FFFFFF' },
+};
 ---
-<section class="py-20 bg-[#08090a] relative">
+<section class="py-24 bg-white">
   <div class="container mx-auto max-w-6xl px-4">
     <div class="text-center max-w-2xl mx-auto">
-      <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[12px] text-zinc-300 mb-5 backdrop-blur-md">
-        <span class="h-1.5 w-1.5 rounded-full bg-[#5e6ad2]"></span>
-        4 大核心业务
-      </div>
-      <h2 class="text-3xl md:text-[44px] leading-[1.1] font-semibold text-white tracking-[-0.02em] text-balance">覆盖所有 AI 服务场景</h2>
-      <p class="mt-4 text-zinc-400 text-base max-w-xl mx-auto leading-relaxed">
+      <h2 class="text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] font-bold text-[#181E25] tracking-[-0.035em] text-balance">
+        覆盖所有 <span class="gradient-purple-text">AI 服务</span> 场景
+      </h2>
+      <p class="mt-5 text-[16px] text-[#6E7782] leading-relaxed">
         从个人订阅到团队拼车，从单一模型到聚合平台，官方价直充 + 透明服务费
       </p>
     </div>
 
-    <div class="mt-14 grid gap-4 md:grid-cols-2">
-      {services.map((s) => (
-        <article class="group card rounded-xl p-7 hover:border-[#5e6ad2]/50 hover:bg-[#151517] transition-all">
-          <div class="flex items-start gap-4">
-            <div class="shrink-0 h-11 w-11 rounded-lg bg-[#5e6ad2]/15 border border-[#5e6ad2]/25 flex items-center justify-center group-hover:bg-[#5e6ad2]/25 transition-all">
-              <Icon name={s.data.icon} class="text-[#5e6ad2]" size={22} />
-            </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="text-lg font-semibold text-white tracking-tight">{s.data.name}</h3>
-              <p class="mt-1.5 text-[13.5px] text-zinc-400 leading-relaxed">{s.data.description}</p>
-            </div>
-          </div>
-
-          <ul class="mt-5 space-y-2.5">
-            {s.data.highlights.map((h) => (
-              <li class="flex items-start gap-2.5 text-[13px]">
-                <div class="shrink-0 mt-0.5 h-4 w-4 rounded bg-[#5e6ad2]/15 flex items-center justify-center">
-                  <Icon name={h.icon} class="text-[#5e6ad2]" size={10} />
+    <div class="mt-16 grid gap-5 md:grid-cols-2">
+      {services.map((s) => {
+        const g = gradientMap[s.data.slug] || gradientMap['chatgpt'];
+        return (
+          <article class="group relative rounded-3xl bg-white border border-[#E4E7EB] p-7 card-hover overflow-hidden">
+            <!-- 渐变小色块装饰 -->
+            <div class={`absolute -top-12 -right-12 h-32 w-32 rounded-full ${g.card} opacity-10 blur-2xl`}></div>
+            <div class="relative">
+              <div class="flex items-start gap-4">
+                <div class={`shrink-0 h-12 w-12 rounded-xl ${g.card} flex items-center justify-center shadow-sm`}>
+                  <Icon name={s.data.icon} class="text-white" size={24} />
                 </div>
-                <div class="text-zinc-300">
-                  <span class="font-medium text-white">{h.title}</span>
-                  <span class="text-zinc-500"> · {h.description}</span>
+                <div class="flex-1 min-w-0">
+                  <h3 class={`text-[20px] font-bold tracking-tight ${g.text}`}>{s.data.name}</h3>
+                  <p class="mt-1.5 text-[14px] text-[#6E7782] leading-relaxed">{s.data.description}</p>
                 </div>
-              </li>
-            ))}
-          </ul>
+              </div>
 
-          <div class="mt-6 flex justify-end">
-            <a href={`/services/${s.data.slug}`}>
-              <Button variant="ghost" className="rounded-lg text-[13px] text-[#5e6ad2] hover:text-[#c4c5f5] hover:bg-[#5e6ad2]/10 px-3">
-                查看详情 →
-              </Button>
-            </a>
-          </div>
-        </article>
-      ))}
+              <ul class="mt-6 space-y-3">
+                {s.data.highlights.map((h) => (
+                  <li class="flex items-start gap-2.5 text-[14px]">
+                    <div class={`shrink-0 mt-0.5 h-5 w-5 rounded-md ${g.card} flex items-center justify-center`}>
+                      <Icon name={h.icon} class="text-white" size={12} />
+                    </div>
+                    <div class="text-[#181E25]">
+                      <span class="font-semibold">{h.title}</span>
+                      <span class="text-[#6E7782]"> · {h.description}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+
+              <div class="mt-6 flex justify-end">
+                <a href={`/services/${s.data.slug}`}>
+                  <Button variant="ghost" className={`rounded-full text-[14px] font-medium ${g.text} hover:bg-[#F7F8FA] px-4 h-9`}>
+                    查看详情 →
+                  </Button>
+                </a>
+              </div>
+            </div>
+          </article>
+        );
+      })}
     </div>
   </div>
 </section>

@@ -1,63 +1,63 @@
 ---
 import { siteConfig } from '@/lib/site-config';
 ---
-<footer class="border-t border-white/5 bg-[#08090a] mt-24">
+<footer class="border-t border-[#E4E7EB] bg-[#F7F8FA] mt-24">
   <div class="container mx-auto max-w-6xl px-4 py-16">
     <div class="max-w-2xl">
-      <p class="text-[15px] text-zinc-400 leading-relaxed">
-        FluxA 服务超过 <strong class="text-white font-medium">2,000</strong> 个 AI 团队。<br />
-        从个人开发者到企业 R&amp;D 部门。
+      <p class="text-[18px] md:text-[20px] text-[#181E25] leading-relaxed font-medium">
+        FluxA 服务超过 <span class="gradient-purple-text font-bold">2,000</span> 个 AI 团队。<br />
+        <span class="text-[#6E7782] text-[15px] font-normal">从个人开发者到企业 R&amp;D 部门。</span>
       </p>
     </div>
     <div class="mt-12 grid gap-10 md:grid-cols-4">
       <div>
-        <div class="text-[13px] font-semibold text-white tracking-tight">业务</div>
-        <ul class="mt-4 space-y-2.5 text-[13px] text-zinc-400">
+        <div class="text-[13px] font-semibold text-[#181E25] tracking-tight uppercase">业务</div>
+        <ul class="mt-4 space-y-2.5 text-[14px] text-[#6E7782]">
           {siteConfig.nav.filter((n) => n.href.startsWith('/services/')).map((item) => (
             <li>
-              <a href={item.href} class="hover:text-white transition-colors">{item.label}</a>
+              <a href={item.href} class="hover:text-[#7A27FF] transition-colors">{item.label}</a>
             </li>
           ))}
         </ul>
       </div>
       <div>
-        <div class="text-[13px] font-semibold text-white tracking-tight">资源</div>
-        <ul class="mt-4 space-y-2.5 text-[13px] text-zinc-400">
-          <li><a href="/pricing" class="hover:text-white transition-colors">价格</a></li>
-          <li><a href="/faq" class="hover:text-white transition-colors">常见问题</a></li>
+        <div class="text-[13px] font-semibold text-[#181E25] tracking-tight uppercase">资源</div>
+        <ul class="mt-4 space-y-2.5 text-[14px] text-[#6E7782]">
+          <li><a href="/pricing" class="hover:text-[#7A27FF] transition-colors">价格</a></li>
+          <li><a href="/faq" class="hover:text-[#7A27FF] transition-colors">常见问题</a></li>
         </ul>
       </div>
       <div>
-        <div class="text-[13px] font-semibold text-white tracking-tight">公司</div>
-        <ul class="mt-4 space-y-2.5 text-[13px] text-zinc-400">
-          <li><a href="/contact" class="hover:text-white transition-colors">联系我们</a></li>
-          <li><a href={`mailto:${siteConfig.contact.email.address}`} class="hover:text-white transition-colors">商务合作</a></li>
+        <div class="text-[13px] font-semibold text-[#181E25] tracking-tight uppercase">公司</div>
+        <ul class="mt-4 space-y-2.5 text-[14px] text-[#6E7782]">
+          <li><a href="/contact" class="hover:text-[#7A27FF] transition-colors">联系我们</a></li>
+          <li><a href={`mailto:${siteConfig.contact.email.address}`} class="hover:text-[#7A27FF] transition-colors">商务合作</a></li>
         </ul>
       </div>
       <div>
-        <div class="text-[13px] font-semibold text-white tracking-tight">为什么选 FluxA</div>
-        <ul class="mt-4 space-y-2.5 text-[13px] text-zinc-400">
-          <li class="flex items-start gap-2"><span class="text-[#5e6ad2]">✓</span>官方价透明计费</li>
-          <li class="flex items-start gap-2"><span class="text-[#5e6ad2]">✓</span>5 分钟极速到账</li>
-          <li class="flex items-start gap-2"><span class="text-[#5e6ad2]">✓</span>7×24 真人客服</li>
+        <div class="text-[13px] font-semibold text-[#181E25] tracking-tight uppercase">为什么选 FluxA</div>
+        <ul class="mt-4 space-y-2.5 text-[14px] text-[#6E7782]">
+          <li class="flex items-start gap-2"><span class="text-[#7A27FF]">✓</span>官方价透明计费</li>
+          <li class="flex items-start gap-2"><span class="text-[#7A27FF]">✓</span>5 分钟极速到账</li>
+          <li class="flex items-start gap-2"><span class="text-[#7A27FF]">✓</span>7×24 真人客服</li>
         </ul>
       </div>
     </div>
 
-    <div class="mt-12 pt-6 border-t border-white/5 flex flex-col items-start justify-between gap-3 text-[12px] text-zinc-500 md:flex-row md:items-center">
-      <div class="flex items-center gap-2">
-        <span class="inline-flex h-6 w-6 rounded-md bg-white items-center justify-center">
-          <img src="/retroarch.svg" alt="FluxA" class="h-3.5 w-3.5" />
+    <div class="mt-12 pt-6 border-t border-[#E4E7EB] flex flex-col items-start justify-between gap-3 text-[13px] text-[#6E7782] md:flex-row md:items-center">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex h-7 w-7 rounded-md gradient-purple items-center justify-center">
+          <img src="/retroarch.svg" alt="FluxA" class="h-3.5 w-3.5 brightness-0 invert" />
         </span>
         <span>© {new Date().getFullYear()} {siteConfig.brand.name}.</span>
-        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-300 transition-colors">
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" class="hover:text-[#7A27FF] transition-colors">
           {siteConfig.icp}
         </a>
       </div>
       <div class="flex items-center gap-5">
-        <a href={siteConfig.contact.ticket.url} class="hover:text-zinc-300 transition-colors">GitHub</a>
-        <a href={siteConfig.contact.ticket.url} class="hover:text-zinc-300 transition-colors">Twitter</a>
-        <a href={`mailto:${siteConfig.contact.email.address}`} class="hover:text-zinc-300 transition-colors">Email</a>
+        <a href={siteConfig.contact.ticket.url} class="hover:text-[#7A27FF] transition-colors">GitHub</a>
+        <a href={siteConfig.contact.ticket.url} class="hover:text-[#7A27FF] transition-colors">Twitter</a>
+        <a href={`mailto:${siteConfig.contact.email.address}`} class="hover:text-[#7A27FF] transition-colors">Email</a>
       </div>
     </div>
   </div>
@@ -66,7 +66,7 @@ import { siteConfig } from '@/lib/site-config';
     type="button"
     aria-label="回到顶部"
     id="back-to-top"
-    class="fixed bottom-6 right-6 z-50 hidden h-9 w-9 rounded-md border border-white/10 bg-[#0e0e10]/80 text-white backdrop-blur-md transition-all hover:border-[#5e6ad2]/50 hover:text-[#5e6ad2] text-sm"
+    class="fixed bottom-6 right-6 z-50 hidden h-11 w-11 rounded-full gradient-purple text-white shadow-lg transition-all hover:opacity-90"
   >
     ↑
   </button>
