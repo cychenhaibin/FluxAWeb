@@ -1,0 +1,64 @@
+---
+// 邀请奖励 banner (minimaxi.com 风格: 大字 + 描述 + CTA)
+---
+<section class="py-24 bg-white">
+  <div class="container-fluid">
+    <div class="relative rounded-[32px] overflow-hidden gradient-pink p-10 md:p-16 lg:p-20">
+      <!-- 装饰圆 -->
+      <div class="pointer-events-none absolute inset-0">
+        <div class="absolute -top-20 -left-20 w-80 h-80 rounded-full bg-white/10 blur-3xl"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-white/15 blur-3xl"></div>
+        <div class="absolute top-1/2 -right-20 w-72 h-72 rounded-full bg-[#7A27FF]/30 blur-3xl"></div>
+      </div>
+
+      <div class="relative z-10 grid gap-8 md:grid-cols-[1.4fr_1fr] items-center">
+        <!-- 左：大字 + 描述 -->
+        <div>
+          <div class="inline-flex items-center h-7 px-3 rounded-full bg-white/25 backdrop-blur-sm text-white text-[11px] font-semibold uppercase tracking-[0.2em]">
+            邀请奖励
+          </div>
+          <h2 class="mt-5 heading-display text-white text-[clamp(2.5rem,6vw,4.5rem)] text-balance">
+            邀请好友<br />各得 <span class="text-white">$5</span>
+          </h2>
+          <p class="mt-5 text-[16px] md:text-[18px] text-white/85 leading-relaxed max-w-xl text-pretty">
+            分享你的专属链接，好友首单成功支付后，你和好友各得 $5 余额奖励，无上限。
+          </p>
+          <div class="mt-7 flex flex-col sm:flex-row gap-3">
+            <a
+              href="/contact"
+              class="inline-flex items-center justify-center h-12 px-7 rounded-full bg-white text-[#7A27FF] text-[15px] font-semibold hover:opacity-90 transition-opacity"
+            >
+              获取我的邀请链接
+            </a>
+            <a
+              href="/faq"
+              class="inline-flex items-center justify-center h-12 px-7 rounded-full border border-white/40 text-white text-[15px] font-medium hover:bg-white/10 transition-colors"
+            >
+              了解奖励规则
+            </a>
+          </div>
+        </div>
+
+        <!-- 右：3 步流程卡 -->
+        <div class="rounded-3xl bg-white/15 backdrop-blur-sm border border-white/20 p-6 space-y-4">
+          <div class="text-[11px] font-semibold text-white/70 uppercase tracking-[0.2em]">3 步即可</div>
+          {[
+            { num: '01', title: '生成链接', desc: '联系客服获取专属邀请链接' },
+            { num: '02', title: '分享好友', desc: '发送链接给好友或社交平台' },
+            { num: '03', title: '双方得 $5', desc: '好友首单后余额自动到账' },
+          ].map((step) => (
+            <div class="flex items-start gap-3">
+              <div class="shrink-0 w-9 h-9 rounded-lg bg-white/20 flex items-center justify-center text-white text-[12px] font-bold">
+                {step.num}
+              </div>
+              <div class="flex-1">
+                <div class="text-[14px] font-semibold text-white">{step.title}</div>
+                <div class="mt-0.5 text-[12px] text-white/75 leading-relaxed">{step.desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

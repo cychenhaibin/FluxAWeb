@@ -1,0 +1,74 @@
+---
+// aboutUs section (minimaxi.com 风格: 居中大字 + 长描述 + 4 数字 + 3 价值卡)
+const stats = [
+  { num: '2000+', label: '服务 AI 团队' },
+  { num: '5min', label: '极速到账' },
+  { num: '7×24', label: '真人客服' },
+  { num: '$3', label: '透明服务费' },
+];
+
+const values = [
+  {
+    icon: 'ShieldCheck',
+    title: '透明定价',
+    desc: '官方价 + 仅 $3 服务费，所有套餐一视同仁，无隐藏费用。',
+  },
+  {
+    icon: 'Zap',
+    title: '极速体验',
+    desc: '5 分钟内自动开通，特殊情况下 30 分钟内人工处理。',
+  },
+  {
+    icon: 'Headphones',
+    title: '7×24 客服',
+    desc: '真人客服在线响应，紧急工单 5 分钟内回复。',
+  },
+];
+---
+<section class="py-24 bg-[#F7F8FA] border-t border-[#E4E7EB]">
+  <div class="container-fluid">
+    <div class="text-center max-w-4xl mx-auto">
+      <!-- 居中大字 -->
+      <h2 class="heading-display text-[clamp(3rem,8vw,6rem)]">
+        关于 <span class="gradient-purple-text">FluxA</span>
+      </h2>
+      <p class="mt-4 text-[18px] md:text-[20px] text-[#181E25] font-medium">
+        AI 服务，一站搞定
+      </p>
+
+      <!-- 长段描述 -->
+      <p class="mt-10 text-[15px] md:text-[16px] text-[#6E7782] leading-[1.8] text-left max-w-3xl mx-auto">
+        FluxA 致力于为开发者和团队提供稳定、极速、可观测的 AI 服务。从 ChatGPT / Claude 官方价直充，到 MiniMax Max 拼车降低 50% 成本，再到自营 AI 聚合 API 按量计费——我们用一个平台，解决所有 AI 服务需求。官方价透明、5 分钟到账、7×24 真人客服，让 AI 服务像水电一样即开即用。
+      </p>
+
+      <!-- 4 数字统计 -->
+      <div class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+        {stats.map((s) => (
+          <div>
+            <div class="text-[clamp(2rem,4vw,3rem)] font-bold text-[#181E25] tracking-[-0.02em] tnum leading-none">
+              {s.num}
+            </div>
+            <div class="mt-2 text-[12px] text-[#6E7782]">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- 3 价值卡 -->
+    <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+      {values.map((v) => (
+        <div class="rounded-3xl bg-white border border-[#E4E7EB] p-7 hover:border-[#181E25] transition-colors">
+          <div class="inline-flex h-12 w-12 rounded-2xl gradient-purple items-center justify-center text-white">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+              {v.icon === 'ShieldCheck' && <><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></>}
+              {v.icon === 'Zap' && <><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></>}
+              {v.icon === 'Headphones' && <><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3" /></>}
+            </svg>
+          </div>
+          <h3 class="mt-5 text-[18px] font-bold text-[#181E25] tracking-tight">{v.title}</h3>
+          <p class="mt-2 text-[14px] text-[#6E7782] leading-relaxed">{v.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

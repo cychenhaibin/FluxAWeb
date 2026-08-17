@@ -1,0 +1,76 @@
+---
+import { getCollection } from 'astro:content';
+
+const services = await getCollection('services');
+const pricingList = await getCollection('pricing');
+const pricingMap = Object.fromEntries(pricingList.map((p) => [p.data.service, p.data]));
+
+// 4 业务 + 起步价（用于横向条形图对比）
+// 用起步价归一化（$23 = 100%）
+const compareData = services
+  .map((s) => {
+    const pricing = pricingMap[s.data.slug];
+    const tier = pricing?.tiers[0];
+    return {
+      slug: s.data.slug,
+      name: s.data.name,
+      tagline: s.data.tagline,
+      startingPrice: tier ? parseFloat(tier.price.replace(/[^0-9.]/g, '')) || 0 : 0,
+      period: tier?.period ?? '',
+    };
+  })
+  .filter((d) => d.startingPrice > 0);
+
+const maxPrice = Math.max(...compareData.map((d) => d.startingPrice));
+const minPrice = Math.min(...compareData.map((d) => d.startingPrice));
+---
+<section class="py-24 bg-[#F7F8FA] border-y border-[#E4E7EB]">
+  <div class="container-fluid">
+    <div class="text-center max-w-3xl mx-auto">
+      <h2 class="heading-display text-[clamp(2.5rem,6vw,4.5rem)] text-balance">
+        模型 <span class="gradient-purple-text">对比</span>
+      </h2>
+      <p class="mt-5 text-[16px] md:text-[18px] text-[#6E7782] leading-relaxed">
+        4 块业务 · 起步价横向对比 · 透明计费无隐藏
+      </p>
+    </div>
+
+    <!-- 横向条形图 (minimaxi.com 风格: 横条 + 标签 + 数值) -->
+    <div class="mt-16 max-w-4xl mx-auto space-y-5">
+      {compareData.map((d) => {
+        const widthPct = (d.startingPrice / maxPrice) * 100;
+        const isCheapest = d.startingPrice === minPrice;
+        return (
+          <div class="rounded-2xl bg-white border border-[#E4E7EB] p-5 md:p-6 hover:border-[#CDD1D6] transition-colors">
+            <div class="flex items-center justify-between mb-3">
+              <div>
+                <div class="text-[15px] md:text-[17px] font-bold text-[#181E25] tracking-tight">{d.name}</div>
+                <div class="mt-1 text-[12px] text-[#6E7782]">{d.tagline}</div>
+              </div>
+              <div class="text-right shrink-0 ml-4">
+                <div class="text-[22px] md:text-[28px] font-bold text-[#181E25] tracking-tight tnum leading-none">
+                  ${d.startingPrice}
+                </div>
+                {d.period && <div class="mt-1 text-[11px] text-[#6E7782]">{d.period}</div>}
+              </div>
+            </div>
+            <!-- 横条 -->
+            <div class="relative h-2.5 rounded-full bg-[#F2F3F5] overflow-hidden">
+              <div
+                class={`absolute inset-y-0 left-0 rounded-full ${isCheapest ? 'gradient-pink' : 'bg-[#7A27FF]'}`}
+                style={`width: ${widthPct}%`}
+              ></div>
+            </div>
+            {isCheapest && (
+              <div class="mt-2 text-[11px] text-[#7A27FF] font-semibold uppercase tracking-wider">起步价最优</div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+
+    <p class="mt-10 text-center text-[13px] text-[#6E7782]">
+      * 起步价为各业务最低套餐。AI 聚合按需报价，单独咨询。
+    </p>
+  </div>
+</section>

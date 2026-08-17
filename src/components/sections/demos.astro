@@ -1,0 +1,91 @@
+---
+import { getCollection } from 'astro:content';
+import Icon from '@/components/icon.astro';
+
+const services = await getCollection('services');
+
+// 5 demo 卡：
+// demo 1-4: 4 业务 (从 services[].demo 加载)
+// demo 5: 邀请奖励 (InviteFriends 概念卡)
+const demos = services.map((s) => ({
+  slug: s.data.slug,
+  name: s.data.name,
+  icon: s.data.icon,
+  description: s.data.demo?.description ?? s.data.tagline,
+  url: s.data.demo?.url ?? `/services/${s.data.slug}`,
+  badge: s.data.showcase?.badge ?? s.data.name,
+}));
+
+// gradient 按 slug 选
+const gradientMap: Record<string, string> = {
+  chatgpt: 'gradient-blue',
+  claude: 'gradient-purple',
+  minimax: 'gradient-pink',
+  'ai-aggregator': 'bg-[#181E25]',
+};
+---
+<section class="py-24 bg-[#F7F8FA] border-y border-[#E4E7EB]">
+  <div class="container-fluid">
+    <div class="text-center max-w-3xl mx-auto">
+      <h2 class="heading-display text-[clamp(2.5rem,6vw,4.5rem)] text-balance">
+        5 个 <span class="gradient-blue-text">Demo</span>
+      </h2>
+      <p class="mt-5 text-[16px] md:text-[18px] text-[#6E7782] leading-relaxed">
+        4 块业务 + 1 个邀请奖励 · 即刻体验 FluxA 服务能力
+      </p>
+    </div>
+
+    <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {demos.map((d) => (
+        <a
+          href={d.url}
+          class="group rounded-3xl bg-white border border-[#E4E7EB] overflow-hidden hover:border-[#181E25] transition-all flex flex-col"
+        >
+          <!-- 渐变缩略图 -->
+          <div class={`relative aspect-[16/10] ${gradientMap[d.slug] ?? 'gradient-purple'} flex items-center justify-center overflow-hidden`}>
+            <div class="absolute -top-6 -right-6 w-32 h-32 rounded-full bg-white/15 blur-2xl"></div>
+            <div class="absolute bottom-0 -left-6 w-32 h-32 rounded-full bg-white/10 blur-2xl"></div>
+            <div class="relative z-10 inline-flex h-14 w-14 rounded-2xl bg-white/25 backdrop-blur-sm items-center justify-center text-white">
+              <Icon name={d.icon} size={26} />
+            </div>
+            <div class="absolute top-4 left-4 z-10 inline-flex items-center h-6 px-2.5 rounded-full bg-white/25 backdrop-blur-sm text-white text-[10px] font-bold uppercase tracking-[0.2em]">
+              {d.badge}
+            </div>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="text-[16px] font-bold text-[#181E25] tracking-tight">{d.name}</h3>
+            <p class="mt-2 text-[13px] text-[#6E7782] leading-relaxed flex-1">
+              {d.description}
+            </p>
+            <div class="mt-3 text-[12px] text-[#181E25] font-medium group-hover:text-[#7A27FF] transition-colors">
+              查看 →
+            </div>
+          </div>
+        </a>
+      ))}
+
+      <!-- Demo 5: 邀请奖励 (InviteFriends 概念卡) -->
+      <a
+        href="/contact"
+        class="group rounded-3xl bg-[#181E25] text-white border border-[#181E25] overflow-hidden hover:scale-[1.01] transition-transform flex flex-col"
+      >
+        <div class="relative aspect-[16/10] bg-gradient-to-br from-[#7A27FF] via-[#5B2BCB] to-[#181E25] flex items-center justify-center overflow-hidden">
+          <div class="absolute -top-6 -right-6 w-32 h-32 rounded-full bg-white/15 blur-2xl"></div>
+          <div class="absolute bottom-0 -left-6 w-32 h-32 rounded-full bg-white/10 blur-2xl"></div>
+          <div class="relative z-10 text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.04em] leading-none text-balance text-center">
+            邀请<br />奖励
+          </div>
+        </div>
+        <div class="p-5 flex-1 flex flex-col">
+          <h3 class="text-[16px] font-bold text-white tracking-tight">邀请好友，各得 $5</h3>
+          <p class="mt-2 text-[13px] text-white/70 leading-relaxed flex-1">
+            分享链接邀请好友，好友首单后双方各得 $5 余额奖励
+          </p>
+          <div class="mt-3 text-[12px] text-white/80 font-medium group-hover:translate-x-1 transition-transform">
+            立即邀请 →
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
