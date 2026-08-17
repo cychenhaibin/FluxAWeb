@@ -56,7 +56,7 @@ const logoMap: Record<string, string> = {
 
     <!-- 2x2 grid (1:1 复刻 MiniMax 旗舰模型 布局) -->
     <div class="model-layout relative mx-auto grid max-w-[1126px] grid-cols-1 gap-[15px] md:grid-cols-2 md:grid-rows-2 md:gap-x-[34px] md:gap-y-6">
-      <!-- (1,1) + (2,1) 左大图 row-span-2 h-[550px]：第 1 篇文章 (粉橙 + 大白字) -->
+      <!-- (1,1) + (2,1) 左大图 row-span-2 h-[550px]：第 1 篇文章 (粉橙 + 3D 装饰 + 大白字) -->
       <a
         href={a1.href}
         class="model-card group relative overflow-hidden rounded-[16px] bg-transparent transition-colors duration-300 hover:bg-[#F7F8FA] has-[a:active]:bg-[#F7F8FA] md:rounded-[24px] model-card-large h-[368px] md:row-span-2 md:h-[550px] gradient-pink"
@@ -66,8 +66,29 @@ const logoMap: Record<string, string> = {
         <div class="absolute top-1/3 -right-20 w-72 h-72 rounded-full bg-[#7A27FF]/30 blur-3xl"></div>
         <div class="absolute bottom-10 -left-10 w-40 h-40 rounded-full bg-white/15 blur-2xl"></div>
 
-        <!-- 大白字 (mobile top-272 + bottom-4, desktop left-6 + bottom-5) -->
-        <div class="absolute left-1/2 top-[272px] bottom-4 z-[2] flex w-[min(calc(100%_-_32px),336px)] -translate-x-1/2 flex-col justify-between md:left-6 md:right-auto md:top-auto md:translate-x-0 md:bottom-5 md:w-[min(calc(100%_-_48px),336px)]">
+        <!-- 3D 装饰 (SVG 模拟 MiniMax M3 黑色多面体+球体) -->
+        <div class="model-image-frame absolute left-1/2 top-3 h-[253px] w-[min(calc(100%_-_32px),336px)] -translate-x-1/2 overflow-hidden rounded-[12px] md:left-6 md:right-auto md:top-[14px] md:aspect-[498/375] md:h-auto md:w-[min(498px,calc(100%_-_48px))] md:translate-x-0 md:rounded-[18px]">
+          <svg class="absolute inset-0 m-auto w-[80%] h-[80%] object-contain transition-transform duration-500 group-hover:scale-[1.03]" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="m3-sphere-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3a3a3a" />
+                <stop offset="50%" stop-color="#0f0f0f" />
+                <stop offset="100%" stop-color="#000" />
+              </linearGradient>
+              <linearGradient id="m3-highlight-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#5a5a5a" stop-opacity="0.7" />
+                <stop offset="100%" stop-color="#0a0a0a" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+            <ellipse cx="100" cy="110" rx="78" ry="82" fill="url(#m3-sphere-2)" />
+            <path d="M 100 110 L 100 28 A 78 82 0 0 0 28 70 Z" fill="url(#m3-highlight-2)" />
+            <ellipse cx="80" cy="70" rx="18" ry="10" fill="#fff" opacity="0.18" />
+            <ellipse cx="100" cy="110" rx="78" ry="82" fill="none" stroke="#000" stroke-width="1" opacity="0.5" />
+          </svg>
+        </div>
+
+        <!-- 大白字 (mobile top-272 + bottom-4, desktop top-405 + bottom-5) -->
+        <div class="absolute left-1/2 top-[272px] bottom-4 z-[2] flex w-[min(calc(100%_-_32px),336px)] -translate-x-1/2 flex-col justify-between md:left-6 md:right-auto md:top-[405px] md:translate-x-0 md:bottom-5 md:w-[min(382px,calc(100%_-_48px))]">
           <div class="text-[clamp(2rem,5vw,4.5rem)] font-bold tracking-[-0.04em] leading-[0.95] text-white text-balance md:whitespace-pre-line">
             {a1.title}
           </div>
