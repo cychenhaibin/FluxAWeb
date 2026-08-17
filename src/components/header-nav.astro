@@ -16,20 +16,20 @@ const isItemActive = (item: NavItem): boolean => {
 };
 ---
 <header
-  class="sticky top-0 z-50 border-b border-[#E4E7EB] bg-white/85 backdrop-blur-xl supports-[backdrop-filter]:bg-white/70"
+  class="sticky top-0 z-50 border-b border-[#E4E7EB] bg-white/85 backdrop-blur-xl supports-[backdrop-filter]:bg-white/70 transition-transform duration-300 ease-out will-change-transform"
   data-header
 >
   <div class="container-fluid flex items-center justify-between" style="height: var(--header-height-mobile);">
-    <!-- 左 logo：紫渐变背景 + retroarch 图标 + FluxA 黑字 -->
-    <a href="/" class="flex items-center gap-2.5 shrink-0" aria-label="FluxA 首页">
-      <span class="inline-flex h-8 w-8 rounded-lg gradient-purple items-center justify-center">
+    <!-- 左 logo：紫渐变背景 + retroarch 图标 + FluxA 黑字 (logo 宽流体 clamp 72-180) -->
+    <a href="/" class="flex items-center gap-2.5 shrink-0 w-[clamp(120px,15vw,180px)]" aria-label="FluxA 首页">
+      <span class="inline-flex h-8 w-8 rounded-lg gradient-purple items-center justify-center shrink-0">
         <img src="/retroarch.svg" alt="" class="h-4 w-4 brightness-0 invert" />
       </span>
-      <span class="text-[17px] font-bold text-[#181E25] tracking-[-0.01em]">{siteConfig.brand.name}</span>
+      <span class="text-[clamp(14px,1.2vw,17px)] font-bold text-[#181E25] tracking-[-0.01em] truncate">{siteConfig.brand.name}</span>
     </a>
 
-    <!-- 桌面端 nav (>= md 1024px 显示) -->
-    <nav class="hidden lg:flex items-center gap-1 text-[14px] font-medium" aria-label="主导航">
+    <!-- 桌面端 nav (>= md 1024px 显示) — minimaxi.com pill 风格 -->
+    <nav class="hidden lg:flex items-center gap-1 text-[14px] font-normal" aria-label="主导航">
       {nav.map((item) => {
         const active = isItemActive(item);
         if (item.subMenu) {
@@ -38,8 +38,10 @@ const isItemActive = (item: NavItem): boolean => {
             <div class="relative group" data-has-submenu>
               <button
                 type="button"
-                class={`inline-flex items-center gap-1 h-[78px] px-4 transition-colors ${
-                  active ? 'text-[#7A27FF]' : 'text-[#181E25] hover:text-[#7A27FF]'
+                class={`inline-flex items-center gap-1 px-4 py-2 rounded-full transition-all duration-200 ${
+                  active
+                    ? 'text-[#181E25] bg-[#F7F8FA]'
+                    : 'text-[#181E25] hover:bg-[#F7F8FA]'
                 }`}
                 aria-haspopup="true"
                 aria-expanded="false"
@@ -89,8 +91,10 @@ const isItemActive = (item: NavItem): boolean => {
         return (
           <a
             href={item.href}
-            class={`inline-flex items-center h-[78px] px-4 transition-colors ${
-              active ? 'text-[#7A27FF]' : 'text-[#181E25] hover:text-[#7A27FF]'
+            class={`inline-flex items-center px-4 py-2 rounded-full transition-all duration-200 ${
+              active
+                ? 'text-[#181E25] bg-[#F7F8FA]'
+                : 'text-[#181E25] hover:bg-[#F7F8FA]'
             }`}
             aria-current={active ? 'page' : undefined}
           >
@@ -259,4 +263,28 @@ const isItemActive = (item: NavItem): boolean => {
       });
     }
   });
+
+  // 桌面端 header: 向下滚动隐藏, 向上滚动显示 (minimaxi.com 行为)
+  const header = document.querySelector('[data-header]') as HTMLElement | null;
+  if (header) {
+    let lastY = 0;
+    let ticking = false;
+    const HEADER_HIDE_THRESHOLD = 100; // 滚动超过 100px 才生效
+    const updateHeader = () => {
+      const y = window.pageYOffset;
+      if (y > lastY && y > HEADER_HIDE_THRESHOLD) {
+        header.style.transform = 'translateY(-100%)';
+      } else if (y < lastY) {
+        header.style.transform = 'translateY(0)';
+      }
+      lastY = y;
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateHeader);
+        ticking = true;
+      }
+    }, { passive: true });
+  }
 </script>
