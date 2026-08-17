@@ -3,145 +3,119 @@ import { getCollection } from 'astro:content';
 import { Button } from '@/components/ui/button';
 
 const services = await getCollection('services');
-const svcMax = services.find((s) => s.data.slug === 'minimax');      // (1,1)+(2,1) 左大图 row-span-2
-const svcChatGPT = services.find((s) => s.data.slug === 'chatgpt');  // (1,2) 右上 cell
-const svcClaude = services.find((s) => s.data.slug === 'claude');     // (2,2) 右下 cell
+const svcMax = services.find((s) => s.data.slug === 'minimax');      // (1,1)+(2,1) 左大：Max 拼车 row-span-2
+const svcChatGPT = services.find((s) => s.data.slug === 'chatgpt');  // (1,2) 右上图 / (2,2) 中下文字
+const svcClaude = services.find((s) => s.data.slug === 'claude');     // (1,3) 右中图 / (2,3) 右下文字
 ---
 <section class="py-24 bg-white">
-  <div class="mx-auto mt-[50px] w-full max-w-[1126px] px-4 md:mt-[60px] md:px-0">
-    <div class="section-heading centered mx-auto mb-[36px] max-w-[760px] text-center">
-      <h2 class="m-0 text-[24px] font-bold leading-[1.2] tracking-[-0.2px] text-[#181E25] md:text-[40px] md:tracking-[-0.4px]">
+  <div class="container mx-auto max-w-6xl px-4">
+    <div class="text-center max-w-3xl mx-auto">
+      <h2 class="text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05] font-bold text-[#181E25] tracking-[-0.04em] text-balance">
         旗舰服务
       </h2>
-      <p class="m-0 mt-2 flex w-full flex-col justify-center break-words text-center text-[16px] leading-[19.2px] text-[#86909C] md:mt-3">
+      <p class="mt-5 text-[16px] md:text-[18px] text-[#6E7782] leading-relaxed">
         FluxA 主推三大业务，覆盖 ChatGPT 充值 / Claude 充值 / Max 拼车
       </p>
     </div>
 
-    <!-- 2x2 grid (1:1 复刻 MiniMax 旗舰模型 布局: 大图 row-span-2 + 2 个 文字+图+底部行 cell) -->
-    <div class="model-layout relative mx-auto grid max-w-[1126px] grid-cols-1 gap-[15px] md:grid-cols-2 md:grid-rows-2 md:gap-x-[34px] md:gap-y-6">
-      <!-- (1,1) + (2,1) 左大图 row-span-2 h-[550px]：Max 拼车 (粉橙 + 3D 装饰 + 大白字) -->
+    <!-- 2x3 grid (1:1 复刻样图 1 布局: 大图 row-span-2 + 2 个图 cell + 2 个文字 cell) -->
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- (1,1) + (2,1) 左大图 row-span-2：Max 拼车 (粉橙 + Users icon 左上半透明白盒 + 大白字底部) -->
       {svcMax && (
         <a
           href={`/services/${svcMax.data.slug}`}
-          class="model-card group relative overflow-hidden rounded-[16px] bg-transparent transition-colors duration-300 hover:bg-[#F7F8FA] has-[a:active]:bg-[#F7F8FA] md:rounded-[24px] model-card-large h-[368px] md:row-span-2 md:h-[550px] gradient-pink"
+          class="group md:row-span-2 relative aspect-square rounded-3xl gradient-pink overflow-hidden flex flex-col items-start justify-between p-8 text-white hover:scale-[1.01] transition-transform"
         >
           <!-- 装饰圆 (模糊光斑) -->
           <div class="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
           <div class="absolute top-1/3 -right-20 w-72 h-72 rounded-full bg-[#7A27FF]/30 blur-3xl"></div>
           <div class="absolute bottom-10 -left-10 w-40 h-40 rounded-full bg-white/15 blur-2xl"></div>
 
-          <!-- 3D 装饰 (SVG 模拟 MiniMax M3 黑色多面体+球体, 居中偏上) -->
-          <div class="model-image-frame absolute left-1/2 top-3 h-[253px] w-[min(calc(100%_-_32px),336px)] -translate-x-1/2 overflow-hidden rounded-[12px] md:left-6 md:right-auto md:top-[14px] md:aspect-[498/375] md:h-auto md:w-[min(498px,calc(100%_-_48px))] md:translate-x-0 md:rounded-[18px]">
-            <svg class="absolute inset-0 m-auto w-[80%] h-[80%] object-contain transition-transform duration-500 group-hover:scale-[1.03]" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="m3-sphere" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#3a3a3a" />
-                  <stop offset="50%" stop-color="#0f0f0f" />
-                  <stop offset="100%" stop-color="#000" />
-                </linearGradient>
-                <linearGradient id="m3-highlight" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#5a5a5a" stop-opacity="0.7" />
-                  <stop offset="100%" stop-color="#0a0a0a" stop-opacity="0" />
-                </linearGradient>
-                <linearGradient id="m3-cut" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#1a1a1a" />
-                  <stop offset="100%" stop-color="#000" />
-                </linearGradient>
-              </defs>
-
-              <!-- 主体 3D 球体 -->
-              <ellipse cx="100" cy="110" rx="78" ry="82" fill="url(#m3-sphere)" />
-
-              <!-- 切口高光（左上被切开部分） -->
-              <path d="M 100 110 L 100 28 A 78 82 0 0 0 28 70 Z" fill="url(#m3-highlight)" />
-
-              <!-- 切口深色边 -->
-              <path d="M 100 110 L 100 28 A 78 82 0 0 0 28 70" fill="none" stroke="#000" stroke-width="1.5" opacity="0.6" />
-              <path d="M 100 110 L 100 28 A 78 82 0 0 1 172 70" fill="none" stroke="#000" stroke-width="1.5" opacity="0.4" />
-
-              <!-- 球体高光 -->
-              <ellipse cx="80" cy="70" rx="18" ry="10" fill="#fff" opacity="0.18" />
-
-              <!-- 切口内侧深色面 -->
-              <path d="M 100 110 L 100 28 A 78 82 0 0 0 28 70 Z" fill="url(#m3-cut)" opacity="0.4" />
-
-              <!-- 球体轮廓 -->
-              <ellipse cx="100" cy="110" rx="78" ry="82" fill="none" stroke="#000" stroke-width="1" opacity="0.5" />
+          <!-- 左上角 Users icon 在半透明白盒 -->
+          <div class="relative z-[2] w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 text-white">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
             </svg>
           </div>
 
-          <!-- 大白字 (mobile top-272 + bottom-4, desktop top-405 + bottom-5, w-[min(382px,calc(100%_-_48px))]) -->
-          <div class="absolute left-1/2 top-[272px] bottom-4 z-[2] flex w-[min(calc(100%_-_32px),336px)] -translate-x-1/2 flex-col justify-between md:left-6 md:right-auto md:top-[405px] md:translate-x-0 md:bottom-5 md:w-[min(382px,calc(100%_-_48px))]">
-            <div class="text-[clamp(2rem,5vw,4.5rem)] font-bold tracking-[-0.04em] leading-[0.95] text-white text-balance md:whitespace-pre-line">
-              Max<br />拼车
-            </div>
+          <!-- 大白字 (底部) -->
+          <div class="relative z-[2] text-[clamp(3rem,7vw,6.5rem)] font-bold tracking-[-0.04em] leading-[0.9] text-balance">
+            Max<br />拼车
           </div>
         </a>
       )}
 
-      <!-- (1,2) 右上 cell：ChatGPT 充值 (MiniMax model-card 1:1) -->
+      <!-- (1,2) 中上图：ChatGPT 紫图 (OpenAI logo 居中) -->
       {svcChatGPT && (
         <a
           href={`/services/${svcChatGPT.data.slug}`}
-          class="model-card group relative overflow-hidden rounded-[16px] bg-transparent transition-colors duration-300 hover:bg-[#F7F8FA] has-[a:active]:bg-[#F7F8FA] md:rounded-[24px] flex h-auto flex-col pt-2.5 pb-2.5 md:block md:h-[264px] md:pt-0 md:pb-0"
+          class="group relative aspect-square rounded-3xl gradient-purple overflow-hidden flex items-center justify-center hover:scale-[1.01] transition-transform"
         >
-          <!-- 文字 (mobile flex order-2, desktop absolute left-6 right-[56%] top-5 bottom-5) -->
-          <div class="z-[2] order-2 mx-auto mt-2.5 flex w-[min(calc(100%_-_32px),336px)] flex-col md:absolute md:left-6 md:right-[56%] md:top-5 md:bottom-5 md:z-[2] md:w-auto md:overflow-hidden">
-            <h3 class="m-0 whitespace-normal text-[24px] font-bold leading-[1.16] tracking-[-0.4px] text-[#181E25] md:whitespace-pre-line md:text-[23px]">
-              ChatGPT 充值
-            </h3>
-            <p class="m-0 mt-2 text-[14px] font-normal leading-[1.2] tracking-[0] text-[#000000] md:mt-2 md:text-[18px]">
-              Plus / Pro 全档 · GPT-4o 无限 · o1 pro 深度推理
-            </p>
-          </div>
-
-          <!-- 图 (mobile h-[253px] w-[min(...336px)] + rounded-[12px], desktop absolute right-6 top-6 w-[min(288px,48%)] aspect-[288/217] rounded-[14px]) -->
-          <div class="model-image-frame relative order-1 mx-auto h-[253px] w-[min(calc(100%_-_32px),336px)] overflow-hidden rounded-[12px] md:absolute md:bottom-auto md:left-auto md:right-6 md:top-6 md:order-none md:aspect-[288/217] md:h-auto md:w-[min(288px,48%)] md:rounded-[14px]">
-            <div class="absolute inset-0 gradient-purple"></div>
-            <div class="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-white/15 blur-2xl"></div>
-            <img src="/icons/openai.svg" alt="OpenAI" class="absolute inset-0 m-auto w-20 h-20 md:w-24 md:h-24 brightness-0 invert relative z-10" />
-          </div>
-
-          <!-- 底部行 (mobile flex order-3, desktop absolute left-6 bottom-6) -->
-          <footer class="flex flex-wrap items-center justify-start gap-x-4 gap-y-1 text-[13px] leading-none text-[#6E7782] order-3 md:absolute md:left-6 md:z-10 md:flex md:bottom-6 mt-3 md:mt-0">
-            <span class="inline-flex items-center font-normal text-[14px] leading-[1.2] text-[#86909C]">2026-08</span>
-            <span class="inline-flex items-center font-normal text-[14px] leading-[1.2] text-[#86909C] transition-opacity group-hover:opacity-60">了解更多<span aria-hidden="true" class="inline-flex w-[0.75em] items-center justify-center">&gt;</span></span>
-          </footer>
+          <div class="absolute -top-8 -right-8 w-40 h-40 rounded-full bg-white/15 blur-2xl"></div>
+          <img src="/icons/openai.svg" alt="OpenAI" class="relative z-10 w-24 h-24 md:w-32 md:h-32 brightness-0 invert" />
         </a>
       )}
 
-      <!-- (2,2) 右下 cell：Claude 充值 (MiniMax model-card 1:1) -->
+      <!-- (1,3) 右上图：Claude 赤土色图 (Anthropic logo 居中) -->
       {svcClaude && (
         <a
           href={`/services/${svcClaude.data.slug}`}
-          class="model-card group relative overflow-hidden rounded-[16px] bg-transparent transition-colors duration-300 hover:bg-[#F7F8FA] has-[a:active]:bg-[#F7F8FA] md:rounded-[24px] flex h-auto flex-col pt-2.5 pb-2.5 md:block md:h-[264px] md:pt-0 md:pb-0"
+          class="group relative aspect-square rounded-3xl gradient-claude overflow-hidden flex items-center justify-center hover:scale-[1.01] transition-transform"
         >
-          <!-- 文字 -->
-          <div class="z-[2] order-2 mx-auto mt-2.5 flex w-[min(calc(100%_-_32px),336px)] flex-col md:absolute md:left-6 md:right-[56%] md:top-5 md:bottom-5 md:z-[2] md:w-auto md:overflow-hidden">
-            <h3 class="m-0 whitespace-normal text-[24px] font-bold leading-[1.16] tracking-[-0.4px] text-[#181E25] md:whitespace-pre-line md:text-[23px]">
-              Claude 充值
-            </h3>
-            <p class="m-0 mt-2 text-[14px] font-normal leading-[1.2] tracking-[0] text-[#000000] md:mt-2 md:text-[18px]">
-              Sonnet 4.5 + Opus 4.1 全模型 · Pro / Max 满血体验
-            </p>
-          </div>
-
-          <!-- 图 (Claude 赤土色) -->
-          <div class="model-image-frame relative order-1 mx-auto h-[253px] w-[min(calc(100%_-_32px),336px)] overflow-hidden rounded-[12px] md:absolute md:bottom-auto md:left-auto md:right-6 md:top-6 md:order-none md:aspect-[288/217] md:h-auto md:w-[min(288px,48%)] md:rounded-[14px]">
-            <div class="absolute inset-0 gradient-claude"></div>
-            <div class="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-white/15 blur-2xl"></div>
-            <img src="/icons/anthropic.svg" alt="Anthropic" class="absolute inset-0 m-auto w-20 h-20 md:w-24 md:h-24 brightness-0 invert relative z-10" />
-          </div>
-
-          <!-- 底部行 -->
-          <footer class="flex flex-wrap items-center justify-start gap-x-4 gap-y-1 text-[13px] leading-none text-[#6E7782] order-3 md:absolute md:left-6 md:z-10 md:flex md:bottom-6 mt-3 md:mt-0">
-            <span class="inline-flex items-center font-normal text-[14px] leading-[1.2] text-[#86909C]">2026-08</span>
-            <span class="inline-flex items-center font-normal text-[14px] leading-[1.2] text-[#86909C] transition-opacity group-hover:opacity-60">了解更多<span aria-hidden="true" class="inline-flex w-[0.75em] items-center justify-center">&gt;</span></span>
-          </footer>
+          <div class="absolute -top-8 -right-8 w-40 h-40 rounded-full bg-white/15 blur-2xl"></div>
+          <img src="/icons/anthropic.svg" alt="Anthropic" class="relative z-10 w-24 h-24 md:w-32 md:h-32 brightness-0 invert" />
         </a>
       )}
+
+      <!-- (2,2) 中下文字 cell (白底 + ChatGPT 充值) -->
+      {svcChatGPT && (
+        <div class="aspect-square rounded-3xl bg-white p-6 md:p-7 flex flex-col">
+          <h3 class="text-[28px] md:text-[32px] font-bold text-[#181E25] tracking-tight leading-tight text-balance">
+            ChatGPT 充值
+          </h3>
+          <p class="mt-2 text-[15px] text-[#6E7782] leading-relaxed text-balance">
+            Plus / Pro 全档 · GPT-4o 无限 · o1 pro 深度推理
+          </p>
+          <div class="mt-6 flex items-center gap-3 text-[12px] text-[#6E7782]">
+            <span>2026-08</span>
+            <a href={`/services/${svcChatGPT.data.slug}`} class="text-[#181E25] font-medium hover:text-[#7A27FF] transition-colors">了解更多 &gt;</a>
+          </div>
+        </div>
+      )}
+
+      <!-- (2,3) 右下文字 cell (白底 + Claude 充值) -->
+      {svcClaude && (
+        <div class="aspect-square rounded-3xl bg-white p-6 md:p-7 flex flex-col">
+          <h3 class="text-[28px] md:text-[32px] font-bold text-[#181E25] tracking-tight leading-tight text-balance">
+            Claude 充值
+          </h3>
+          <p class="mt-2 text-[15px] text-[#6E7782] leading-relaxed text-balance">
+            Sonnet 4.5 + Opus 4.1 全模型 · Pro / Max 满血体验
+          </p>
+          <div class="mt-6 flex items-center gap-3 text-[12px] text-[#6E7782]">
+            <span>2026-08</span>
+            <a href={`/services/${svcClaude.data.slug}`} class="text-[#181E25] font-medium hover:text-[#7A27FF] transition-colors">了解更多 &gt;</a>
+          </div>
+        </div>
+      )}
     </div>
+
+    <!-- Grid 外 col 1 下方：Max 拼车文字 (跟 (1,1) row-span-2 大图下方对齐，宽度 = col 1 宽度) -->
+    {svcMax && (
+      <div class="mt-6 max-w-[calc((100%-3rem)/3)]">
+        <h3 class="text-[24px] font-bold text-[#181E25] tracking-tight">Max 拼车</h3>
+        <p class="mt-2 text-[14px] text-[#6E7782] leading-relaxed">
+          Claude Max 5x 团队拼车服务，2-4 人共享账号分摊费用，加 $3 人工费
+        </p>
+        <div class="mt-3 flex items-center gap-4 text-[12px] text-[#6E7782]">
+          <span>2026-08</span>
+          <a href={`/services/${svcMax.data.slug}`} class="text-[#181E25] font-medium hover:text-[#7A27FF] transition-colors">了解更多 &gt;</a>
+        </div>
+      </div>
+    )}
 
     <div class="mt-16 flex justify-center">
       <a href="/services/ai-aggregator">
