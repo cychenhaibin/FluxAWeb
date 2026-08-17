@@ -71,7 +71,7 @@
     text-underline-offset: 3px;
   }
 
-  /* 渐变 utility (MiniMax 风格三色) */
+  /* 渐变 utility (MiniMax 风格三色 + Claude 主题色) */
   .gradient-purple {
     background: linear-gradient(135deg, #7a27ff 0%, #a36aff 100%);
   }
@@ -98,6 +98,10 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+  }
+  .gradient-claude {
+    /* Anthropic 2024 品牌色: 赤土色 / 暖橙棕 */
+    background: linear-gradient(135deg, #DA7756 0%, #CC785C 100%);
   }
 
   /* 柔和的彩色 mesh（很弱，作为背景用） */
