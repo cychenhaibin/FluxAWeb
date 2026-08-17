@@ -8,44 +8,24 @@ const values = [
     title: "官方价透明",
     description:
       "OpenAI / Anthropic 官方通道充值，所有套餐官方价 + 仅 $3 服务费，无隐藏费用，到账即享官方权益。",
-    color: {
-      icon: "bg-[#10A37F] text-white",
-      chip: "bg-[#10A37F]/10 text-[#0d8c6c] border-[#10A37F]/20",
-      ring: "hover:border-[#10A37F]/40",
-    },
   },
   {
     icon: Zap,
     title: "5 分钟到账",
     description:
       "下单后自动开通，5 分钟内账号到位；特殊情况 30 分钟内人工处理，无需漫长等待。",
-    color: {
-      icon: "bg-[#FF7038] text-white",
-      chip: "bg-[#FF7038]/10 text-[#c9551f] border-[#FF7038]/20",
-      ring: "hover:border-[#FF7038]/40",
-    },
   },
   {
     icon: BadgeDollarSign,
     title: "拼车省 50%",
     description:
       "MiniMax Max 拼车 2-4 人共享官方团队账号，比单独订阅省 50% 以上，每人均摊 $28 起。",
-    color: {
-      icon: "bg-gradient-to-br from-[#FF276F] to-[#7A27FF] text-white",
-      chip: "bg-[#7A27FF]/10 text-[#7A27FF] border-[#7A27FF]/20",
-      ring: "hover:border-[#FF276F]/40",
-    },
   },
   {
     icon: Headphones,
     title: "7×24 客服",
     description:
       "真人客服在线响应，紧急工单 5 分钟内回复；微信、邮箱、工单多渠道随时可联系。",
-    color: {
-      icon: "bg-[#7A27FF] text-white",
-      chip: "bg-[#7A27FF]/10 text-[#7A27FF] border-[#7A27FF]/20",
-      ring: "hover:border-[#7A27FF]/40",
-    },
   },
 ];
 
@@ -73,17 +53,17 @@ export default function WhyFluxa() {
           </p>
         </div>
 
-        {/* 4 个价值卡 */}
+        {/* 4 个价值卡 — icon 统一前景色 */}
         <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {values.map((v, i) => {
             const Icon = v.icon;
             return (
               <Card
                 key={i}
-                className={"h-full transition-all " + v.color.ring + " hover:shadow-md"}
+                className="h-full transition-all hover:border-foreground/20 hover:shadow-sm"
               >
                 <CardHeader className="gap-3">
-                  <span className={`inline-flex h-10 w-10 items-center justify-center rounded-lg ${v.color.icon}`}>
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-foreground text-background">
                     <Icon className="h-5 w-5" />
                   </span>
                   <CardTitle className="text-base font-semibold tracking-tight">

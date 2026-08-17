@@ -46,43 +46,15 @@ const completion = await client.chat.completions.create({
 console.log(completion.choices[0].message.content);`;
 
 const integrations = [
-  {
-    icon: Layers,
-    title: "OpenAI SDK",
-    desc: "一行 base_url 切换到 FluxA",
-    color: { icon: "bg-[#10A37F] text-white", ring: "hover:border-[#10A37F]/40" },
-  },
-  {
-    icon: Sparkles,
-    title: "Anthropic SDK",
-    desc: "Claude 系列原生支持",
-    color: { icon: "bg-[#da7756] text-white", ring: "hover:border-[#da7756]/40" },
-  },
-  {
-    icon: Code2,
-    title: "REST API",
-    desc: "标准 HTTP + 流式响应",
-    color: { icon: "bg-[#7A27FF] text-white", ring: "hover:border-[#7A27FF]/40" },
-  },
-  {
-    icon: Globe,
-    title: "Web UI",
-    desc: "AI 聚合平台统一界面",
-    color: { icon: "bg-[#FF276F] text-white", ring: "hover:border-[#FF276F]/40" },
-  },
+  { icon: Layers, title: "OpenAI SDK", desc: "一行 base_url 切换到 FluxA" },
+  { icon: Sparkles, title: "Anthropic SDK", desc: "Claude 系列原生支持" },
+  { icon: Code2, title: "REST API", desc: "标准 HTTP + 流式响应" },
+  { icon: Globe, title: "Web UI", desc: "AI 聚合平台统一界面" },
 ];
 
 const tools = [
-  { name: "Python", accent: "bg-[#10A37F]/10 text-[#0d8c6c] border-[#10A37F]/30" },
-  { name: "Node.js", accent: "bg-[#10A37F]/10 text-[#0d8c6c] border-[#10A37F]/30" },
-  { name: "cURL", accent: "bg-[#7A27FF]/10 text-[#7A27FF] border-[#7A27FF]/30" },
-  { name: "TypeScript", accent: "bg-[#3178C6]/10 text-[#3178C6] border-[#3178C6]/30" },
-  { name: "Go", accent: null },
-  { name: "Rust", accent: null },
-  { name: "Java", accent: null },
-  { name: "Ruby", accent: null },
-  { name: "PHP", accent: null },
-  { name: "Postman", accent: "bg-[#FF7038]/10 text-[#c9551f] border-[#FF7038]/30" },
+  "Python", "Node.js", "Go", "Rust", "Java",
+  "TypeScript", "Ruby", "PHP", "cURL", "Postman",
 ];
 
 function CodeBlock({ code, language }: { code: string; language: string }) {
@@ -138,19 +110,14 @@ export default function Developers() {
           </p>
         </div>
 
-        {/* 工具 chips */}
+        {/* 工具 chips — 统一单色 */}
         <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
           {tools.map((t) => (
             <span
-              key={t.name}
-              className={
-                "inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium " +
-                (t.accent
-                  ? t.accent
-                  : "border-border bg-background text-foreground/80")
-              }
+              key={t}
+              className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground/80"
             >
-              {t.name}
+              {t}
             </span>
           ))}
         </div>
@@ -184,17 +151,17 @@ export default function Developers() {
           </Tabs>
         </div>
 
-        {/* 4 接入方式 — 各色 icon */}
+        {/* 4 接入方式 — icon 统一前景色 */}
         <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {integrations.map((it, i) => {
             const Icon = it.icon;
             return (
               <Card
                 key={i}
-                className={"h-full transition-all " + it.color.ring + " hover:shadow-md"}
+                className="h-full transition-all hover:border-foreground/20 hover:shadow-sm"
               >
                 <CardHeader className="gap-3">
-                  <span className={`inline-flex h-10 w-10 items-center justify-center rounded-lg ${it.color.icon}`}>
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-foreground text-background">
                     <Icon className="h-5 w-5" />
                   </span>
                   <CardTitle className="text-base font-semibold tracking-tight">

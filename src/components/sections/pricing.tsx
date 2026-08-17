@@ -101,15 +101,13 @@ export default function Pricing({
                       <Card
                         key={i}
                         className={
-                          "relative flex h-full flex-col overflow-hidden transition-all " +
+                          "flex h-full flex-col transition-all " +
                           (tier.recommended
                             ? "border-foreground/30 shadow-sm ring-1 ring-foreground/10"
                             : "hover:border-foreground/20 hover:shadow-sm")
                         }
                       >
-                        {/* 顶部彩色条 — 对应当前服务品牌色 */}
-                        <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${accent.bar}`} />
-                        <CardHeader className="gap-2 pt-6">
+                        <CardHeader className="gap-2">
                           {tier.recommended && (
                             <Badge
                               variant="default"
@@ -151,7 +149,7 @@ export default function Pricing({
                           <ul className="space-y-2.5 text-sm text-foreground/80 flex-1">
                             {tier.features.map((f, j) => (
                               <li key={j} className="flex items-start gap-2.5">
-                                <span className={`mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-sm ${accent.checkBg} text-background`}>
+                                <span className="mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-sm bg-foreground text-background">
                                   <Check className="h-3 w-3" strokeWidth={3} />
                                 </span>
                                 <span>{f}</span>
