@@ -75,8 +75,10 @@ export default function Hero() {
           <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl md:text-6xl">
             FluxA
           </h1>
-          <p className="mt-4 text-lg font-medium text-foreground/80 sm:text-xl">
-            AI 服务，一站搞定
+          <p className="mt-4 text-lg font-medium sm:text-xl">
+            <span className="bg-gradient-to-r from-[#FF276F] via-[#FF7038] to-[#7A27FF] bg-clip-text text-transparent">
+              AI 服务，一站搞定
+            </span>
           </p>
           <p className="mt-3 text-sm text-muted-foreground sm:text-base">
             4 块业务一站搞定 · 官方价 + 仅 $3 服务费 · 5 分钟到账 · 7×24 客服
@@ -85,19 +87,19 @@ export default function Hero() {
 
         {/* 4 个服务卡：1 个主推 + 3 个并排 */}
         <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-2">
-          {/* 主推卡 (FEATURED) — 跨 2 行 */}
+          {/* 主推卡 (FEATURED) — 跨 2 行, pink-orange 渐变 + 深底色 */}
           <Card
             id="minimax"
-            className="relative md:row-span-2 overflow-hidden border-foreground/15 bg-foreground text-background transition-all hover:shadow-md"
+            className="relative md:row-span-2 overflow-hidden border-0 bg-gradient-to-br from-[#FF276F] via-[#FF7038] to-[#7A27FF] text-background transition-all hover:shadow-xl"
           >
             <CardHeader className="gap-3">
               <div className="flex items-center gap-2">
-                <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-background/10 text-background">
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-background/15 text-background">
                   <FeaturedIcon className="h-4 w-4" />
                 </span>
                 <Badge
                   variant="secondary"
-                  className="rounded-full bg-background/15 text-background border-0 hover:bg-background/15"
+                  className="rounded-full bg-background/20 text-background border-0 hover:bg-background/20"
                 >
                   团队账号 · 主推
                 </Badge>
@@ -105,25 +107,25 @@ export default function Hero() {
               <CardTitle className="text-2xl font-semibold tracking-tight text-background sm:text-3xl">
                 {featured.name}
               </CardTitle>
-              <CardDescription className="text-sm leading-relaxed text-background/70">
+              <CardDescription className="text-sm leading-relaxed text-background/85">
                 {featured.description}
               </CardDescription>
             </CardHeader>
             <CardContent className="mt-auto flex flex-col gap-5">
               <div>
-                <div className="text-xs uppercase tracking-wider text-background/60">
+                <div className="text-xs uppercase tracking-wider text-background/70">
                   起售价
                 </div>
                 <div className="mt-1 flex items-baseline gap-2">
                   <span className="text-3xl font-semibold tracking-tight tnum text-background sm:text-4xl">
                     {featured.price}
                   </span>
-                  <span className="rounded-md bg-background/10 px-2 py-0.5 text-xs font-medium text-background/80">
+                  <span className="rounded-md bg-background/15 px-2 py-0.5 text-xs font-medium text-background/90">
                     + $3 服务费
                   </span>
                 </div>
               </div>
-              <ul className="space-y-1.5 text-sm text-background/80">
+              <ul className="space-y-1.5 text-sm text-background/85">
                 <li className="flex items-center gap-2">
                   <ShieldCheck className="h-3.5 w-3.5" />
                   Anthropic 官方账号
@@ -150,22 +152,48 @@ export default function Hero() {
             </CardContent>
           </Card>
 
-          {/* 3 个并排卡 */}
+          {/* 3 个并排卡 — 每个有彩色顶条 + 彩色 icon 背景 */}
           {other.map((s, idx) => {
             const Icon = iconMap[s.icon];
             const id = s.slug === "ai-aggregator" ? "fluxa" : s.slug;
+            // 每个服务一种品牌色
+            const accent: Record<string, { swatch: string; chip: string; ring: string; bar: string }> = {
+              chatgpt: {
+                swatch: "bg-[#10A37F]/10 text-[#10A37F]",
+                chip: "bg-[#10A37F]/10 text-[#0d8c6c] border-[#10A37F]/20",
+                ring: "hover:border-[#10A37F]/30",
+                bar: "from-[#10A37F] to-[#10A37F]/0",
+              },
+              claude: {
+                swatch: "bg-[#da7756]/10 text-[#da7756]",
+                chip: "bg-[#da7756]/10 text-[#b85f3d] border-[#da7756]/20",
+                ring: "hover:border-[#da7756]/30",
+                bar: "from-[#da7756] to-[#da7756]/0",
+              },
+              "ai-aggregator": {
+                swatch: "bg-[#7A27FF]/10 text-[#7A27FF]",
+                chip: "bg-[#7A27FF]/10 text-[#7A27FF] border-[#7A27FF]/20",
+                ring: "hover:border-[#7A27FF]/30",
+                bar: "from-[#7A27FF] to-[#7A27FF]/0",
+              },
+            };
+            const c = accent[s.slug];
             return (
               <Card
                 key={s.slug}
                 id={id}
-                className="group transition-all hover:border-foreground/20 hover:shadow-sm"
+                className={
+                  "group relative overflow-hidden transition-all " + c.ring + " hover:shadow-md"
+                }
               >
-                <CardHeader className="gap-3">
+                {/* 顶部彩色条 */}
+                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${c.bar}`} />
+                <CardHeader className="gap-3 pt-6">
                   <div className="flex items-center gap-2">
-                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-muted text-foreground">
+                    <span className={`inline-flex h-8 w-8 items-center justify-center rounded-md ${c.swatch}`}>
                       <Icon className="h-4 w-4" />
                     </span>
-                    <Badge variant="outline" className="rounded-full px-2.5 text-[10px] font-medium uppercase tracking-wider">
+                    <Badge variant="outline" className={`rounded-full px-2.5 text-[10px] font-medium uppercase tracking-wider ${c.chip}`}>
                       0{idx + 1}
                     </Badge>
                   </div>

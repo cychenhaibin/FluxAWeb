@@ -83,9 +83,9 @@ export default function Pricing({
                           {tier.recommended && (
                             <Badge
                               variant="default"
-                              className="self-start rounded-full px-2.5 text-[10px] font-medium uppercase tracking-wider"
+                              className="self-start rounded-full bg-gradient-to-r from-[#7A27FF] to-[#FF276F] px-2.5 text-[10px] font-medium uppercase tracking-wider text-background hover:from-[#7A27FF] hover:to-[#FF276F] border-0"
                             >
-                              推荐
+                              ★ 推荐
                             </Badge>
                           )}
                           <CardTitle className="text-lg font-semibold tracking-tight">
