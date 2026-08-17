@@ -1,37 +1,67 @@
 ---
-// 最新动态 section (MiniMax 最新研究风格: 2x2 文章列表)
-// 数据可以扩展为 content collection，但先写静态 4 条
+// 最新动态 section (1:1 复刻 MiniMax 旗舰模型 2x3 grid 布局)
+// 3 篇文章：第 1 篇作左大图 (row-span-2) + 第 2 篇 (中上文字 + 右上图) + 第 3 篇 (中下文字 + 右下图)
 
 const articles = [
   {
-    tags: ['Max 拼车', 'Claude', '上线公告'],
-    title: 'Claude Max 5x 拼车上线：人均仅 $53/月',
+    title: 'Claude Max 5x\n拼车上线',
+    subtitle: '人均仅 $53/月',
+    description: 'Claude Max 5x 团队拼车服务，2-4 人共享账号分摊费用',
     date: '2026-08-13',
     href: '/services/minimax',
-    gradient: 'gradient-pink',
+    color: 'pink',     // 左大图粉橙
+    isBig: true,       // row-span-2
+    type: 'image',     // 图 cell
   },
   {
-    tags: ['ChatGPT', 'Pro 200'],
-    title: 'Pro 200 满血套餐：1v1 专属客户经理 + 7×24 售后',
+    title: 'Pro 200 满血套餐',
+    subtitle: '1v1 专属客户经理 · 7×24 售后',
+    description: 'Pro 200 满血版：1v1 专属客户经理 + 7×24 售后，1 个账号独享',
     date: '2026-08-05',
     href: '/services/chatgpt',
-    gradient: 'gradient-blue',
+    color: 'purple',   // 紫渐变
+    isBig: false,
+    type: 'text',      // (1,2) 文字 cell
   },
   {
-    tags: ['Claude', 'Max 20x'],
-    title: 'Max 20x 满血体验：所有优先通道 + Opus 满血',
+    title: '',
+    subtitle: '',
+    description: '',
+    date: '2026-08-05',
+    href: '/services/chatgpt',
+    color: 'purple',
+    isBig: false,
+    type: 'image',     // (1,3) 图 cell：紫渐变 + OpenAI logo
+    logo: 'openai',
+  },
+  {
+    title: 'Max 20x 满血体验',
+    subtitle: '所有优先通道 + Opus 满血',
+    description: 'Max 20x 满血体验：所有优先通道 + Opus 满血 + Sonnet 4.5 满血',
     date: '2026-07-28',
     href: '/services/claude',
-    gradient: 'gradient-purple',
+    color: 'purple',
+    isBig: false,
+    type: 'text',      // (2,2) 文字 cell
   },
   {
-    tags: ['AI 聚合', '工程实践'],
-    title: 'AI 聚合平台按量计费：自营稳定 + 透明计费',
-    date: '2026-07-15',
-    href: '/services/ai-aggregator',
-    gradient: 'bg-[#181E25]',
+    title: '',
+    subtitle: '',
+    description: '',
+    date: '2026-07-28',
+    href: '/services/claude',
+    color: 'purple',
+    isBig: false,
+    type: 'image',     // (2,3) 图 cell：紫渐变 + Anthropic logo
+    logo: 'anthropic',
   },
 ];
+
+const a1 = articles[0];  // 左大图 row-span-2
+const a2text = articles[1];  // (1,2) 文字
+const a2img = articles[2];   // (1,3) 图
+const a3text = articles[3];  // (2,2) 文字
+const a3img = articles[4];   // (2,3) 图
 ---
 <section class="py-24 bg-white">
   <div class="container mx-auto max-w-6xl px-4">
@@ -44,36 +74,94 @@ const articles = [
       </p>
     </div>
 
-    <!-- 2x2 文章列表 (MiniMax 最新研究风格: 标签 + 标题 + 日期 + 缩略图) -->
-    <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
-      {articles.map((article) => (
-        <a
-          href={article.href}
-          class="group grid grid-cols-1 sm:grid-cols-[1fr_140px] gap-6 items-start"
-        >
-          <div>
-            <div class="flex flex-wrap gap-2 mb-3">
-              {article.tags.map((tag) => (
-                <span class="inline-flex items-center h-6 px-2.5 rounded-full bg-[#F2F3F5] text-[#6E7782] text-[11px] font-medium">
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <h3 class="text-[20px] md:text-[22px] font-bold text-[#181E25] leading-[1.3] tracking-tight text-balance group-hover:text-[#7A27FF] transition-colors">
-              {article.title}
-            </h3>
-            <div class="mt-4 flex items-center gap-4 text-[12px] text-[#6E7782]">
-              <span>{article.date}</span>
-              <span class="text-[#181E25] font-medium group-hover:text-[#7A27FF] transition-colors">了解更多 ›</span>
-            </div>
+    <!-- 2x3 grid (1:1 复刻 MiniMax 旗舰模型布局) -->
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- (1,1) + (2,1) 左大图 row-span-2：第 1 篇文章 粉橙 + 大白字 -->
+      <a
+        href={a1.href}
+        class="group md:row-span-2 relative rounded-3xl gradient-pink overflow-hidden hover:scale-[1.01] transition-transform"
+      >
+        <!-- 装饰圆 (模糊光斑) -->
+        <div class="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
+        <div class="absolute top-1/3 -right-20 w-72 h-72 rounded-full bg-[#7A27FF]/30 blur-3xl"></div>
+        <div class="absolute bottom-10 -left-10 w-40 h-40 rounded-full bg-white/15 blur-2xl"></div>
+
+        <div class="relative h-full min-h-[420px] md:min-h-[528px] flex flex-col items-start justify-between p-8 text-white">
+          <!-- 左上角 tag -->
+          <div class="inline-flex items-center h-7 px-3 rounded-full bg-white/20 backdrop-blur-sm text-white text-[11px] font-medium tracking-wide">
+            {a1.subtitle}
           </div>
-          <div class={`relative w-full aspect-square rounded-2xl ${article.gradient} overflow-hidden`}>
-            <div class="absolute inset-0 flex items-center justify-center text-white">
-              <div class="text-[36px] font-bold tracking-[-0.04em] opacity-80">FluxA</div>
-            </div>
+
+          <!-- 大白字 -->
+          <div class="text-[clamp(2.5rem,6vw,5rem)] font-bold tracking-[-0.04em] leading-[0.95] whitespace-pre-line text-balance">
+            {a1.title}
           </div>
-        </a>
-      ))}
+        </div>
+      </a>
+
+      <!-- (1,2) 中上文字 cell：白底 + 第 2 篇文章标题 + 描述 + 日期 + 了解更多 > -->
+      <div class="aspect-square rounded-3xl bg-white p-6 md:p-8 flex flex-col justify-between">
+        <div>
+          <h3 class="text-[24px] md:text-[28px] font-bold text-[#181E25] tracking-tight leading-tight text-balance">
+            {a2text.title}
+          </h3>
+          <p class="mt-2 text-[14px] text-[#6E7782] leading-relaxed">
+            {a2text.description}
+          </p>
+        </div>
+        <div class="flex items-center justify-between text-[12px] text-[#6E7782]">
+          <span>{a2text.date}</span>
+          <a href={a2text.href} class="text-[#181E25] font-medium hover:text-[#7A27FF] transition-colors">了解更多 &gt;</a>
+        </div>
+      </div>
+
+      <!-- (1,3) 右上图 cell：第 2 篇文章 紫渐变 + logo -->
+      <a
+        href={a2img.href}
+        class="group relative aspect-square rounded-3xl gradient-purple overflow-hidden flex items-center justify-center hover:scale-[1.01] transition-transform"
+      >
+        <div class="absolute -top-8 -right-8 w-40 h-40 rounded-full bg-white/15 blur-2xl"></div>
+        <div class="absolute -bottom-12 -left-12 w-48 h-48 rounded-full bg-white/10 blur-3xl"></div>
+        <img src={`/icons/${a2img.logo}.svg`} alt={a2img.logo} class="relative z-10 w-24 h-24 md:w-32 md:h-32 brightness-0 invert" />
+      </a>
+
+      <!-- (2,2) 中下文字 cell：白底 + 第 3 篇文章标题 + 描述 + 日期 + 了解更多 > -->
+      <div class="aspect-square rounded-3xl bg-white p-6 md:p-8 flex flex-col justify-between">
+        <div>
+          <h3 class="text-[24px] md:text-[28px] font-bold text-[#181E25] tracking-tight leading-tight text-balance">
+            {a3text.title}
+          </h3>
+          <p class="mt-2 text-[14px] text-[#6E7782] leading-relaxed">
+            {a3text.description}
+          </p>
+        </div>
+        <div class="flex items-center justify-between text-[12px] text-[#6E7782]">
+          <span>{a3text.date}</span>
+          <a href={a3text.href} class="text-[#181E25] font-medium hover:text-[#7A27FF] transition-colors">了解更多 &gt;</a>
+        </div>
+      </div>
+
+      <!-- (2,3) 右下图 cell：第 3 篇文章 紫渐变 + logo -->
+      <a
+        href={a3img.href}
+        class="group relative aspect-square rounded-3xl gradient-purple overflow-hidden flex items-center justify-center hover:scale-[1.01] transition-transform"
+      >
+        <div class="absolute -top-8 -right-8 w-40 h-40 rounded-full bg-white/15 blur-2xl"></div>
+        <div class="absolute -bottom-12 -left-12 w-48 h-48 rounded-full bg-white/10 blur-3xl"></div>
+        <img src={`/icons/${a3img.logo}.svg`} alt={a3img.logo} class="relative z-10 w-24 h-24 md:w-32 md:h-32 brightness-0 invert" />
+      </a>
+    </div>
+
+    <!-- Grid 外 col 1 下方：第 1 篇文章 文字 (跟 (1,1) row-span-2 大图下方对齐，宽度 = col 1 宽度) -->
+    <div class="mt-6 max-w-[calc((100%-3rem)/3)]">
+      <h3 class="text-[24px] font-bold text-[#181E25] tracking-tight">{a1.subtitle}</h3>
+      <p class="mt-2 text-[14px] text-[#6E7782] leading-relaxed">
+        {a1.description}
+      </p>
+      <div class="mt-3 flex items-center gap-4 text-[12px] text-[#6E7782]">
+        <span>{a1.date}</span>
+        <a href={a1.href} class="text-[#181E25] font-medium hover:text-[#7A27FF] transition-colors">了解更多 &gt;</a>
+      </div>
     </div>
 
     <div class="mt-16 flex justify-center">
