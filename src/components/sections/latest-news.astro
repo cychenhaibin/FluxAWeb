@@ -1,0 +1,88 @@
+---
+// 最新动态 section (MiniMax 最新研究风格: 2x2 文章列表)
+// 数据可以扩展为 content collection，但先写静态 4 条
+
+const articles = [
+  {
+    tags: ['Max 拼车', 'Claude', '上线公告'],
+    title: 'Claude Max 5x 拼车上线：人均仅 $53/月',
+    date: '2026-08-13',
+    href: '/services/minimax',
+    gradient: 'gradient-pink',
+  },
+  {
+    tags: ['ChatGPT', 'Pro 200'],
+    title: 'Pro 200 满血套餐：1v1 专属客户经理 + 7×24 售后',
+    date: '2026-08-05',
+    href: '/services/chatgpt',
+    gradient: 'gradient-blue',
+  },
+  {
+    tags: ['Claude', 'Max 20x'],
+    title: 'Max 20x 满血体验：所有优先通道 + Opus 满血',
+    date: '2026-07-28',
+    href: '/services/claude',
+    gradient: 'gradient-purple',
+  },
+  {
+    tags: ['AI 聚合', '工程实践'],
+    title: 'AI 聚合平台按量计费：自营稳定 + 透明计费',
+    date: '2026-07-15',
+    href: '/services/ai-aggregator',
+    gradient: 'bg-[#181E25]',
+  },
+];
+---
+<section class="py-24 bg-white">
+  <div class="container mx-auto max-w-6xl px-4">
+    <div class="text-center max-w-3xl mx-auto">
+      <h2 class="text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05] font-bold text-[#181E25] tracking-[-0.04em] text-balance">
+        最新动态
+      </h2>
+      <p class="mt-5 text-[16px] md:text-[18px] text-[#6E7782] leading-relaxed">
+        价格调整 / 服务上线 / 工程实践 · 与用户同行
+      </p>
+    </div>
+
+    <!-- 2x2 文章列表 (MiniMax 最新研究风格: 标签 + 标题 + 日期 + 缩略图) -->
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
+      {articles.map((article) => (
+        <a
+          href={article.href}
+          class="group grid grid-cols-1 sm:grid-cols-[1fr_140px] gap-6 items-start"
+        >
+          <div>
+            <div class="flex flex-wrap gap-2 mb-3">
+              {article.tags.map((tag) => (
+                <span class="inline-flex items-center h-6 px-2.5 rounded-full bg-[#F2F3F5] text-[#6E7782] text-[11px] font-medium">
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <h3 class="text-[20px] md:text-[22px] font-bold text-[#181E25] leading-[1.3] tracking-tight text-balance group-hover:text-[#7A27FF] transition-colors">
+              {article.title}
+            </h3>
+            <div class="mt-4 flex items-center gap-4 text-[12px] text-[#6E7782]">
+              <span>{article.date}</span>
+              <span class="text-[#181E25] font-medium group-hover:text-[#7A27FF] transition-colors">了解更多 ›</span>
+            </div>
+          </div>
+          <div class={`relative w-full aspect-square rounded-2xl ${article.gradient} overflow-hidden`}>
+            <div class="absolute inset-0 flex items-center justify-center text-white">
+              <div class="text-[36px] font-bold tracking-[-0.04em] opacity-80">FluxA</div>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-16 flex justify-center">
+      <a
+        href="/faq"
+        class="inline-flex items-center justify-center h-12 px-7 rounded-full border border-[#E4E7EB] bg-white text-[#181E25] text-[15px] font-medium hover:border-[#181E25] transition-colors"
+      >
+        查看全部 →
+      </a>
+    </div>
+  </div>
+</section>

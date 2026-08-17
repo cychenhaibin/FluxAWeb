@@ -6,14 +6,14 @@ import { siteConfig } from '@/lib/site-config';
 const { contact } = siteConfig;
 ---
 <BaseLayout title="联系我们 - FluxA">
-  <section class="relative bg-white pt-24 pb-12 overflow-hidden">
+  <section class="bg-white pt-24 pb-12">
     <div class="container mx-auto max-w-6xl px-4 text-center">
       <h1 class="text-[clamp(2.5rem,7vw,5rem)] leading-[1.05] font-bold text-[#181E25] tracking-[-0.04em] text-balance">
         联系 <span class="gradient-pink-text">我们</span>
       </h1>
-      <p class="mt-6 text-[16px] md:text-[18px] text-[#6E7782] leading-relaxed max-w-2xl mx-auto">
-        3 种联系方式 · 7×24 在线响应。<br />
-        工作日 5 分钟内真人客服回复。
+      <p class="mt-6 text-[18px] md:text-[20px] text-[#6E7782] leading-relaxed max-w-2xl mx-auto">
+        3 种联系方式 · 7×24 在线响应<br />
+        工作日 5 分钟内真人客服回复
       </p>
     </div>
   </section>
@@ -21,7 +21,7 @@ const { contact } = siteConfig;
   <section class="bg-white pb-24">
     <div class="container mx-auto max-w-6xl px-4">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <div class="rounded-3xl bg-white border border-[#E4E7EB] p-8 flex flex-col items-center text-center card-hover">
+        <div class="rounded-3xl bg-white border border-[#E4E7EB] p-8 flex flex-col items-center text-center hover:border-[#181E25] transition-all">
           <div class="h-14 w-14 rounded-2xl gradient-pink flex items-center justify-center text-white">
             <Icon name="MessageCircle" size={26} />
           </div>
@@ -38,7 +38,7 @@ const { contact } = siteConfig;
 
         <a
           href={`mailto:${contact.email.address}`}
-          class="rounded-3xl bg-white border border-[#E4E7EB] p-8 flex flex-col items-center text-center card-hover"
+          class="rounded-3xl bg-white border border-[#E4E7EB] p-8 flex flex-col items-center text-center hover:border-[#181E25] transition-all"
         >
           <div class="h-14 w-14 rounded-2xl gradient-purple flex items-center justify-center text-white">
             <Icon name="Mail" size={26} />
@@ -54,7 +54,7 @@ const { contact } = siteConfig;
           href={contact.ticket.url}
           target="_blank"
           rel="noopener noreferrer"
-          class="rounded-3xl bg-white border border-[#E4E7EB] p-8 flex flex-col items-center text-center card-hover"
+          class="rounded-3xl bg-white border border-[#E4E7EB] p-8 flex flex-col items-center text-center hover:border-[#181E25] transition-all"
         >
           <div class="h-14 w-14 rounded-2xl gradient-blue flex items-center justify-center text-white">
             <Icon name="Ticket" size={26} />

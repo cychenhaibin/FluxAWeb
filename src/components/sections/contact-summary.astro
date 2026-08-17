@@ -1,89 +1,49 @@
 ---
-import { siteConfig } from '@/lib/site-config';
-import { Button } from '@/components/ui/button';
-import Icon from '@/components/icon.astro';
-
-interface Channel {
-  key: string;
-  name: string;
-  iconName: string;
-  detail: string;
-  href?: string;
-  external?: boolean;
-}
-
-const channels: Channel[] = [
-  {
-    key: 'wechat',
-    name: siteConfig.contact.wechat.name,
-    iconName: 'MessageCircle',
-    detail: '扫码添加客服微信，工作日 5 分钟内响应',
-  },
-  {
-    key: 'email',
-    name: siteConfig.contact.email.name,
-    iconName: 'Mail',
-    detail: siteConfig.contact.email.address,
-    href: `mailto:${siteConfig.contact.email.address}`,
-  },
-  {
-    key: 'ticket',
-    name: siteConfig.contact.ticket.name,
-    iconName: 'Ticket',
-    detail: '提交工单后工程师会在 1 小时内响应',
-    href: siteConfig.contact.ticket.url,
-    external: true,
-  },
-];
-
-const gradientMap: Record<string, string> = {
-  wechat: 'gradient-pink',
-  email: 'gradient-purple',
-  ticket: 'gradient-blue',
-};
+// 关于 FluxA section (MiniMax 公司介绍风格: 居中大字 + 长描述 + 4 数字)
 ---
-<section class="py-24 bg-[#F7F8FA] border-t border-[#E4E7EB]">
-  <div class="container mx-auto max-w-6xl px-4">
-    <div class="text-center max-w-2xl mx-auto">
-      <h2 class="text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] font-bold text-[#181E25] tracking-[-0.035em] text-balance">
-        联系 <span class="gradient-pink-text">我们</span>
-      </h2>
-      <p class="mt-5 text-[16px] text-[#6E7782]">三种方式挑一个最方便的，7×24 都有真人</p>
-    </div>
+<section class="py-24 bg-white">
+  <div class="container mx-auto max-w-4xl px-4 text-center">
+    <!-- 居中大字标题 -->
+    <h2 class="text-[clamp(3rem,8vw,6rem)] leading-[1.0] font-bold text-[#181E25] tracking-[-0.04em]">
+      FluxA
+    </h2>
+    <p class="mt-4 text-[18px] md:text-[20px] text-[#181E25] font-medium">
+      AI 服务，一站搞定
+    </p>
 
-    <div class="mt-16 grid gap-5 sm:grid-cols-3">
-      {channels.map((c) => {
-        const g = gradientMap[c.key] || 'gradient-purple';
-        const body = (
-          <article class="h-full rounded-3xl bg-white border border-[#E4E7EB] p-7 card-hover flex flex-col items-start">
-            <div class={`h-12 w-12 rounded-xl ${g} flex items-center justify-center shadow-sm`}>
-              <Icon name={c.iconName} class="text-white" size={22} />
-            </div>
-            <h3 class="mt-5 text-[16px] font-bold text-[#181E25] tracking-tight">{c.name}</h3>
-            <p class="mt-2 text-[14px] text-[#6E7782] flex-1 leading-relaxed">{c.detail}</p>
-          </article>
-        );
-        return c.href ? (
-          <a
-            href={c.href}
-            target={c.external ? '_blank' : undefined}
-            rel={c.external ? 'noopener noreferrer' : undefined}
-            class="block"
-          >
-            {body}
-          </a>
-        ) : (
-          body
-        );
-      })}
-    </div>
-
-    <div class="mt-12 flex justify-center">
-      <a href="/contact">
-        <Button size="lg" className="rounded-full h-12 px-7 text-[15px] font-medium gradient-purple text-white hover:opacity-90 shadow-lg">
-          联系我们
-        </Button>
+    <!-- 关于我们按钮 -->
+    <div class="mt-8">
+      <a
+        href="/contact"
+        class="inline-flex items-center justify-center h-11 px-7 rounded-full border border-[#E4E7EB] bg-white text-[#181E25] text-[14px] font-medium hover:border-[#181E25] transition-colors"
+      >
+        关于我们
       </a>
+    </div>
+
+    <!-- 长段描述 -->
+    <p class="mt-12 text-[14px] md:text-[15px] text-[#6E7782] leading-[1.8] text-left max-w-3xl mx-auto">
+      FluxA 致力于为开发者和团队提供稳定、极速、可观测的 AI 服务。从 ChatGPT / Claude 官方价直充，到 Claude Max 拼车降低 80% 成本，再到自营 AI 聚合 API 按量计费——我们用一个平台，解决所有 AI 服务需求。官方价透明、5 分钟到账、7×24 真人客服，让 AI 服务像水电一样即开即用。
+    </p>
+
+    <!-- 4 数字统计 -->
+    <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+      <div>
+        <div class="text-[clamp(2rem,4vw,3rem)] font-bold text-[#181E25] tracking-[-0.02em] tnum">2000<span class="text-[#7A27FF]">+</span></div>
+        <div class="mt-1 text-[12px] text-[#6E7782]">服务 AI 团队</div>
+      </div>
+      <div>
+        <div class="text-[clamp(2rem,4vw,3rem)] font-bold text-[#181E25] tracking-[-0.02em] tnum">5<span class="text-[#7A27FF]">min</span></div>
+        <div class="mt-1 text-[12px] text-[#6E7782]">极速到账</div>
+      </div>
+      <div>
+        <div class="text-[clamp(2rem,4vw,3rem)] font-bold text-[#181E25] tracking-[-0.02em] tnum">7×24</div>
+        <div class="mt-1 text-[12px] text-[#6E7782]">真人客服</div>
+      </div>
+      <div>
+        <div class="text-[clamp(2rem,4vw,3rem)] font-bold text-[#181E25] tracking-[-0.02em] tnum">$3</div>
+        <div class="mt-1 text-[12px] text-[#6E7782]">透明人工费</div>
+      </div>
     </div>
   </div>
 </section>

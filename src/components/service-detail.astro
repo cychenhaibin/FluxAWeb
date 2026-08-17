@@ -59,69 +59,62 @@ const gradientTextMap: Record<string, string> = {
 const g = gradientMap[service.slug] || 'gradient-purple';
 const gt = gradientTextMap[service.slug] || 'gradient-purple-text';
 ---
-<section class="relative bg-white pt-24 pb-12 overflow-hidden">
-  <div class="container mx-auto max-w-6xl px-4">
-    <div class="text-center max-w-3xl mx-auto">
-      <div class={`inline-flex h-14 w-14 rounded-2xl ${g} items-center justify-center shadow-lg mb-6`}>
-        <Icon name={service.icon} class="text-white" size={28} />
-      </div>
-      <h1 class="text-[clamp(2.5rem,7vw,5rem)] leading-[1.05] font-bold text-[#181E25] tracking-[-0.04em] text-balance">
-        <span class={gt}>{service.name}</span>
-      </h1>
-      <p class="mt-6 text-[16px] md:text-[18px] text-[#6E7782] leading-relaxed max-w-2xl mx-auto">
-        {service.tagline.split(/[，,。]/)[0]}。<br />
-        官方价直充 + 透明服务费，5 分钟极速到账。
-      </p>
+<section class="bg-white pt-24 pb-12">
+  <div class="container mx-auto max-w-6xl px-4 text-center">
+    <h1 class="text-[clamp(2.5rem,7vw,5rem)] leading-[1.05] font-bold text-[#181E25] tracking-[-0.04em] text-balance">
+      <span class={gt}>{service.name}</span>
+    </h1>
+    <p class="mt-6 text-[18px] md:text-[20px] text-[#6E7782] leading-relaxed max-w-2xl mx-auto">
+      {service.tagline.split(/[，,。]/)[0]}<br />
+      官方价直充 + 透明服务费，5 分钟极速到账
+    </p>
+    <div class="mt-10 flex flex-col sm:flex-row gap-3 items-center justify-center">
+      <a
+        href="/pricing"
+        class="inline-flex items-center justify-center h-12 px-8 rounded-full border border-[#E4E7EB] bg-white text-[#181E25] text-[15px] font-medium hover:border-[#181E25] transition-colors min-w-[140px]"
+      >
+        查看套餐
+      </a>
+      <a
+        href="/contact"
+        class="inline-flex items-center justify-center h-12 px-8 rounded-full bg-[#181E25] text-white text-[15px] font-medium hover:bg-[#0a0d12] transition-colors min-w-[140px]"
+      >
+        {service.ctaLabel}
+      </a>
     </div>
   </div>
 </section>
 
 <section class="bg-white pb-20">
   <div class="container mx-auto max-w-6xl px-4 text-center">
-    <p class="text-[16px] text-[#181E25] leading-relaxed max-w-2xl mx-auto">{service.description}</p>
-
-    <div class="mt-8 inline-flex flex-wrap items-center gap-x-3 gap-y-1.5 rounded-full border border-[#E4E7EB] bg-white px-5 py-2.5 text-[14px]">
-      {startingPrice && (
-        <>
-          <span class="text-[#6E7782]">起售价</span>
-          <span class="font-bold text-[#181E25] tnum">{startingPrice}</span>
-        </>
-      )}
-      {tierCount > 0 && (
-        <>
-          <span class="text-[#CDD1D6]">·</span>
-          <span class="text-[#6E7782]">共 {tierCount} 个套餐</span>
-        </>
-      )}
-    </div>
-
-    <div class="mt-8 flex flex-col sm:flex-row gap-3 items-center justify-center">
-      <a href="/pricing">
-        <Button size="lg" variant="outline" className="rounded-full h-12 px-6 text-[15px] font-medium border-[#E4E7EB] bg-white text-[#181E25] hover:border-[#7A27FF] hover:text-[#7A27FF]">
-          查看套餐
-        </Button>
-      </a>
-      <a href="/contact">
-        <Button size="lg" className="rounded-full h-12 px-6 text-[15px] font-medium gradient-purple text-white hover:opacity-90 shadow-lg">
-          {service.ctaLabel}
-        </Button>
-      </a>
-    </div>
+    <p class="text-[15px] text-[#181E25] leading-relaxed max-w-2xl mx-auto">{service.description}</p>
+    {startingPrice && (
+      <div class="mt-6 inline-flex items-center gap-3 rounded-full border border-[#E4E7EB] bg-white px-5 py-2.5 text-[14px]">
+        <span class="text-[#6E7782]">起售价</span>
+        <span class="font-bold text-[#181E25] tnum">{startingPrice}</span>
+        {tierCount > 0 && (
+          <>
+            <span class="text-[#CDD1D6]">·</span>
+            <span class="text-[#6E7782]">共 {tierCount} 个套餐</span>
+          </>
+        )}
+      </div>
+    )}
   </div>
 </section>
 
 <section class="bg-[#F7F8FA] py-20 border-t border-[#E4E7EB]">
   <div class="container mx-auto max-w-6xl px-4">
     <div class="text-center max-w-2xl mx-auto">
-      <h2 class="text-[clamp(1.75rem,4.5vw,2.75rem)] leading-[1.15] font-bold text-[#181E25] tracking-[-0.035em] text-balance">
+      <h2 class="text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] font-bold text-[#181E25] tracking-[-0.04em] text-balance">
         核心 <span class={gt}>亮点</span>
       </h2>
-      <p class="mt-3 text-[15px] text-[#6E7782]">为什么选择 {service.name}</p>
+      <p class="mt-4 text-[15px] text-[#6E7782]">为什么选择 {service.name}</p>
     </div>
     <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
       {service.highlights.map((h) => (
-        <div class="rounded-3xl bg-white border border-[#E4E7EB] p-6 card-hover">
-          <div class={`h-10 w-10 rounded-xl ${g} flex items-center justify-center shadow-sm`}>
+        <div class="rounded-3xl bg-white border border-[#E4E7EB] p-6 hover:border-[#181E25] transition-all">
+          <div class={`h-10 w-10 rounded-xl ${g} flex items-center justify-center`}>
             <Icon name={h.icon} class="text-white" size={20} />
           </div>
           <h3 class="mt-4 text-[16px] font-bold text-[#181E25] tracking-tight">{h.title}</h3>

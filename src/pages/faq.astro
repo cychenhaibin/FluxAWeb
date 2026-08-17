@@ -7,19 +7,19 @@ const faqEntry = await getEntry('faq', 'faq');
 const items = faqEntry?.data ?? [];
 ---
 <BaseLayout title="常见问题 - FluxA">
-  <section class="relative bg-white pt-24 pb-12 overflow-hidden">
+  <section class="bg-white pt-24 pb-12">
     <div class="container mx-auto max-w-6xl px-4 text-center">
       <h1 class="text-[clamp(2.5rem,7vw,5rem)] leading-[1.05] font-bold text-[#181E25] tracking-[-0.04em] text-balance">
         常见 <span class="gradient-blue-text">问题</span>
       </h1>
-      <p class="mt-6 text-[16px] md:text-[18px] text-[#6E7782] leading-relaxed max-w-2xl mx-auto">
-        8 个常见问题 · 5 个分类。<br />
-        下单、账户、续费、退款——这里有你想问的。
+      <p class="mt-6 text-[18px] md:text-[20px] text-[#6E7782] leading-relaxed max-w-2xl mx-auto">
+        8 个常见问题 · 5 个分类<br />
+        下单、账户、续费、退款——这里有你想问的
       </p>
     </div>
   </section>
 
-  <section class="bg-white pb-24">
+  <section class="bg-[#F7F8FA] pb-24">
     <div class="container mx-auto max-w-3xl px-4">
       <div class="rounded-3xl bg-white border border-[#E4E7EB] overflow-hidden">
         <FaqAccordion client:visible items={items} />

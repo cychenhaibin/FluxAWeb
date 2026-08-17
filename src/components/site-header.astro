@@ -1,17 +1,22 @@
 ---
 import { siteConfig } from '@/lib/site-config';
 const currentPath = Astro.url.pathname;
+
+// MiniMax 风格：把主导航 7 项居中，登录按钮在最右
+const mainNav = siteConfig.nav; // 7 项
 ---
-<header class="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-[#E4E7EB]">
+<header class="sticky top-0 z-50 bg-white border-b border-[#E4E7EB]">
   <div class="container mx-auto max-w-6xl px-4 h-16 flex items-center justify-between">
+    <!-- 左 logo：紫渐变背景 + retroarch 图标 + FluxA 黑字 -->
     <a href="/" class="flex items-center gap-2.5 shrink-0">
-      <span class="inline-flex h-8 w-8 rounded-lg gradient-purple items-center justify-center shadow-sm">
-        <img src="/retroarch.svg" alt="FluxA" class="h-4 w-4 brightness-0 invert" />
+      <span class="inline-flex h-7 w-7 rounded-md gradient-purple items-center justify-center">
+        <img src="/retroarch.svg" alt="FluxA" class="h-3.5 w-3.5 brightness-0 invert" />
       </span>
-      <span class="text-[18px] font-bold text-[#181E25] tracking-[-0.02em]">{siteConfig.brand.name}</span>
+      <span class="text-[16px] font-bold text-[#181E25] tracking-[-0.01em]">{siteConfig.brand.name}</span>
     </a>
-    <nav class="hidden md:flex items-center gap-7 text-[14px] font-medium">
-      {siteConfig.nav.map((item) => (
+    <!-- 居中导航 -->
+    <nav class="hidden lg:flex items-center gap-7 text-[14px] font-medium">
+      {mainNav.map((item) => (
         <a
           href={item.href}
           class={`transition-colors ${
@@ -24,11 +29,12 @@ const currentPath = Astro.url.pathname;
         </a>
       ))}
     </nav>
+    <!-- 右：联系客服按钮 (圆角胶囊) -->
     <a
       href="/contact"
-      class="inline-flex items-center justify-center h-10 px-5 rounded-full gradient-purple text-white text-[14px] font-medium hover:opacity-90 transition-opacity shrink-0"
+      class="inline-flex items-center justify-center h-9 px-5 rounded-full border border-[#E4E7EB] bg-white text-[#181E25] text-[13px] font-medium hover:border-[#181E25] transition-colors shrink-0"
     >
-      立即购买
+      联系客服
     </a>
   </div>
 </header>

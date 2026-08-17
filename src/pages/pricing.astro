@@ -14,14 +14,14 @@ const pricingList = await getCollection('pricing');
 const pricingByService = Object.fromEntries(pricingList.map((p) => [p.data.service.id, p.data]));
 ---
 <BaseLayout title="价格 - FluxA">
-  <section class="relative bg-white pt-24 pb-12 overflow-hidden">
+  <section class="bg-white pt-24 pb-12">
     <div class="container mx-auto max-w-6xl px-4 text-center">
       <h1 class="text-[clamp(2.5rem,7vw,5rem)] leading-[1.05] font-bold text-[#181E25] tracking-[-0.04em] text-balance">
         <span class="gradient-purple-text">价格</span> 方案
       </h1>
-      <p class="mt-6 text-[16px] md:text-[18px] text-[#6E7782] leading-relaxed max-w-2xl mx-auto">
-        4 块业务 · 11 个套餐可选。<br />
-        所有套餐均为官方价 + $3 人工费，5 分钟极速到账。
+      <p class="mt-6 text-[18px] md:text-[20px] text-[#6E7782] leading-relaxed max-w-2xl mx-auto">
+        4 块业务 · 11 个套餐可选<br />
+        所有套餐均为官方价 + $3 人工费，5 分钟极速到账
       </p>
     </div>
   </section>
@@ -32,7 +32,7 @@ const pricingByService = Object.fromEntries(pricingList.map((p) => [p.data.servi
         <span class="text-lg">⚠️</span>
         <div>
           <strong class="font-semibold text-[#D48806]">价格说明：</strong>
-          所有套餐均为官方价 + $3 人工费。下单前请确认账号状态，下单后 5 分钟内开通。如对价格有疑问，请联系客服。
+          所有套餐均为官方价 + $3 人工费。下单前请确认账号状态，下单后 5 分钟内开通。
         </div>
       </div>
 

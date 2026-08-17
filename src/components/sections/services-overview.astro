@@ -1,72 +1,90 @@
 ---
 import { getCollection } from 'astro:content';
-import { Button } from '@/components/ui/button';
-import Icon from '@/components/icon.astro';
 
 const services = await getCollection('services');
-
-// 给每个业务分配渐变（按 slug 固定）
-const gradientMap: Record<string, { card: string; text: string; icon: string }> = {
-  chatgpt: { card: 'gradient-blue', text: 'gradient-blue-text', icon: '#1BA4FF' },
-  claude: { card: 'gradient-purple', text: 'gradient-purple-text', icon: '#7A27FF' },
-  minimax: { card: 'gradient-pink', text: 'gradient-pink-text', icon: '#FF276F' },
-  'ai-aggregator': { card: 'bg-[#181E25]', text: 'text-white', icon: '#FFFFFF' },
-};
+const leftBig = services.find((s) => s.data.slug === 'minimax');
+const topRight = services.find((s) => s.data.slug === 'chatgpt');
+const bottomRight = services.find((s) => s.data.slug === 'claude');
 ---
 <section class="py-24 bg-white">
   <div class="container mx-auto max-w-6xl px-4">
-    <div class="text-center max-w-2xl mx-auto">
-      <h2 class="text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] font-bold text-[#181E25] tracking-[-0.035em] text-balance">
-        覆盖所有 <span class="gradient-purple-text">AI 服务</span> 场景
+    <div class="text-center max-w-3xl mx-auto">
+      <h2 class="text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05] font-bold text-[#181E25] tracking-[-0.04em] text-balance">
+        核心服务
       </h2>
-      <p class="mt-5 text-[16px] text-[#6E7782] leading-relaxed">
-        从个人订阅到团队拼车，从单一模型到聚合平台，官方价直充 + 透明服务费
+      <p class="mt-5 text-[16px] md:text-[18px] text-[#6E7782] leading-relaxed">
+        FluxA 主推服务，覆盖 ChatGPT / Claude / Max 拼车
       </p>
     </div>
 
-    <div class="mt-16 grid gap-5 md:grid-cols-2">
-      {services.map((s) => {
-        const g = gradientMap[s.data.slug] || gradientMap['chatgpt'];
-        return (
-          <article class="group relative rounded-3xl bg-white border border-[#E4E7EB] p-7 card-hover overflow-hidden">
-            <!-- 渐变小色块装饰 -->
-            <div class={`absolute -top-12 -right-12 h-32 w-32 rounded-full ${g.card} opacity-10 blur-2xl`}></div>
-            <div class="relative">
-              <div class="flex items-start gap-4">
-                <div class={`shrink-0 h-12 w-12 rounded-xl ${g.card} flex items-center justify-center shadow-sm`}>
-                  <Icon name={s.data.icon} class="text-white" size={24} />
-                </div>
-                <div class="flex-1 min-w-0">
-                  <h3 class={`text-[20px] font-bold tracking-tight ${g.text}`}>{s.data.name}</h3>
-                  <p class="mt-1.5 text-[14px] text-[#6E7782] leading-relaxed">{s.data.description}</p>
-                </div>
-              </div>
-
-              <ul class="mt-6 space-y-3">
-                {s.data.highlights.map((h) => (
-                  <li class="flex items-start gap-2.5 text-[14px]">
-                    <div class={`shrink-0 mt-0.5 h-5 w-5 rounded-md ${g.card} flex items-center justify-center`}>
-                      <Icon name={h.icon} class="text-white" size={12} />
-                    </div>
-                    <div class="text-[#181E25]">
-                      <span class="font-semibold">{h.title}</span>
-                      <span class="text-[#6E7782]"> · {h.description}</span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-
-              <div class="mt-6 flex justify-end">
-                <a href={`/services/${s.data.slug}`}>
-                  <Button variant="ghost" className={`rounded-full text-[14px] font-medium ${g.text} hover:bg-[#F7F8FA] px-4 h-9`}>
-                    查看详情 →
-                  </Button>
-                </a>
-              </div>
+    <!-- 2x2 不对称布局: 左大跨 2 行 + 右上小 + 右下小 (MiniMax 旗舰模型风格) -->
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- 左大卡：Max 拼车 (粉橙渐变) - 跨 2 行 -->
+      {leftBig && (
+        <a
+          href={`/services/${leftBig.data.slug}`}
+          class="group md:row-span-2 relative rounded-3xl gradient-pink p-8 md:p-10 text-white overflow-hidden flex flex-col justify-between min-h-[420px] hover:scale-[1.01] transition-transform"
+        >
+          <div class="absolute -top-12 -right-12 w-40 h-40 rounded-full bg-white/20 blur-2xl"></div>
+          <div class="relative">
+            <div class="text-[11px] uppercase tracking-[0.25em] font-semibold opacity-90">FEATURED · HOT</div>
+            <div class="mt-6 text-[clamp(3rem,5.5vw,5.5rem)] font-bold tracking-[-0.04em] leading-[0.9]">
+              Max<br />拼车
             </div>
-          </article>
-        );
-      })}
+            <p class="mt-6 text-[14px] md:text-[15px] opacity-90 leading-relaxed max-w-xs">
+              {leftBig.data.description}
+            </p>
+          </div>
+          <div class="relative flex items-center justify-between mt-8">
+            <span class="text-[12px] opacity-90">2026 · 热门</span>
+            <span class="text-[14px] font-medium">了解更多 ›</span>
+          </div>
+        </a>
+      )}
+
+      <!-- 右上小：ChatGPT 充值 (蓝渐变) -->
+      {topRight && (
+        <a
+          href={`/services/${topRight.data.slug}`}
+          class="group relative rounded-3xl gradient-blue p-6 text-white overflow-hidden flex flex-col justify-between min-h-[200px] hover:scale-[1.01] transition-transform"
+        >
+          <div class="relative">
+            <div class="text-[10px] uppercase tracking-[0.25em] font-semibold opacity-90">CHATGPT</div>
+            <div class="mt-3 text-[24px] md:text-[28px] font-bold tracking-tight leading-tight">
+              ChatGPT 充值
+            </div>
+            <p class="mt-2 text-[12px] opacity-90 leading-relaxed">
+              Plus / Pro 全档 · GPT-4o 无限
+            </p>
+          </div>
+          <div class="relative flex items-center justify-between mt-6">
+            <span class="text-[11px] opacity-90">2026</span>
+            <span class="text-[12px] font-medium">了解更多 ›</span>
+          </div>
+        </a>
+      )}
+
+      <!-- 右下小：Claude 充值 (紫渐变) -->
+      {bottomRight && (
+        <a
+          href={`/services/${bottomRight.data.slug}`}
+          class="group relative rounded-3xl gradient-purple p-6 text-white overflow-hidden flex flex-col justify-between min-h-[200px] hover:scale-[1.01] transition-transform"
+        >
+          <div class="relative">
+            <div class="text-[10px] uppercase tracking-[0.25em] font-semibold opacity-90">CLAUDE</div>
+            <div class="mt-3 text-[24px] md:text-[28px] font-bold tracking-tight leading-tight">
+              Claude 充值
+            </div>
+            <p class="mt-2 text-[12px] opacity-90 leading-relaxed">
+              Pro / Max 满血 · Sonnet 4.5
+            </p>
+          </div>
+          <div class="relative flex items-center justify-between mt-6">
+            <span class="text-[11px] opacity-90">2026</span>
+            <span class="text-[12px] font-medium">了解更多 ›</span>
+          </div>
+        </a>
+      )}
     </div>
   </div>
 </section>
