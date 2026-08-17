@@ -2,22 +2,28 @@
 import { getCollection } from 'astro:content';
 
 const services = await getCollection('services');
-const leftBig = services.find((s) => s.data.slug === 'minimax');
-const topRight = services.find((s) => s.data.slug === 'chatgpt');
-const bottomRight = services.find((s) => s.data.slug === 'claude');
+const leftBig = services.find((s) => s.data.slug === 'minimax');      // 左大：Max 拼车 (粉橙)
+const topRight = services.find((s) => s.data.slug === 'chatgpt');      // 右上：ChatGPT (紫)
+const bottomRight = services.find((s) => s.data.slug === 'claude');    // 右下：Claude (紫)
+
+// 各业务用 simpleicons 图标 (单色 SVG, 用 CSS filter 变白)
+const iconMap: Record<string, string> = {
+  chatgpt: '/icons/openai.svg',
+  claude: '/icons/anthropic.svg',
+};
 ---
 <section class="py-24 bg-white">
   <div class="container mx-auto max-w-6xl px-4">
     <div class="text-center max-w-3xl mx-auto">
       <h2 class="text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05] font-bold text-[#181E25] tracking-[-0.04em] text-balance">
-        核心服务
+        旗舰服务
       </h2>
       <p class="mt-5 text-[16px] md:text-[18px] text-[#6E7782] leading-relaxed">
-        FluxA 主推服务，覆盖 ChatGPT / Claude / Max 拼车
+        FluxA 主推三大业务，覆盖 ChatGPT 充值 / Claude 充值 / Max 拼车
       </p>
     </div>
 
-    <!-- 2x2 不对称布局: 左大跨 2 行 + 右上小 + 右下小 (MiniMax 旗舰模型风格) -->
+    <!-- 1:1 复刻 MiniMax 旗舰模型 2x2 不对称布局 (左大跨 2 行 + 右上小 + 右下小) -->
     <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-4">
       <!-- 左大卡：Max 拼车 (粉橙渐变) - 跨 2 行 -->
       {leftBig && (
@@ -25,10 +31,14 @@ const bottomRight = services.find((s) => s.data.slug === 'claude');
           href={`/services/${leftBig.data.slug}`}
           class="group md:row-span-2 relative rounded-3xl gradient-pink p-8 md:p-10 text-white overflow-hidden flex flex-col justify-between min-h-[420px] hover:scale-[1.01] transition-transform"
         >
-          <div class="absolute -top-12 -right-12 w-40 h-40 rounded-full bg-white/20 blur-2xl"></div>
+          <!-- 装饰圆 (类似 MiniMax 3D 几何效果) -->
+          <div class="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
+          <div class="absolute top-1/3 -right-20 w-72 h-72 rounded-full bg-[#7A27FF]/30 blur-3xl"></div>
+          <div class="absolute bottom-10 -left-10 w-40 h-40 rounded-full bg-white/15 blur-2xl"></div>
+
           <div class="relative">
             <div class="text-[11px] uppercase tracking-[0.25em] font-semibold opacity-90">FEATURED · HOT</div>
-            <div class="mt-6 text-[clamp(3rem,5.5vw,5.5rem)] font-bold tracking-[-0.04em] leading-[0.9]">
+            <div class="mt-6 text-[clamp(3.5rem,7vw,7rem)] font-bold tracking-[-0.04em] leading-[0.9]">
               Max<br />拼车
             </div>
             <p class="mt-6 text-[14px] md:text-[15px] opacity-90 leading-relaxed max-w-xs">
@@ -42,20 +52,29 @@ const bottomRight = services.find((s) => s.data.slug === 'claude');
         </a>
       )}
 
-      <!-- 右上小：ChatGPT 充值 (蓝渐变) -->
+      <!-- 右上小：ChatGPT 充值 (紫渐变) -->
       {topRight && (
         <a
           href={`/services/${topRight.data.slug}`}
-          class="group relative rounded-3xl gradient-blue p-6 text-white overflow-hidden flex flex-col justify-between min-h-[200px] hover:scale-[1.01] transition-transform"
+          class="group relative rounded-3xl gradient-purple p-8 text-white overflow-hidden flex flex-col justify-between min-h-[200px] hover:scale-[1.01] transition-transform"
         >
-          <div class="relative">
-            <div class="text-[10px] uppercase tracking-[0.25em] font-semibold opacity-90">CHATGPT</div>
-            <div class="mt-3 text-[24px] md:text-[28px] font-bold tracking-tight leading-tight">
-              ChatGPT 充值
+          <!-- 装饰圆 (类似 MiniMax 紫色烟雾) -->
+          <div class="absolute -top-8 -right-8 w-40 h-40 rounded-full bg-white/15 blur-2xl"></div>
+          <div class="absolute -bottom-12 -left-12 w-48 h-48 rounded-full bg-white/10 blur-3xl"></div>
+
+          <div class="relative flex items-start justify-between">
+            <div>
+              <div class="text-[10px] uppercase tracking-[0.25em] font-semibold opacity-90">CHATGPT</div>
+              <div class="mt-3 text-[26px] md:text-[32px] font-bold tracking-tight leading-tight">
+                ChatGPT 充值
+              </div>
             </div>
-            <p class="mt-2 text-[12px] opacity-90 leading-relaxed">
-              Plus / Pro 全档 · GPT-4o 无限
-            </p>
+            <img
+              src={iconMap.chatgpt}
+              alt="ChatGPT"
+              class="h-16 w-16 md:h-20 md:w-20 object-contain opacity-90 brightness-0 invert"
+              loading="lazy"
+            />
           </div>
           <div class="relative flex items-center justify-between mt-6">
             <span class="text-[11px] opacity-90">2026</span>
@@ -68,16 +87,25 @@ const bottomRight = services.find((s) => s.data.slug === 'claude');
       {bottomRight && (
         <a
           href={`/services/${bottomRight.data.slug}`}
-          class="group relative rounded-3xl gradient-purple p-6 text-white overflow-hidden flex flex-col justify-between min-h-[200px] hover:scale-[1.01] transition-transform"
+          class="group relative rounded-3xl gradient-purple p-8 text-white overflow-hidden flex flex-col justify-between min-h-[200px] hover:scale-[1.01] transition-transform"
         >
-          <div class="relative">
-            <div class="text-[10px] uppercase tracking-[0.25em] font-semibold opacity-90">CLAUDE</div>
-            <div class="mt-3 text-[24px] md:text-[28px] font-bold tracking-tight leading-tight">
-              Claude 充值
+          <!-- 装饰圆 -->
+          <div class="absolute -top-8 -right-8 w-40 h-40 rounded-full bg-white/15 blur-2xl"></div>
+          <div class="absolute -bottom-12 -left-12 w-48 h-48 rounded-full bg-[#FF276F]/20 blur-3xl"></div>
+
+          <div class="relative flex items-start justify-between">
+            <div>
+              <div class="text-[10px] uppercase tracking-[0.25em] font-semibold opacity-90">CLAUDE</div>
+              <div class="mt-3 text-[26px] md:text-[32px] font-bold tracking-tight leading-tight">
+                Claude 充值
+              </div>
             </div>
-            <p class="mt-2 text-[12px] opacity-90 leading-relaxed">
-              Pro / Max 满血 · Sonnet 4.5
-            </p>
+            <img
+              src={iconMap.claude}
+              alt="Claude"
+              class="h-16 w-16 md:h-20 md:w-20 object-contain opacity-90 brightness-0 invert"
+              loading="lazy"
+            />
           </div>
           <div class="relative flex items-center justify-between mt-6">
             <span class="text-[11px] opacity-90">2026</span>
