@@ -1,0 +1,262 @@
+---
+import { siteConfig, type NavItem } from '@/lib/site-config';
+
+const currentPath = Astro.url.pathname;
+const nav: NavItem[] = siteConfig.nav as NavItem[];
+
+// 判断当前 nav item 是否 active
+const isItemActive = (item: NavItem): boolean => {
+  if (item.href) return currentPath === item.href || currentPath.startsWith(item.href + '/');
+  if (item.subMenu) {
+    return item.subMenu.some((cat) =>
+      cat.items.some((sub) => currentPath === sub.href || currentPath.startsWith(sub.href + '/'))
+    );
+  }
+  return false;
+};
+---
+<header
+  class="sticky top-0 z-50 border-b border-[#E4E7EB] bg-white/85 backdrop-blur-xl supports-[backdrop-filter]:bg-white/70"
+  data-header
+>
+  <div class="container-fluid flex items-center justify-between" style="height: var(--header-height-mobile);">
+    <!-- 左 logo：紫渐变背景 + retroarch 图标 + FluxA 黑字 -->
+    <a href="/" class="flex items-center gap-2.5 shrink-0" aria-label="FluxA 首页">
+      <span class="inline-flex h-8 w-8 rounded-lg gradient-purple items-center justify-center">
+        <img src="/retroarch.svg" alt="" class="h-4 w-4 brightness-0 invert" />
+      </span>
+      <span class="text-[17px] font-bold text-[#181E25] tracking-[-0.01em]">{siteConfig.brand.name}</span>
+    </a>
+
+    <!-- 桌面端 nav (>= md 1024px 显示) -->
+    <nav class="hidden lg:flex items-center gap-1 text-[14px] font-medium" aria-label="主导航">
+      {nav.map((item) => {
+        const active = isItemActive(item);
+        if (item.subMenu) {
+          // 3 级下拉：模型 (category: 语言模型/拼车 → items)
+          return (
+            <div class="relative group" data-has-submenu>
+              <button
+                type="button"
+                class={`inline-flex items-center gap-1 h-[78px] px-4 transition-colors ${
+                  active ? 'text-[#7A27FF]' : 'text-[#181E25] hover:text-[#7A27FF]'
+                }`}
+                aria-haspopup="true"
+                aria-expanded="false"
+                data-submenu-trigger
+              >
+                {item.label}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 transition-transform group-hover:rotate-180">
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </button>
+              <!-- 下拉面板 -->
+              <div
+                class="absolute left-1/2 -translate-x-1/2 top-full pt-2 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 z-50"
+                role="menu"
+              >
+                <div class="min-w-[320px] rounded-2xl border border-[#E4E7EB] bg-white p-3 shadow-2xl shadow-black/5">
+                  {item.subMenu.map((cat) => (
+                    <div class="px-2 py-2">
+                      <div class="text-[11px] font-semibold text-[#AAB1BA] uppercase tracking-[0.15em] mb-2 px-2">
+                        {cat.category}
+                      </div>
+                      <div class="space-y-0.5">
+                        {cat.items.map((sub) => {
+                          const subActive = currentPath === sub.href;
+                          return (
+                            <a
+                              href={sub.href}
+                              class={`block rounded-lg px-3 py-2.5 text-[14px] transition-colors ${
+                                subActive
+                                  ? 'bg-[#F7F4FF] text-[#7A27FF] font-medium'
+                                  : 'text-[#181E25] hover:bg-[#F7F8FA]'
+                              }`}
+                              role="menuitem"
+                            >
+                              {sub.label}
+                            </a>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          );
+        }
+        return (
+          <a
+            href={item.href}
+            class={`inline-flex items-center h-[78px] px-4 transition-colors ${
+              active ? 'text-[#7A27FF]' : 'text-[#181E25] hover:text-[#7A27FF]'
+            }`}
+            aria-current={active ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+    </nav>
+
+    <!-- 桌面端右侧：联系客服按钮 -->
+    <div class="hidden lg:flex items-center gap-2 shrink-0">
+      <a
+        href="/contact"
+        class="inline-flex items-center justify-center h-10 px-5 rounded-full border border-[#E4E7EB] bg-white text-[#181E25] text-[13px] font-medium hover:border-[#181E25] transition-colors"
+      >
+        联系客服
+      </a>
+    </div>
+
+    <!-- 移动端：汉堡按钮 (展开全屏菜单) -->
+    <button
+      type="button"
+      class="lg:hidden inline-flex items-center justify-center w-10 h-10 -mr-2 rounded-md text-[#181E25] hover:bg-[#F7F8FA] transition-colors"
+      aria-label="打开菜单"
+      aria-expanded="false"
+      data-mobile-toggle
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" data-icon-closed>
+        <line x1="4" x2="20" y1="6" y2="6" />
+        <line x1="4" x2="20" y1="12" y2="12" />
+        <line x1="4" x2="20" y1="18" y2="18" />
+      </svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 hidden" data-icon-open>
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- 移动端全屏菜单 (默认 hidden) -->
+  <div
+    class="lg:hidden hidden border-t border-[#E4E7EB] bg-white max-h-[calc(100vh-var(--header-height-mobile))] overflow-y-auto"
+    data-mobile-menu
+    role="dialog"
+    aria-label="移动端菜单"
+  >
+    <div class="container-fluid py-4 space-y-1">
+      {nav.map((item) => {
+        if (item.subMenu) {
+          return (
+            <details class="group rounded-xl">
+              <summary class="flex items-center justify-between cursor-pointer list-none px-4 py-3 rounded-xl hover:bg-[#F7F8FA] transition-colors [&::-webkit-details-marker]:hidden">
+                <span class="text-[15px] font-semibold text-[#181E25]">{item.label}</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-[#6E7782] transition-transform group-open:rotate-180">
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </summary>
+              <div class="pb-2 space-y-3">
+                {item.subMenu.map((cat) => (
+                  <div class="pl-3">
+                    <div class="text-[11px] font-semibold text-[#AAB1BA] uppercase tracking-[0.15em] px-4 mb-1.5">
+                      {cat.category}
+                    </div>
+                    {cat.items.map((sub) => (
+                      <a
+                        href={sub.href}
+                        class="block rounded-lg px-4 py-2.5 text-[14px] text-[#181E25] hover:bg-[#F7F8FA] transition-colors"
+                      >
+                        {sub.label}
+                      </a>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </details>
+          );
+        }
+        return (
+          <a
+            href={item.href}
+            class={`block px-4 py-3 rounded-xl text-[15px] font-semibold transition-colors ${
+              isItemActive(item) ? 'text-[#7A27FF] bg-[#F7F4FF]' : 'text-[#181E25] hover:bg-[#F7F8FA]'
+            }`}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+      <a
+        href="/contact"
+        class="block mt-3 px-4 py-3 rounded-xl text-[15px] font-semibold text-center bg-[#181E25] text-white"
+      >
+        联系客服
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  /* 桌面端下拉：mouse hover 时显示（group-hover） */
+  @media (max-width: 1023px) {
+    [data-has-submenu] > div[role='menu'] {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  // 移动端汉堡菜单 toggle
+  const toggle = document.querySelector('[data-mobile-toggle]') as HTMLButtonElement | null;
+  const menu = document.querySelector('[data-mobile-menu]') as HTMLElement | null;
+  const iconClosed = document.querySelector('[data-icon-closed]') as SVGElement | null;
+  const iconOpen = document.querySelector('[data-icon-open]') as SVGElement | null;
+
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      const isOpen = !menu.classList.contains('hidden');
+      menu.classList.toggle('hidden');
+      toggle.setAttribute('aria-expanded', String(!isOpen));
+      iconClosed?.classList.toggle('hidden', !isOpen);
+      iconOpen?.classList.toggle('hidden', isOpen);
+      document.body.style.overflow = isOpen ? '' : 'hidden';
+    });
+  }
+
+  // 桌面端下拉：键盘可访问 (focus-within)
+  const submenuItems = document.querySelectorAll('[data-has-submenu]');
+  submenuItems.forEach((item) => {
+    const trigger = item.querySelector('[data-submenu-trigger]') as HTMLButtonElement | null;
+    const panel = item.querySelector('[role="menu"]') as HTMLElement | null;
+    if (!trigger || !panel) return;
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      const expanded = trigger.getAttribute('aria-expanded') === 'true';
+      // 关闭其他
+      submenuItems.forEach((other) => {
+        const t = other.querySelector('[data-submenu-trigger]') as HTMLButtonElement | null;
+        const p = other.querySelector('[role="menu"]') as HTMLElement | null;
+        if (t && p && other !== item) {
+          t.setAttribute('aria-expanded', 'false');
+          p.classList.add('opacity-0', 'invisible', 'translate-y-1');
+          p.classList.remove('opacity-100', 'visible', 'translate-y-0');
+        }
+      });
+      trigger.setAttribute('aria-expanded', String(!expanded));
+      panel.classList.toggle('opacity-0', expanded);
+      panel.classList.toggle('invisible', expanded);
+      panel.classList.toggle('translate-y-1', expanded);
+      panel.classList.toggle('opacity-100', !expanded);
+      panel.classList.toggle('visible', !expanded);
+      panel.classList.toggle('translate-y-0', !expanded);
+    });
+  });
+
+  // 桌面端下拉：点击外部关闭
+  document.addEventListener('click', (e) => {
+    if (!(e.target as HTMLElement).closest('[data-has-submenu]')) {
+      submenuItems.forEach((item) => {
+        const t = item.querySelector('[data-submenu-trigger]') as HTMLButtonElement | null;
+        const p = item.querySelector('[role="menu"]') as HTMLElement | null;
+        if (t && p) {
+          t.setAttribute('aria-expanded', 'false');
+          p.classList.add('opacity-0', 'invisible', 'translate-y-1');
+          p.classList.remove('opacity-100', 'visible', 'translate-y-0');
+        }
+      });
+    }
+  });
+</script>
