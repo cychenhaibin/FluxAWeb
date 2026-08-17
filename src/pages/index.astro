@@ -1,23 +1,47 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import ModelsHero from '@/components/sections/models-hero.astro';
-import ShowcaseCards from '@/components/sections/showcase-cards.astro';
-import ModelComparison from '@/components/sections/model-comparison.astro';
-import ModelShowcase from '@/components/sections/model-showcase.astro';
-import Demos from '@/components/sections/demos.astro';
-import InviteFriends from '@/components/sections/invite-friends.astro';
-import DevTools from '@/components/sections/dev-tools.astro';
-import Research from '@/components/sections/research.astro';
-import AboutUs from '@/components/sections/about-us.astro';
+import { siteConfig } from '@/lib/site-config';
+import Hero from '@/components/sections/hero';
+import Services from '@/components/sections/services';
+import Pricing from '@/components/sections/pricing';
+import WhyFluxa from '@/components/sections/why-fluxa';
+import Developers from '@/components/sections/developers';
+import AboutUs from '@/components/sections/about-us';
+import Faq from '@/components/sections/faq';
+import Cta from '@/components/sections/cta';
+
+const services = await getCollection('services');
+const pricingList = await getCollection('pricing');
+const pricingByService = Object.fromEntries(
+  pricingList.map((p) => [p.data.service, p.data])
+);
+
+// 保持稳定顺序：chatgpt → claude → minimax → ai-aggregator
+const order = ['chatgpt', 'claude', 'minimax', 'ai-aggregator'];
+const orderedServices = [...services].sort(
+  (a, b) => order.indexOf(a.data.slug) - order.indexOf(b.data.slug)
+);
+const orderedServiceList = orderedServices.map((s) => ({
+  slug: s.data.slug,
+  name: s.data.name,
+}));
 ---
-<BaseLayout>
-  <ModelsHero />
-  <ShowcaseCards />
-  <ModelComparison />
-  <ModelShowcase />
-  <Demos />
-  <InviteFriends />
-  <DevTools />
-  <Research />
-  <AboutUs />
+
+<BaseLayout
+  title={siteConfig.title}
+  description={siteConfig.description}
+>
+  <Hero client:load />
+  <Services client:visible services={orderedServices.map((s) => s.data)} />
+  <Pricing
+    client:visible
+    services={orderedServiceList}
+    pricingByService={pricingByService}
+  />
+  <WhyFluxa client:visible />
+  <Developers client:visible />
+  <AboutUs client:visible />
+  <Faq client:visible />
+  <Cta client:visible />
 </BaseLayout>

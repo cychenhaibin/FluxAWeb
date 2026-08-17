@@ -1,44 +1,28 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { siteConfig } from '@/lib/site-config';
-import PricingTabs from '@/components/pricing-tabs';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Pricing from '@/components/sections/pricing';
 
-const navOrder = siteConfig.nav
-  .filter((n): n is { label: string; href: string } => Boolean(n.href?.startsWith('/services/')))
-  .map((n) => n.href.split('/').pop());
-const services = (await getCollection('services')).sort(
-  (a, b) => navOrder.indexOf(a.data.slug) - navOrder.indexOf(b.data.slug)
-);
+const services = (await getCollection('services')).map((s) => ({
+  slug: s.data.slug,
+  name: s.data.name,
+}));
 const pricingList = await getCollection('pricing');
-const pricingByService = Object.fromEntries(pricingList.map((p) => [p.data.service, p.data]));
+const pricingByService = Object.fromEntries(
+  pricingList.map((p) => [p.data.service, p.data])
+);
+const order = ['chatgpt', 'claude', 'minimax', 'ai-aggregator'];
+const orderedServices = [...services].sort(
+  (a, b) => order.indexOf(a.slug) - order.indexOf(b.slug)
+);
 ---
-<BaseLayout title="价格 - FluxA">
-  <section class="bg-white pt-24 pb-12">
-    <div class="container-fluid text-center max-w-4xl mx-auto">
-      <h1 class="heading-display text-[clamp(2.5rem,7vw,5rem)] text-balance">
-        <span class="gradient-purple-text">价格</span> 方案
-      </h1>
-      <p class="mt-6 text-[18px] md:text-[20px] text-[#6E7782] leading-relaxed max-w-2xl mx-auto">
-        4 块业务 · 12 个套餐可选<br />
-        所有套餐均为官方价 + $3 服务费，5 分钟极速到账
-      </p>
-    </div>
-  </section>
-
-  <section class="bg-white pb-24">
-    <div class="container-fluid">
-      <div class="mx-auto max-w-3xl rounded-2xl border border-[#FAAD14]/40 bg-[#FFFBE6] p-5 text-sm text-[#181E25] flex items-start gap-3">
-        <span class="text-lg">⚠️</span>
-        <div>
-          <strong class="font-semibold text-[#D48806]">价格说明：</strong>
-          所有套餐均为官方价 + $3 服务费。下单前请确认账号状态，下单后 5 分钟内开通。
-        </div>
-      </div>
-
-      <div class="mt-12">
-        <PricingTabs client:visible services={services.map(s => ({slug: s.data.slug, name: s.data.name}))} pricingByService={pricingByService} />
-      </div>
-    </div>
-  </section>
+<BaseLayout
+  title="价格方案 - FluxA"
+  description="FluxA 价格方案 — ChatGPT / Claude / MiniMax Max 拼车 / AI 聚合，官方价 + 仅 $3 服务费。"
+>
+  <Pricing
+    client:load
+    services={orderedServices}
+    pricingByService={pricingByService}
+  />
 </BaseLayout>

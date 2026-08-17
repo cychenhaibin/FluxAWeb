@@ -1,58 +1,61 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { ArrowRight, Newspaper } from 'lucide-react';
 
 const articles = [
   { title: 'MiniMax Max 拼车正式上线', date: '2026-08-13', tag: '新品上线', desc: 'Anthropic Claude Max 5x 官方团队账号 2-4 人拼车，比单独订阅省 50% 以上。', href: '/services/minimax' },
   { title: 'ChatGPT Pro 200 满血套餐', date: '2026-08-05', tag: '套餐', desc: 'Pro 200 满血版上线：1v1 专属客户经理 + 7×24 售后 + 所有模型优先通道。', href: '/services/chatgpt' },
   { title: 'Claude Max 20x 满血体验', date: '2026-07-28', tag: '套餐', desc: 'Max 20x 满血体验：所有优先通道 + Opus 4 满血 + 高峰不限速。', href: '/services/claude' },
   { title: 'AI 聚合平台上线', date: '2026-07-15', tag: '新品上线', desc: 'GPT-4o + Claude Opus + Gemini Pro + 国产大模型，统一接入，智能路由。', href: '/services/ai-aggregator' },
-  { title: '5 分钟极速到账', date: '2026-07-01', tag: '工程实践', desc: '我们重构了订单系统，实现 5 分钟极速到账，特殊情况下 30 分钟内人工处理。', href: '/blog/fast-fulfillment' },
-  { title: '$3 服务费透明计费', date: '2026-06-20', tag: '价格政策', desc: '我们坚持透明计费，每单仅 $3 服务费，无隐藏费用，所有渠道一视同仁。', href: '/blog/transparent-pricing' },
-  { title: 'OpenAI o1 pro 模式正式支持', date: '2026-06-10', tag: '技术', desc: 'Pro 100 套餐已正式支持 o1 pro 深度推理模式，欢迎体验。', href: '/blog/o1-pro-mode' },
-  { title: 'Anthropic Sonnet 4.5 发布', date: '2026-05-25', tag: '行业', desc: 'Sonnet 4.5 已正式发布，Max 5x/20x 套餐同步支持。', href: '/blog/sonnet-4-5' },
+  { title: '5 分钟极速到账', date: '2026-07-01', tag: '工程实践', desc: '我们重构了订单系统，实现 5 分钟极速到账，特殊情况下 30 分钟内人工处理。', href: '#' },
+  { title: '$3 服务费透明计费', date: '2026-06-20', tag: '价格政策', desc: '我们坚持透明计费，每单仅 $3 服务费，无隐藏费用，所有渠道一视同仁。', href: '#' },
+  { title: 'OpenAI o1 pro 模式正式支持', date: '2026-06-10', tag: '技术', desc: 'Pro 100 套餐已正式支持 o1 pro 深度推理模式，欢迎体验。', href: '#' },
+  { title: 'Anthropic Sonnet 4.5 发布', date: '2026-05-25', tag: '行业', desc: 'Sonnet 4.5 已正式发布，Max 5x/20x 套餐同步支持。', href: '#' },
 ];
 ---
 <BaseLayout title="行业动态 - FluxA">
-  <section class="bg-white pt-24 pb-12">
-    <div class="container-fluid text-center max-w-4xl mx-auto">
-      <h1 class="heading-display text-[clamp(2.5rem,7vw,5rem)] text-balance">
-        行业 <span class="gradient-blue-text">动态</span>
-      </h1>
-      <p class="mt-6 text-[18px] md:text-[20px] text-[#6E7782] leading-relaxed max-w-2xl mx-auto">
-        价格调整 / 服务上线 / 工程实践 / 行业资讯
-      </p>
+  <section class="w-full bg-background py-20 md:py-28 border-b border-border">
+    <div class="container-fluid">
+      <div class="mx-auto max-w-2xl text-center">
+        <Badge variant="outline" className="mb-4 rounded-full px-3 py-1 text-xs font-medium">
+          <Newspaper className="h-3 w-3" />
+          行业动态
+        </Badge>
+        <h1 class="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+          价格 · 服务 · 工程 · 资讯
+        </h1>
+      </div>
     </div>
   </section>
 
-  <section class="pb-24 bg-white">
+  <section class="w-full bg-background py-20 md:py-28">
     <div class="container-fluid max-w-4xl">
-      <div class="space-y-4">
+      <div class="space-y-3">
         {articles.map((a) => (
-          <a
-            href={a.href}
-            class="group block rounded-3xl bg-white border border-[#E4E7EB] p-6 md:p-8 hover:border-[#181E25] transition-all"
-          >
-            <div class="flex items-start gap-6">
-              <div class="hidden sm:block shrink-0 w-24">
-                <div class="text-[11px] uppercase tracking-[0.2em] text-[#6E7782] font-semibold">{a.date.split('-')[0]}</div>
-                <div class="mt-1 text-[28px] font-bold text-[#181E25] tracking-tight tnum leading-none">
-                  {a.date.split('-')[2]}
+          <a href={a.href} class="block">
+            <Card className="transition-all hover:border-foreground/20 hover:shadow-sm">
+              <CardContent className="p-6">
+                <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+                  <div class="flex-1">
+                    <div class="flex items-center gap-2 text-xs text-muted-foreground">
+                      <Badge variant="secondary" className="rounded-full px-2.5 py-0.5 text-[10px] font-medium">
+                        {a.tag}
+                      </Badge>
+                      <time>{a.date}</time>
+                    </div>
+                    <h3 class="mt-2 text-base font-semibold tracking-tight text-foreground">
+                      {a.title}
+                    </h3>
+                    <p class="mt-2 text-sm text-muted-foreground leading-relaxed">
+                      {a.desc}
+                    </p>
+                  </div>
+                  <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-muted-foreground" />
                 </div>
-                <div class="mt-1 text-[11px] text-[#6E7782]">{a.date.split('-')[1]}月</div>
-              </div>
-              <div class="flex-1">
-                <div class="text-[11px] uppercase tracking-[0.2em] text-[#7A27FF] font-semibold">{a.tag}</div>
-                <h2 class="mt-2 text-[20px] md:text-[22px] font-bold text-[#181E25] tracking-tight text-balance group-hover:text-[#7A27FF] transition-colors">
-                  {a.title}
-                </h2>
-                <p class="mt-2 text-[14px] text-[#6E7782] leading-relaxed text-pretty">
-                  {a.desc}
-                </p>
-              </div>
-              <div class="hidden md:block shrink-0 text-[#6E7782] group-hover:translate-x-1 transition-transform">
-                →
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           </a>
         ))}
       </div>

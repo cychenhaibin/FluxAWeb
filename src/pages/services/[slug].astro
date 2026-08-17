@@ -3,6 +3,10 @@ import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { siteConfig } from '@/lib/site-config';
 import Icon from '@/components/icon.astro';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Check, ArrowRight, BadgeDollarSign } from 'lucide-react';
 
 export async function getStaticPaths() {
   const services = await getCollection('services');
@@ -16,21 +20,6 @@ const { service } = Astro.props;
 const data = service.data;
 const pricing = await getEntry('pricing', data.slug);
 
-const gradientMap: Record<string, string> = {
-  chatgpt: 'gradient-blue',
-  claude: 'gradient-purple',
-  minimax: 'gradient-pink',
-  'ai-aggregator': 'bg-[#181E25]',
-};
-const gradientTextMap: Record<string, string> = {
-  chatgpt: 'gradient-blue-text',
-  claude: 'gradient-purple-text',
-  minimax: 'gradient-pink-orange-text',
-  'ai-aggregator': 'text-[#181E25]',
-};
-const g = gradientMap[data.slug] || 'gradient-purple';
-const gt = gradientTextMap[data.slug] || 'gradient-purple-text';
-
 const tierCount = pricing?.data.tiers.length ?? 0;
 const startingTier = pricing?.data.tiers[0];
 const startingPrice = startingTier
@@ -38,155 +27,187 @@ const startingPrice = startingTier
   : null;
 ---
 <BaseLayout title={`${data.name} - ${siteConfig.title}`} description={data.tagline}>
-  <!-- Hero (minimaxi.com 风格: 大字 + 副标题 + 2 CTA + 装饰圆) -->
-  <section class="relative bg-white pt-20 pb-12 overflow-hidden">
-    <div class="pointer-events-none absolute inset-0">
-      <div class="absolute top-20 -left-32 w-96 h-96 rounded-full bg-[#7A27FF]/6 blur-3xl"></div>
-      <div class="absolute top-40 -right-20 w-80 h-80 rounded-full bg-[#FF276F]/6 blur-3xl"></div>
-    </div>
-    <div class="container-fluid relative z-10">
-      <div class="text-center max-w-3xl mx-auto">
-        <h1 class={`heading-display text-[clamp(2.5rem,7vw,5rem)] text-balance`}>
-          <span class={gt}>{data.name}</span>
+  <!-- Hero -->
+  <section class="w-full bg-background py-16 md:py-24 border-b border-border">
+    <div class="container-fluid">
+      <div class="mx-auto max-w-2xl text-center">
+        <Badge variant="outline" className="mb-5 rounded-full px-3 py-1 text-xs font-medium">
+          {data.showcase?.badge ?? data.name}
+        </Badge>
+        <h1 class="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+          {data.name}
         </h1>
-        <p class="mt-6 text-[18px] md:text-[20px] text-[#6E7782] leading-relaxed max-w-2xl mx-auto">
+        <p class="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
           {data.tagline}
         </p>
-        <div class="mt-10 flex flex-col sm:flex-row gap-3 items-center justify-center">
-          <a
-            href="#pricing"
-            class="inline-flex items-center justify-center h-12 px-8 rounded-full bg-[#181E25] text-white text-[15px] font-medium hover:bg-[#0a0d12] transition-colors min-w-[150px]"
-          >
-            查看套餐
-          </a>
-          <a
-            href="/contact"
-            class="inline-flex items-center justify-center h-12 px-8 rounded-full border border-[#E4E7EB] bg-white text-[#181E25] text-[15px] font-medium hover:border-[#181E25] transition-colors min-w-[150px]"
-          >
-            {data.ctaLabel}
-          </a>
+        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <Button asChild size="lg">
+            <a href="#pricing">
+              查看套餐
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </Button>
+          <Button asChild size="lg" variant="outline">
+            <a href="/contact">{data.ctaLabel}</a>
+          </Button>
         </div>
       </div>
     </div>
   </section>
 
   <!-- 描述 + 起售价 -->
-  <section class="bg-white pb-20">
-    <div class="container-fluid max-w-3xl text-center">
-      <p class="text-[15px] md:text-[16px] text-[#181E25] leading-[1.8] text-pretty">
+  <section class="w-full bg-background py-12 border-b border-border">
+    <div class="container-fluid max-w-3xl">
+      <p class="text-center text-sm leading-relaxed text-foreground/80 sm:text-base">
         {data.description}
       </p>
       {startingPrice && (
-        <div class="mt-7 inline-flex items-center gap-3 rounded-full border border-[#E4E7EB] bg-white px-5 py-2.5 text-[14px]">
-          <span class="text-[#6E7782]">起售价</span>
-          <span class="font-bold text-[#181E25] tnum">{startingPrice}</span>
-          {tierCount > 0 && (
-            <>
-              <span class="text-[#CDD1D6]">·</span>
-              <span class="text-[#6E7782]">共 {tierCount} 个套餐</span>
-            </>
-          )}
+        <div class="mt-6 flex justify-center">
+          <div class="inline-flex items-center gap-3 rounded-md border border-border bg-background px-4 py-2 text-sm">
+            <span class="text-muted-foreground">起售价</span>
+            <span class="font-semibold text-foreground tnum">{startingPrice}</span>
+            {tierCount > 0 && (
+              <>
+                <span class="text-border">·</span>
+                <span class="text-muted-foreground">共 {tierCount} 个套餐</span>
+              </>
+            )}
+          </div>
         </div>
       )}
     </div>
   </section>
 
-  <!-- 核心亮点 (4 张卡) -->
-  <section class="bg-[#F7F8FA] py-20 border-y border-[#E4E7EB]">
+  <!-- 核心亮点 -->
+  <section class="w-full bg-muted/30 py-20 md:py-24 border-b border-border">
     <div class="container-fluid">
-      <div class="text-center max-w-2xl mx-auto">
-        <h2 class="heading-display text-[clamp(2rem,5vw,3rem)] text-balance">
-          核心 <span class={gt}>亮点</span>
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+          核心亮点
         </h2>
-        <p class="mt-4 text-[15px] text-[#6E7782]">为什么选择 {data.name}</p>
+        <p class="mt-3 text-sm text-muted-foreground">为什么选择 {data.name}</p>
       </div>
-      <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
+      <div class="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {data.highlights.map((h) => (
-          <div class="rounded-3xl bg-white border border-[#E4E7EB] p-6 hover:border-[#181E25] transition-all">
-            <div class={`h-11 w-11 rounded-xl ${g} flex items-center justify-center text-white`}>
-              <Icon name={h.icon} size={20} />
-            </div>
-            <h3 class="mt-4 text-[16px] font-bold text-[#181E25] tracking-tight">{h.title}</h3>
-            <p class="mt-2 text-[14px] text-[#6E7782] leading-relaxed">{h.description}</p>
-          </div>
+          <Card className="h-full transition-all hover:border-foreground/20 hover:shadow-sm">
+            <CardHeader className="gap-3">
+              <span class="inline-flex h-9 w-9 items-center justify-center rounded-md bg-foreground text-background">
+                <Icon name={h.icon} size={18} class="text-background" />
+              </span>
+              <CardTitle className="text-base font-semibold tracking-tight">{h.title}</CardTitle>
+              <CardDescription className="text-sm leading-relaxed">{h.description}</CardDescription>
+            </CardHeader>
+          </Card>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- 套餐 (mini minimaxi 风格 Tabs 单列) -->
+  <!-- 套餐价格 -->
   {pricing && pricing.data.tiers.length > 0 && (
-    <section id="pricing" class="py-24 bg-white">
+    <section id="pricing" class="w-full bg-background py-20 md:py-24 border-b border-border">
       <div class="container-fluid max-w-5xl">
-        <div class="text-center max-w-2xl mx-auto">
-          <h2 class="heading-display text-[clamp(2rem,5vw,3rem)] text-balance">
-            套餐 <span class={gt}>价格</span>
+        <div class="mx-auto max-w-2xl text-center">
+          <h2 class="text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+            套餐价格
           </h2>
-          <p class="mt-4 text-[15px] text-[#6E7782]">官方价 + 仅 $3 服务费 · 5 分钟到账</p>
+          <p class="mt-3 text-sm text-muted-foreground">
+            官方价 + 仅 $3 服务费 · 5 分钟到账
+          </p>
         </div>
-        <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3">
           {pricing.data.tiers.map((tier) => (
-            <div
-              class={`rounded-3xl p-7 flex flex-col transition-all ${
-                tier.recommended
-                  ? 'gradient-purple text-white shadow-2xl'
-                  : 'bg-white border border-[#E4E7EB] hover:border-[#CDD1D6] hover:shadow-lg'
-              }`}
+            <Card
+              className={
+                "flex h-full flex-col transition-all " +
+                (tier.recommended
+                  ? "border-foreground/30 shadow-sm ring-1 ring-foreground/10"
+                  : "hover:border-foreground/20 hover:shadow-sm")
+              }
             >
-              {tier.recommended && (
-                <div class="self-start mb-3 inline-flex items-center h-6 px-2.5 rounded-full bg-white/25 backdrop-blur-sm text-white text-[10px] font-bold uppercase tracking-[0.2em]">
-                  推荐
-                </div>
-              )}
-              <h3 class={`text-[18px] font-bold tracking-tight ${tier.recommended ? 'text-white' : 'text-[#181E25]'}`}>{tier.name}</h3>
-              <div class="mt-4 grid grid-cols-[1fr_auto] items-end gap-3">
-                <div>
-                  <div class={`text-[40px] font-bold tracking-[-0.025em] tnum leading-none ${tier.recommended ? 'text-white' : 'text-[#181E25]'}`}>
+              <CardHeader className="gap-2">
+                {tier.recommended && (
+                  <Badge
+                    variant="default"
+                    className="self-start rounded-full px-2.5 text-[10px] font-medium uppercase tracking-wider"
+                  >
+                    推荐
+                  </Badge>
+                )}
+                <CardTitle className="text-lg font-semibold tracking-tight">
+                  {tier.name}
+                </CardTitle>
+                <div class="flex items-baseline gap-2 mt-2">
+                  <span class="text-3xl font-semibold tracking-tight tnum text-foreground">
                     {tier.price}
-                  </div>
-                  {tier.period && <div class={`mt-1 text-[12px] ${tier.recommended ? 'text-white/80' : 'text-[#6E7782]'}`}>{tier.period}</div>}
+                  </span>
+                  {tier.period && (
+                    <span class="text-sm text-muted-foreground">{tier.period}</span>
+                  )}
                 </div>
                 {(tier.originalPrice || tier.serviceFee) && (
-                  <div class={`text-right text-[11px] tnum space-y-0.5 ${tier.recommended ? 'text-white/80' : 'text-[#6E7782]'}`}>
-                    {tier.originalPrice && <div>官方 ${tier.originalPrice}</div>}
-                    {tier.serviceFee && <div>服务费 ${tier.serviceFee}</div>}
+                  <div class="mt-2 flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
+                    {tier.originalPrice && (
+                      <span class="rounded-md bg-muted px-2 py-0.5">
+                        官方 ${tier.originalPrice}
+                      </span>
+                    )}
+                    {tier.serviceFee && (
+                      <span class="inline-flex items-center gap-1 rounded-md bg-muted px-2 py-0.5">
+                        <BadgeDollarSign className="h-3 w-3" />
+                        服务费 ${tier.serviceFee}
+                      </span>
+                    )}
                   </div>
                 )}
-              </div>
-              <ul class={`mt-6 space-y-2.5 text-[13px] flex-1 ${tier.recommended ? 'text-white/95' : 'text-[#181E25]'}`}>
-                {tier.features.map((f) => (
-                  <li class="flex gap-2">
-                    <span class={`shrink-0 ${tier.recommended ? 'text-white' : 'text-[#7A27FF]'}`}>✓</span>
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-              <a
-                href="/contact"
-                class={`mt-7 inline-flex items-center justify-center h-11 rounded-full text-[14px] font-semibold transition-colors ${
-                  tier.recommended
-                    ? 'bg-white text-[#7A27FF] hover:bg-white/90'
-                    : 'gradient-purple text-white hover:opacity-90'
-                }`}
-              >
-                {tier.ctaLabel}
-              </a>
-            </div>
+              </CardHeader>
+              <CardContent className="mt-2 flex flex-1 flex-col">
+                <ul class="space-y-2.5 text-sm text-foreground/80 flex-1">
+                  {tier.features.map((f) => (
+                    <li class="flex items-start gap-2.5">
+                      <span class="mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-sm bg-foreground text-background">
+                        <Check className="h-3 w-3" strokeWidth={3} />
+                      </span>
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Button
+                  asChild
+                  variant={tier.recommended ? "default" : "outline"}
+                  className="mt-6 w-full"
+                >
+                  <a href="/contact">
+                    {tier.ctaLabel}
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                </Button>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>
     </section>
   )}
 
-  <!-- CTA -->
-  <section class="py-16 bg-white">
-    <div class="container-fluid text-center max-w-2xl">
-      <a
-        href="/pricing"
-        class="inline-flex items-center justify-center h-12 px-8 rounded-full border border-[#E4E7EB] bg-white text-[#181E25] text-[15px] font-medium hover:border-[#181E25] transition-colors min-w-[160px]"
-      >
-        查看所有套餐 →
-      </a>
+  <!-- 底部 CTA -->
+  <section class="w-full bg-foreground py-16 text-background">
+    <div class="container-fluid text-center">
+      <h3 class="text-2xl font-semibold tracking-tight sm:text-3xl">
+        {data.demo?.description ?? `立即开始使用 ${data.name}`}
+      </h3>
+      <div class="mt-6 flex justify-center">
+        <Button
+          asChild
+          size="lg"
+          className="bg-background text-foreground hover:bg-background/90"
+        >
+          <a href="/pricing">
+            查看所有套餐
+            <ArrowRight className="h-4 w-4" />
+          </a>
+        </Button>
+      </div>
     </div>
   </section>
 </BaseLayout>
