@@ -7,7 +7,7 @@ const values = [
     icon: ShieldCheck,
     title: "官方价透明",
     description:
-      "OpenAI / Anthropic 官方通道充值，所有套餐官方价 + 仅 $3 服务费，无隐藏费用，到账即享官方权益。",
+      "OpenAI / Anthropic 官方通道充值，官方价透明，充值仅 $3 服务费，4 人拼车 ¥119 / 月 无服务费，无隐藏费用，到账即享官方权益。",
   },
   {
     icon: Zap,

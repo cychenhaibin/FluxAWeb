@@ -24,9 +24,9 @@ const featured: ServiceHeroCard = {
   slug: "minimax",
   name: "MiniMax Max 拼车",
   description:
-    "Anthropic Claude Max 5x ($100/账号) 官方团队账号 2-4 人拼车，每人 $28 起",
+    "Anthropic Claude Max 5x ($100/账号) 官方团队账号 2-4 人拼车，4 人总价 ¥119 / 月",
   icon: "Users",
-  price: "$28 / 月 / 人起",
+  price: "¥119 / 月",
   href: "#minimax",
   cta: "立即拼车",
 };
@@ -70,7 +70,7 @@ export default function Hero() {
         <div className="mx-auto max-w-3xl text-center">
           <Badge variant="outline" className="mb-5 rounded-full px-3 py-1 text-xs font-medium">
             <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" />
-            官方价透明 · 仅 $3 服务费
+            官方价透明 · 服务费透明
           </Badge>
           <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl md:text-6xl">
             FluxA
@@ -81,7 +81,7 @@ export default function Hero() {
             </span>
           </p>
           <p className="mt-3 text-sm text-muted-foreground sm:text-base">
-            4 块业务一站搞定 · 官方价 + 仅 $3 服务费 · 5 分钟到账 · 7×24 客服
+            4 块业务一站搞定 · 拼车无服务费 / 充值仅 $3 · 5 分钟到账 · 7×24 客服
           </p>
         </div>
 
@@ -114,21 +114,21 @@ export default function Hero() {
             <CardContent className="mt-auto flex flex-col gap-5">
               <div>
                 <div className="text-xs uppercase tracking-wider text-background/70">
-                  起售价
+                  4 人拼车价
                 </div>
                 <div className="mt-1 flex items-baseline gap-2">
                   <span className="text-3xl font-semibold tracking-tight tnum text-background sm:text-4xl">
                     {featured.price}
                   </span>
                   <span className="rounded-md bg-background/15 px-2 py-0.5 text-xs font-medium text-background/90">
-                    + $3 服务费
+                    4 人总价
                   </span>
                 </div>
               </div>
               <ul className="space-y-1.5 text-sm text-background/85">
                 <li className="flex items-center gap-2">
                   <ShieldCheck className="h-3.5 w-3.5" />
-                  Anthropic 官方账号
+                  MiniMax 官方账号
                 </li>
                 <li className="flex items-center gap-2">
                   <Users className="h-3.5 w-3.5" />

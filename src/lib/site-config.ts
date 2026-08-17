@@ -56,7 +56,7 @@ export const siteConfig = {
   icp: '粤ICP备 XXXXXXXX 号-1',
   title: 'FluxA - AI 服务专家 | ChatGPT 充值 Claude 充值 MiniMax Max 拼车',
   description:
-    'FluxA 提供 ChatGPT 充值、Claude 充值、MiniMax Max 拼车与 AI 聚合平台服务。官方价透明 + 仅 $3 服务费，5 分钟到账，7×24 客服。',
+    'FluxA 提供 ChatGPT 充值、Claude 充值、MiniMax Max 拼车与 AI 聚合平台服务。官方价透明，充值仅 $3 服务费，4 人拼车 ¥119 / 月 无服务费，5 分钟到账，7×24 客服。',
 } as const;
 
 export type SiteConfig = typeof siteConfig;
