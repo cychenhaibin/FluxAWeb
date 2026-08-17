@@ -8,18 +8,12 @@ const nav = siteConfig.nav as NavItem[];
   data-header
 >
   <div class="container-fluid flex h-16 items-center justify-between gap-6">
-    <!-- 左：品牌 logo (shadcn 简洁风：小图标 + 黑字) -->
-    <a
-      href="/"
-      class="flex items-center gap-2 shrink-0"
-      aria-label="FluxA 首页"
-    >
-      <span
-        class="inline-flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground text-sm font-bold"
-      >
-        F
+    <!-- 左：品牌 logo (紫渐变 + retroarch.svg + FluxA 黑字 — 还原最初样式) -->
+    <a href="/" class="flex items-center gap-2.5 shrink-0" aria-label="FluxA 首页">
+      <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[linear-gradient(135deg,#7a27ff_0%,#5b2bcb_100%)]">
+        <img src="/retroarch.svg" alt="" class="h-4 w-4 brightness-0 invert" />
       </span>
-      <span class="text-[15px] font-semibold tracking-tight text-foreground">
+      <span class="text-[17px] font-bold text-[#181E25] tracking-[-0.01em]">
         {siteConfig.brand.name}
       </span>
     </a>

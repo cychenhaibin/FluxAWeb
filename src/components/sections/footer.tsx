@@ -39,13 +39,13 @@ export default function Footer() {
           <div>
             <a
               href="/"
-              className="inline-flex items-center gap-2"
+              className="inline-flex items-center gap-2.5"
               aria-label="FluxA 首页"
             >
-              <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground text-sm font-bold">
-                F
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[linear-gradient(135deg,#7a27ff_0%,#5b2bcb_100%)]">
+                <img src="/retroarch.svg" alt="" className="h-4 w-4 brightness-0 invert" />
               </span>
-              <span className="text-[15px] font-semibold tracking-tight text-foreground">
+              <span className="text-[17px] font-bold text-[#181E25] tracking-[-0.01em]">
                 {siteConfig.brand.name}
               </span>
             </a>
