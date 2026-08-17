@@ -8,25 +8,52 @@ const values = [
     title: "官方价透明",
     description:
       "OpenAI / Anthropic 官方通道充值，所有套餐官方价 + 仅 $3 服务费，无隐藏费用，到账即享官方权益。",
+    color: {
+      icon: "bg-[#10A37F] text-white",
+      chip: "bg-[#10A37F]/10 text-[#0d8c6c] border-[#10A37F]/20",
+      ring: "hover:border-[#10A37F]/40",
+    },
   },
   {
     icon: Zap,
     title: "5 分钟到账",
     description:
       "下单后自动开通，5 分钟内账号到位；特殊情况 30 分钟内人工处理，无需漫长等待。",
+    color: {
+      icon: "bg-[#FF7038] text-white",
+      chip: "bg-[#FF7038]/10 text-[#c9551f] border-[#FF7038]/20",
+      ring: "hover:border-[#FF7038]/40",
+    },
   },
   {
     icon: BadgeDollarSign,
     title: "拼车省 50%",
     description:
       "MiniMax Max 拼车 2-4 人共享官方团队账号，比单独订阅省 50% 以上，每人均摊 $28 起。",
+    color: {
+      icon: "bg-gradient-to-br from-[#FF276F] to-[#7A27FF] text-white",
+      chip: "bg-[#7A27FF]/10 text-[#7A27FF] border-[#7A27FF]/20",
+      ring: "hover:border-[#FF276F]/40",
+    },
   },
   {
     icon: Headphones,
     title: "7×24 客服",
     description:
       "真人客服在线响应，紧急工单 5 分钟内回复；微信、邮箱、工单多渠道随时可联系。",
+    color: {
+      icon: "bg-[#7A27FF] text-white",
+      chip: "bg-[#7A27FF]/10 text-[#7A27FF] border-[#7A27FF]/20",
+      ring: "hover:border-[#7A27FF]/40",
+    },
   },
+];
+
+const stats = [
+  { num: "2000+", label: "服务 AI 团队", color: "text-[#10A37F]" },
+  { num: "5min", label: "极速到账", color: "text-[#FF7038]" },
+  { num: "7×24", label: "真人客服", color: "text-[#7A27FF]" },
+  { num: "$3", label: "透明服务费", color: "text-[#FF276F]" },
 ];
 
 export default function WhyFluxa() {
@@ -53,11 +80,11 @@ export default function WhyFluxa() {
             return (
               <Card
                 key={i}
-                className="h-full transition-all hover:border-foreground/20 hover:shadow-sm"
+                className={"h-full transition-all " + v.color.ring + " hover:shadow-md"}
               >
                 <CardHeader className="gap-3">
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-foreground text-background">
-                    <Icon className="h-4 w-4" />
+                  <span className={`inline-flex h-10 w-10 items-center justify-center rounded-lg ${v.color.icon}`}>
+                    <Icon className="h-5 w-5" />
                   </span>
                   <CardTitle className="text-base font-semibold tracking-tight">
                     {v.title}
@@ -71,16 +98,11 @@ export default function WhyFluxa() {
           })}
         </div>
 
-        {/* 数字统计 */}
+        {/* 数字统计 — 每数字独立彩色 */}
         <div className="mt-16 grid grid-cols-2 gap-4 rounded-lg border border-border bg-background p-6 sm:grid-cols-4 sm:p-8">
-          {[
-            { num: "2000+", label: "服务 AI 团队" },
-            { num: "5min", label: "极速到账" },
-            { num: "7×24", label: "真人客服" },
-            { num: "$3", label: "透明服务费" },
-          ].map((s) => (
+          {stats.map((s) => (
             <div key={s.label} className="text-center sm:text-left">
-              <div className="text-2xl font-semibold tracking-tight tnum text-foreground sm:text-3xl">
+              <div className={`text-2xl font-semibold tracking-tight tnum sm:text-3xl ${s.color}`}>
                 {s.num}
               </div>
               <div className="mt-1 text-xs text-muted-foreground sm:text-sm">

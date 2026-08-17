@@ -7,17 +7,36 @@ const values = [
     icon: ShieldCheck,
     title: "透明定价",
     desc: "官方价 + 仅 $3 服务费，所有套餐一视同仁，无隐藏费用。",
+    color: {
+      icon: "bg-[#10A37F] text-white",
+      ring: "hover:border-[#10A37F]/40",
+    },
   },
   {
     icon: Zap,
     title: "极速体验",
     desc: "5 分钟内自动开通，特殊情况 30 分钟内人工处理。",
+    color: {
+      icon: "bg-[#FF7038] text-white",
+      ring: "hover:border-[#FF7038]/40",
+    },
   },
   {
     icon: Headphones,
     title: "7×24 客服",
     desc: "真人客服在线响应，紧急工单 5 分钟内回复。",
+    color: {
+      icon: "bg-[#7A27FF] text-white",
+      ring: "hover:border-[#7A27FF]/40",
+    },
   },
+];
+
+const stats = [
+  { num: "2000+", label: "服务 AI 团队", color: "text-[#10A37F]", accent: "bg-[#10A37F]" },
+  { num: "5min", label: "极速到账", color: "text-[#FF7038]", accent: "bg-[#FF7038]" },
+  { num: "7×24", label: "真人客服", color: "text-[#7A27FF]", accent: "bg-[#7A27FF]" },
+  { num: "$3", label: "透明服务费", color: "text-[#FF276F]", accent: "bg-[#FF276F]" },
 ];
 
 export default function AboutUs() {
@@ -37,17 +56,16 @@ export default function AboutUs() {
           </p>
         </div>
 
-        {/* 4 数字统计 */}
+        {/* 4 数字统计 — 每数字独立彩色 + 左侧色条 */}
         <div className="mx-auto mt-12 max-w-4xl">
-          <div className="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-4">
-            {[
-              { num: "2000+", label: "服务 AI 团队" },
-              { num: "5min", label: "极速到账" },
-              { num: "7×24", label: "真人客服" },
-              { num: "$3", label: "透明服务费" },
-            ].map((s) => (
-              <div key={s.label} className="bg-background p-6 text-center">
-                <div className="text-2xl font-semibold tracking-tight tnum text-foreground sm:text-3xl">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {stats.map((s) => (
+              <div
+                key={s.label}
+                className="relative overflow-hidden rounded-lg border border-border bg-background p-5 sm:p-6"
+              >
+                <div className={`absolute left-0 top-0 h-full w-1 ${s.accent}`} />
+                <div className={`text-2xl font-semibold tracking-tight tnum sm:text-3xl ${s.color}`}>
                   {s.num}
                 </div>
                 <div className="mt-1 text-xs text-muted-foreground sm:text-sm">
@@ -58,18 +76,18 @@ export default function AboutUs() {
           </div>
         </div>
 
-        {/* 3 价值卡 */}
+        {/* 3 价值卡 — 各色 icon */}
         <div className="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-4 md:grid-cols-3">
           {values.map((v, i) => {
             const Icon = v.icon;
             return (
               <Card
                 key={i}
-                className="h-full transition-all hover:border-foreground/20 hover:shadow-sm"
+                className={"h-full transition-all " + v.color.ring + " hover:shadow-md"}
               >
                 <CardHeader className="gap-3">
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-foreground text-background">
-                    <Icon className="h-4 w-4" />
+                  <span className={`inline-flex h-10 w-10 items-center justify-center rounded-lg ${v.color.icon}`}>
+                    <Icon className="h-5 w-5" />
                   </span>
                   <CardTitle className="text-base font-semibold tracking-tight">
                     {v.title}

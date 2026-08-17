@@ -24,6 +24,33 @@ interface PricingByService {
   [slug: string]: { tiers: Tier[] } | undefined;
 }
 
+const serviceAccent: Record<string, { bar: string; trigger: string; checkBg: string; priceText: string }> = {
+  minimax: {
+    bar: "from-[#FF276F] via-[#FF7038] to-[#7A27FF]",
+    trigger: "data-[state=active]:from-[#FF276F] data-[state=active]:to-[#7A27FF] data-[state=active]:text-background",
+    checkBg: "bg-gradient-to-br from-[#FF276F] to-[#7A27FF]",
+    priceText: "text-[#7A27FF]",
+  },
+  chatgpt: {
+    bar: "from-[#10A37F] to-[#10A37F]/0",
+    trigger: "data-[state=active]:bg-[#10A37F] data-[state=active]:text-background",
+    checkBg: "bg-[#10A37F]",
+    priceText: "text-[#0d8c6c]",
+  },
+  claude: {
+    bar: "from-[#da7756] to-[#da7756]/0",
+    trigger: "data-[state=active]:bg-[#da7756] data-[state=active]:text-background",
+    checkBg: "bg-[#da7756]",
+    priceText: "text-[#b85f3d]",
+  },
+  "ai-aggregator": {
+    bar: "from-[#7A27FF] to-[#FF276F]/0",
+    trigger: "data-[state=active]:bg-[#7A27FF] data-[state=active]:text-background",
+    checkBg: "bg-[#7A27FF]",
+    priceText: "text-[#7A27FF]",
+  },
+};
+
 export default function Pricing({
   services,
   pricingByService,
@@ -66,6 +93,7 @@ export default function Pricing({
 
             {services.map((s) => {
               const tiers = pricingByService[s.slug]?.tiers ?? [];
+              const accent = serviceAccent[s.slug] ?? serviceAccent["ai-aggregator"];
               return (
                 <TabsContent key={s.slug} value={s.slug} className="mt-10 outline-none">
                   <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
@@ -73,13 +101,15 @@ export default function Pricing({
                       <Card
                         key={i}
                         className={
-                          "flex h-full flex-col transition-all " +
+                          "relative flex h-full flex-col overflow-hidden transition-all " +
                           (tier.recommended
                             ? "border-foreground/30 shadow-sm ring-1 ring-foreground/10"
                             : "hover:border-foreground/20 hover:shadow-sm")
                         }
                       >
-                        <CardHeader className="gap-2">
+                        {/* 顶部彩色条 — 对应当前服务品牌色 */}
+                        <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${accent.bar}`} />
+                        <CardHeader className="gap-2 pt-6">
                           {tier.recommended && (
                             <Badge
                               variant="default"
@@ -92,7 +122,7 @@ export default function Pricing({
                             {tier.name}
                           </CardTitle>
                           <div className="flex items-baseline gap-2 mt-2">
-                            <span className="text-3xl font-semibold tracking-tight tnum text-foreground">
+                            <span className={"text-3xl font-semibold tracking-tight tnum " + accent.priceText}>
                               {tier.price}
                             </span>
                             {tier.period && (
@@ -121,7 +151,7 @@ export default function Pricing({
                           <ul className="space-y-2.5 text-sm text-foreground/80 flex-1">
                             {tier.features.map((f, j) => (
                               <li key={j} className="flex items-start gap-2.5">
-                                <span className="mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-sm bg-foreground text-background">
+                                <span className={`mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-sm ${accent.checkBg} text-background`}>
                                   <Check className="h-3 w-3" strokeWidth={3} />
                                 </span>
                                 <span>{f}</span>
@@ -131,7 +161,12 @@ export default function Pricing({
                           <Button
                             asChild
                             variant={tier.recommended ? "default" : "outline"}
-                            className="mt-6 w-full"
+                            className={
+                              "mt-6 w-full " +
+                              (tier.recommended
+                                ? "bg-gradient-to-r from-[#7A27FF] to-[#FF276F] text-background hover:from-[#6a1fe0] hover:to-[#e61e5e] border-0"
+                                : "")
+                            }
                           >
                             <a href="#contact">
                               {tier.ctaLabel}

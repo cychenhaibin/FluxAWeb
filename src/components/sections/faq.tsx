@@ -6,6 +6,14 @@ import {
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 
+// 4 色循环 — 跟 services / pricing 配色一致
+const accentBar = [
+  "before:bg-[#10A37F]", // green
+  "before:bg-[#da7756]", // orange
+  "before:bg-gradient-to-b before:from-[#FF276F] before:via-[#FF7038] before:to-[#7A27FF]", // pink-orange-purple
+  "before:bg-[#7A27FF]", // purple
+];
+
 const faqs = [
   {
     q: "怎么充值？流程是怎样的？",
@@ -58,12 +66,15 @@ export default function Faq() {
         </div>
 
         <div className="mx-auto mt-12 max-w-3xl">
-          <Accordion type="single" collapsible defaultValue="item-0" className="w-full rounded-lg border border-border bg-background">
+          <Accordion type="single" collapsible defaultValue="item-0" className="w-full rounded-lg border border-border bg-background overflow-hidden">
             {faqs.map((f, i) => (
               <AccordionItem
                 key={i}
                 value={`item-${i}`}
-                className="px-5 last:border-b-0"
+                className={
+                  "relative px-5 last:border-b-0 before:absolute before:left-0 before:top-0 before:h-full before:w-1 " +
+                  accentBar[i % accentBar.length]
+                }
               >
                 <AccordionTrigger className="text-left text-[15px] font-medium text-foreground hover:no-underline py-4">
                   {f.q}

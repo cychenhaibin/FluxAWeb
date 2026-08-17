@@ -42,7 +42,7 @@ export default function Footer() {
               className="inline-flex items-center gap-2"
               aria-label="FluxA 首页"
             >
-              <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground text-sm font-bold">
+              <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-gradient-to-br from-[#FF276F] via-[#FF7038] to-[#7A27FF] text-background text-sm font-bold">
                 F
               </span>
               <span className="text-[15px] font-semibold tracking-tight text-foreground">

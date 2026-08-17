@@ -157,24 +157,27 @@ export default function Hero() {
             const Icon = iconMap[s.icon];
             const id = s.slug === "ai-aggregator" ? "fluxa" : s.slug;
             // 每个服务一种品牌色
-            const accent: Record<string, { swatch: string; chip: string; ring: string; bar: string }> = {
+            const accent: Record<string, { swatch: string; chip: string; ring: string; bar: string; priceText: string }> = {
               chatgpt: {
-                swatch: "bg-[#10A37F]/10 text-[#10A37F]",
+                swatch: "bg-[#10A37F] text-white",
                 chip: "bg-[#10A37F]/10 text-[#0d8c6c] border-[#10A37F]/20",
                 ring: "hover:border-[#10A37F]/30",
                 bar: "from-[#10A37F] to-[#10A37F]/0",
+                priceText: "text-[#0d8c6c]",
               },
               claude: {
-                swatch: "bg-[#da7756]/10 text-[#da7756]",
+                swatch: "bg-[#da7756] text-white",
                 chip: "bg-[#da7756]/10 text-[#b85f3d] border-[#da7756]/20",
                 ring: "hover:border-[#da7756]/30",
                 bar: "from-[#da7756] to-[#da7756]/0",
+                priceText: "text-[#b85f3d]",
               },
               "ai-aggregator": {
-                swatch: "bg-[#7A27FF]/10 text-[#7A27FF]",
+                swatch: "bg-[#7A27FF] text-white",
                 chip: "bg-[#7A27FF]/10 text-[#7A27FF] border-[#7A27FF]/20",
                 ring: "hover:border-[#7A27FF]/30",
                 bar: "from-[#7A27FF] to-[#7A27FF]/0",
+                priceText: "text-[#7A27FF]",
               },
             };
             const c = accent[s.slug];
@@ -209,7 +212,7 @@ export default function Hero() {
                     <div className="text-xs uppercase tracking-wider text-muted-foreground">
                       起售价
                     </div>
-                    <div className="mt-1 text-2xl font-semibold tracking-tight tnum text-foreground">
+                    <div className={"mt-1 text-2xl font-semibold tracking-tight tnum " + c.priceText}>
                       {s.price}
                     </div>
                   </div>
