@@ -1,8 +1,8 @@
 {
   "slug": "minimax",
   "name": "MiniMax Max 拼车",
-  "tagline": "Anthropic Claude Max 5x 团队账号 2-4 人拼车，4 人总价 ¥119 / 月",
-  "description": "MiniMax Max 拼车服务：Anthropic Claude Max 5x ($100/账号) 官方团队账号 2-4 人共享拼车，4 人总价 ¥119 / 月，无服务费，到账即享 Sonnet 4.5 + Opus 4.1 全模型 / Opus 4 优先通道 / 高峰不限速等 Max 官方全部功能，比单独订阅省 50% 以上。",
+  "tagline": "MiniMax Max 官方团队帐号 2-4 人拼车，4 人总价 ¥119 / 月",
+  "description": "MiniMax Max 拼车服务：MiniMax Max 官方团队帐号 2-4 人共享拼车，4 人总价 ¥119 / 月，无服务费，到账即享 Sonnet 4.5 + Opus 4.1 全模型 / Opus 4 优先通道 / 高峰不限速等 Max 官方全部功能，比单独订阅省 50% 以上。",
   "icon": "Users",
   "highlights": [
     { "title": "官方账号拼车", "description": "Anthropic 官方 Claude Max 5x 团队账号", "icon": "ShieldCheck" },
@@ -16,10 +16,10 @@
     "title": "MiniMax Max 拼车",
     "highlight": "官方团队账号拼车",
     "subtitle": "¥119 / 月 / 4 人",
-    "description": "Anthropic Claude Max 5x ($100/账号) 团队拼车，2-4 人共享，4 人 ¥119 / 月"
+    "description": "MiniMax Max 官方团队帐号，2-4 人共享，4 人 ¥119 / 月"
   },
   "demo": {
-    "description": "2-4 人共享 Anthropic Claude Max 5x 官方团队账号，4 人 ¥119 / 月",
+    "description": "2-4 人共享 MiniMax Max 官方团队帐号，4 人 ¥119 / 月",
     "url": "/services/minimax"
   }
 }

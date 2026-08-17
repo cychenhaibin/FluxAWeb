@@ -2,9 +2,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
-  Bot,
-  Sparkles,
-  Users,
   Globe,
   ShieldCheck,
   Layers,
@@ -13,10 +10,15 @@ import {
   ArrowRight,
 } from "lucide-react";
 
+// 品牌 logo 映射 (per-slug)
+const brandLogo: Record<string, string> = {
+  chatgpt: "/logos/chatgpt.svg",
+  claude: "/logos/claude.svg",
+  minimax: "/logos/minimax.svg",
+  "ai-aggregator": "", // 聚合无品牌 logo, 用 Globe
+};
+
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  Bot,
-  Sparkles,
-  Users,
   Globe,
   ShieldCheck,
   Layers,
@@ -91,9 +93,15 @@ export default function Services({ services }: { services: Service[] }) {
                 <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${c.bar}`} />
                 <CardHeader className="gap-3 pt-6">
                   <div className="flex items-center justify-between">
-                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-foreground text-background">
-                      <Icon className="h-4 w-4" />
-                    </span>
+                    {brandLogo[s.slug] ? (
+                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-white p-2">
+                        <img src={brandLogo[s.slug]} alt={s.name} className="h-full w-full" style={{ color: "#181E25" }} />
+                      </span>
+                    ) : (
+                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-foreground text-background">
+                        <Icon className="h-4 w-4" />
+                      </span>
+                    )}
                     {s.showcase?.badge && (
                       <Badge variant="outline" className={`rounded-full text-[10px] font-medium uppercase tracking-wider ${c.chip}`}>
                         {s.showcase.badge}

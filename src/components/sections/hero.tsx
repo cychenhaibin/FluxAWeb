@@ -1,20 +1,20 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Bot, Sparkles, Users, Globe, ArrowRight, Clock, ShieldCheck } from "lucide-react";
+import { Globe, ArrowRight, Clock, ShieldCheck } from "lucide-react";
 
-const iconMap = {
-  Bot,
-  Sparkles,
-  Users,
-  Globe,
-} as const;
+// 每个服务对应的品牌 logo 路径
+const brandLogo: Record<string, { src: string; bg: string }> = {
+  chatgpt: { src: "/logos/chatgpt.svg", bg: "bg-white" },
+  claude: { src: "/logos/claude.svg", bg: "bg-white" },
+  minimax: { src: "/logos/minimax.svg", bg: "bg-white" },
+};
 
 interface ServiceHeroCard {
   slug: string;
   name: string;
   description: string;
-  icon: keyof typeof iconMap;
+  icon: string;
   price: string;
   href: string;
   cta: string;
@@ -24,7 +24,7 @@ const featured: ServiceHeroCard = {
   slug: "minimax",
   name: "MiniMax Max 拼车",
   description:
-    "Anthropic Claude Max 5x ($100/账号) 官方团队账号 2-4 人拼车，4 人总价 ¥119 / 月",
+    "MiniMax Max 官方团队帐号 2-4 人拼车，4 人总价 ¥119 / 月",
   icon: "Users",
   price: "¥119 / 月",
   href: "#minimax",
@@ -62,7 +62,6 @@ const other: ServiceHeroCard[] = [
 ];
 
 export default function Hero() {
-  const FeaturedIcon = iconMap[featured.icon];
   return (
     <section className="relative w-full overflow-hidden border-b border-border bg-background">
       <div className="container-fluid py-16 md:py-24">
@@ -94,8 +93,8 @@ export default function Hero() {
           >
             <CardHeader className="gap-3">
               <div className="flex items-center gap-2">
-                <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-background/15 text-background">
-                  <FeaturedIcon className="h-4 w-4" />
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-white p-1.5">
+                  <img src="/logos/minimax.svg" alt="MiniMax" className="h-full w-full" />
                 </span>
                 <Badge
                   variant="secondary"
@@ -131,7 +130,7 @@ export default function Hero() {
                   MiniMax 官方账号
                 </li>
                 <li className="flex items-center gap-2">
-                  <Users className="h-3.5 w-3.5" />
+                  <img src="/logos/minimax.svg" alt="MiniMax" className="h-3.5 w-3.5" />
                   2-4 人拼车，人均更低
                 </li>
                 <li className="flex items-center gap-2">
@@ -154,9 +153,8 @@ export default function Hero() {
 
           {/* 3 个并排卡 — 每个有彩色顶条 + 彩色 icon 背景 */}
           {other.map((s, idx) => {
-            const Icon = iconMap[s.icon];
             const id = s.slug === "ai-aggregator" ? "fluxa" : s.slug;
-            // 每个服务一种品牌色 — 只用于顶部色条 + chip + 价格文字, icon 统一前景色
+            // 每个服务一种品牌色 — 只用于顶部色条 + chip + 价格文字
             const accent: Record<string, { chip: string; bar: string; priceText: string }> = {
               chatgpt: {
                 chip: "bg-[#10A37F]/10 text-[#0d8c6c] border-[#10A37F]/20",
@@ -175,6 +173,7 @@ export default function Hero() {
               },
             };
             const c = accent[s.slug];
+            const logo = brandLogo[s.slug];
             return (
               <Card
                 key={s.slug}
@@ -185,9 +184,15 @@ export default function Hero() {
                 <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${c.bar}`} />
                 <CardHeader className="gap-3 pt-6">
                   <div className="flex items-center gap-2">
-                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-foreground text-background">
-                      <Icon className="h-4 w-4" />
-                    </span>
+                    {logo ? (
+                      <span className={`inline-flex h-8 w-8 items-center justify-center rounded-md p-1 ${logo.bg}`}>
+                        <img src={logo.src} alt={s.name} className="h-full w-full" style={{ color: "#181E25" }} />
+                      </span>
+                    ) : (
+                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-foreground text-background">
+                        <Globe className="h-4 w-4" />
+                      </span>
+                    )}
                     <Badge variant="outline" className={`rounded-full px-2.5 text-[10px] font-medium uppercase tracking-wider ${c.chip}`}>
                       0{idx + 1}
                     </Badge>
