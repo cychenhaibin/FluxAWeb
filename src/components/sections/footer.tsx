@@ -42,9 +42,7 @@ export default function Footer() {
               className="inline-flex items-center gap-2.5"
               aria-label="FluxA 首页"
             >
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[linear-gradient(135deg,#7a27ff_0%,#5b2bcb_100%)]">
-                <img src="/retroarch.svg" alt="" className="h-4 w-4 brightness-0 invert" />
-              </span>
+              <img src="/retroarch.svg" alt="FluxA" className="h-7 w-7" />
               <span className="text-[17px] font-bold text-[#181E25] tracking-[-0.01em]">
                 {siteConfig.brand.name}
               </span>
