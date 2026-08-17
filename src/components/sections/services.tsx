@@ -95,7 +95,7 @@ export default function Services({ services }: { services: Service[] }) {
                   <div className="flex items-center justify-between">
                     {brandLogo[s.slug] ? (
                       <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-white p-2">
-                        <img src={brandLogo[s.slug]} alt={s.name} className="h-full w-full" style={{ color: "#181E25" }} />
+                        <img src={brandLogo[s.slug]} alt={s.name} className="h-full w-full" />
                       </span>
                     ) : (
                       <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-foreground text-background">

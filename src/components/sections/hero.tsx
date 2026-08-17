@@ -186,7 +186,7 @@ export default function Hero() {
                   <div className="flex items-center gap-2">
                     {logo ? (
                       <span className={`inline-flex h-8 w-8 items-center justify-center rounded-md p-1 ${logo.bg}`}>
-                        <img src={logo.src} alt={s.name} className="h-full w-full" style={{ color: "#181E25" }} />
+                        <img src={logo.src} alt={s.name} className="h-full w-full" />
                       </span>
                     ) : (
                       <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-foreground text-background">
