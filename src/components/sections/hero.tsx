@@ -1,0 +1,206 @@
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Bot, Sparkles, Users, Globe, ArrowRight, Clock, ShieldCheck } from "lucide-react";
+
+const iconMap = {
+  Bot,
+  Sparkles,
+  Users,
+  Globe,
+} as const;
+
+interface ServiceHeroCard {
+  slug: string;
+  name: string;
+  description: string;
+  icon: keyof typeof iconMap;
+  price: string;
+  href: string;
+  cta: string;
+}
+
+const featured: ServiceHeroCard = {
+  slug: "minimax",
+  name: "MiniMax Max 拼车",
+  description:
+    "Anthropic Claude Max 5x ($100/账号) 官方团队账号 2-4 人拼车，每人 $28 起",
+  icon: "Users",
+  price: "$28 / 月 / 人起",
+  href: "#minimax",
+  cta: "立即拼车",
+};
+
+const other: ServiceHeroCard[] = [
+  {
+    slug: "chatgpt",
+    name: "ChatGPT 充值",
+    description: "OpenAI 官方账号直充，Plus / Pro 100 / Pro 200 全档位可选。",
+    icon: "Bot",
+    price: "$23 / 月起",
+    href: "#chatgpt",
+    cta: "立即购买",
+  },
+  {
+    slug: "claude",
+    name: "Claude 充值",
+    description: "Anthropic 官方账号直充，Pro / Max 5x / Max 20x 全档位可选。",
+    icon: "Sparkles",
+    price: "$23 / 月起",
+    href: "#claude",
+    cta: "立即购买",
+  },
+  {
+    slug: "ai-aggregator",
+    name: "AI 聚合平台",
+    description: "GPT + Claude + Gemini + 国产大模型，统一 API + 统一 UI。",
+    icon: "Globe",
+    price: "$9.9 体验价",
+    href: "#fluxa",
+    cta: "立即试用",
+  },
+];
+
+export default function Hero() {
+  const FeaturedIcon = iconMap[featured.icon];
+  return (
+    <section className="relative w-full overflow-hidden border-b border-border bg-background">
+      <div className="container-fluid py-16 md:py-24">
+        {/* Hero 标题区 */}
+        <div className="mx-auto max-w-3xl text-center">
+          <Badge variant="outline" className="mb-5 rounded-full px-3 py-1 text-xs font-medium">
+            <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" />
+            官方价透明 · 仅 $3 服务费
+          </Badge>
+          <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl md:text-6xl">
+            FluxA
+          </h1>
+          <p className="mt-4 text-lg font-medium text-foreground/80 sm:text-xl">
+            AI 服务，一站搞定
+          </p>
+          <p className="mt-3 text-sm text-muted-foreground sm:text-base">
+            4 块业务一站搞定 · 官方价 + 仅 $3 服务费 · 5 分钟到账 · 7×24 客服
+          </p>
+        </div>
+
+        {/* 4 个服务卡：1 个主推 + 3 个并排 */}
+        <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-2">
+          {/* 主推卡 (FEATURED) — 跨 2 行 */}
+          <Card
+            id="minimax"
+            className="relative md:row-span-2 overflow-hidden border-foreground/15 bg-foreground text-background transition-all hover:shadow-md"
+          >
+            <CardHeader className="gap-3">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-background/10 text-background">
+                  <FeaturedIcon className="h-4 w-4" />
+                </span>
+                <Badge
+                  variant="secondary"
+                  className="rounded-full bg-background/15 text-background border-0 hover:bg-background/15"
+                >
+                  团队账号 · 主推
+                </Badge>
+              </div>
+              <CardTitle className="text-2xl font-semibold tracking-tight text-background sm:text-3xl">
+                {featured.name}
+              </CardTitle>
+              <CardDescription className="text-sm leading-relaxed text-background/70">
+                {featured.description}
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="mt-auto flex flex-col gap-5">
+              <div>
+                <div className="text-xs uppercase tracking-wider text-background/60">
+                  起售价
+                </div>
+                <div className="mt-1 flex items-baseline gap-2">
+                  <span className="text-3xl font-semibold tracking-tight tnum text-background sm:text-4xl">
+                    {featured.price}
+                  </span>
+                  <span className="rounded-md bg-background/10 px-2 py-0.5 text-xs font-medium text-background/80">
+                    + $3 服务费
+                  </span>
+                </div>
+              </div>
+              <ul className="space-y-1.5 text-sm text-background/80">
+                <li className="flex items-center gap-2">
+                  <ShieldCheck className="h-3.5 w-3.5" />
+                  Anthropic 官方账号
+                </li>
+                <li className="flex items-center gap-2">
+                  <Users className="h-3.5 w-3.5" />
+                  2-4 人拼车，人均更低
+                </li>
+                <li className="flex items-center gap-2">
+                  <Clock className="h-3.5 w-3.5" />
+                  下单后 5 分钟开通
+                </li>
+              </ul>
+              <Button
+                asChild
+                size="lg"
+                className="w-full rounded-md bg-background text-foreground hover:bg-background/90"
+              >
+                <a href={featured.href}>
+                  {featured.cta}
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* 3 个并排卡 */}
+          {other.map((s, idx) => {
+            const Icon = iconMap[s.icon];
+            const id = s.slug === "ai-aggregator" ? "fluxa" : s.slug;
+            return (
+              <Card
+                key={s.slug}
+                id={id}
+                className="group transition-all hover:border-foreground/20 hover:shadow-sm"
+              >
+                <CardHeader className="gap-3">
+                  <div className="flex items-center gap-2">
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-muted text-foreground">
+                      <Icon className="h-4 w-4" />
+                    </span>
+                    <Badge variant="outline" className="rounded-full px-2.5 text-[10px] font-medium uppercase tracking-wider">
+                      0{idx + 1}
+                    </Badge>
+                  </div>
+                  <CardTitle className="text-lg font-semibold tracking-tight">
+                    {s.name}
+                  </CardTitle>
+                  <CardDescription className="text-sm leading-relaxed">
+                    {s.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="mt-auto flex flex-col gap-4">
+                  <div>
+                    <div className="text-xs uppercase tracking-wider text-muted-foreground">
+                      起售价
+                    </div>
+                    <div className="mt-1 text-2xl font-semibold tracking-tight tnum text-foreground">
+                      {s.price}
+                    </div>
+                  </div>
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="w-full"
+                  >
+                    <a href={s.href}>
+                      {s.cta}
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
+                  </Button>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
