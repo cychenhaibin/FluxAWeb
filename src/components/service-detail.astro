@@ -44,41 +44,48 @@ const startingPrice = startingTier
   ? `${startingTier.price}${startingTier.period ?? ''}`
   : null;
 ---
-<section class="relative py-28 bg-[#08090a] mesh-bg overflow-hidden">
-  <div class="container mx-auto max-w-4xl px-4 text-center relative">
-    <div class="inline-flex h-16 w-16 rounded-xl bg-[#5e6ad2]/15 border border-[#5e6ad2]/25 items-center justify-center mb-7">
-      <Icon name={service.icon} class="text-[#5e6ad2]" size={32} />
-    </div>
-    <h1 class="text-[clamp(2rem,5vw,3.75rem)] leading-[1.1] font-semibold text-white tracking-[-0.025em] text-balance">{service.name}</h1>
-    <p class="mt-5 text-base md:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed text-pretty">{service.tagline}</p>
-
-    {(startingPrice || tierCount > 0) && (
-      <div class="mt-7 inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[13px] backdrop-blur-md">
-        {startingPrice && (
-          <>
-            <span class="text-zinc-500">起售价</span>
-            <span class="font-semibold text-white tnum">从 {startingPrice} 起</span>
-          </>
-        )}
-        {tierCount > 0 && (
-          <>
-            {startingPrice && <span class="text-zinc-700">·</span>}
-            <span class="text-zinc-500">共 {tierCount} 个套餐</span>
-          </>
-        )}
+<section class="relative bg-[#08090a] pt-32 pb-12 overflow-hidden">
+  <div class="container mx-auto max-w-6xl px-4">
+    <div class="flex items-end justify-between gap-8">
+      <h1 class="text-[clamp(2.5rem,6.5vw,5rem)] leading-[0.95] font-semibold text-white tracking-[-0.04em] text-balance max-w-3xl">{service.name}</h1>
+      <div class="hidden md:flex items-center gap-1.5 text-[13px] text-zinc-400 shrink-0 pb-3">
+        <span class="px-1.5 py-0.5 rounded-md bg-[#5e6ad2] text-white text-[11px] font-medium uppercase tracking-wider">{service.slug}</span>
       </div>
-    )}
+    </div>
+    <p class="mt-6 text-[15px] md:text-base text-zinc-400 leading-relaxed text-pretty max-w-2xl">
+      {service.tagline.split(/[，,。]/)[0]}。<br />
+      官方价直充 + 透明服务费，5 分钟极速到账。
+    </p>
+  </div>
+</section>
 
-    <p class="mt-9 text-[15px] text-zinc-300 max-w-2xl mx-auto leading-relaxed">{service.description}</p>
+<section class="bg-[#08090a] pb-24">
+  <div class="container mx-auto max-w-6xl px-4">
+    <p class="text-[15px] text-zinc-300 leading-relaxed max-w-2xl">{service.description}</p>
 
-    <div class="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
+    <div class="mt-8 inline-flex flex-wrap items-center gap-x-3 gap-y-1.5 rounded-md border border-white/10 bg-white/5 px-4 py-2.5 text-[13px] backdrop-blur-md">
+      {startingPrice && (
+        <>
+          <span class="text-zinc-500">起售价</span>
+          <span class="font-semibold text-white tnum">{startingPrice}</span>
+        </>
+      )}
+      {tierCount > 0 && (
+        <>
+          <span class="text-zinc-700">·</span>
+          <span class="text-zinc-500">共 {tierCount} 个套餐</span>
+        </>
+      )}
+    </div>
+
+    <div class="mt-8 flex flex-col sm:flex-row gap-3">
       <a href="/pricing">
-        <Button size="lg" variant="outline" className="rounded-lg h-11 px-5 text-[13px] font-medium border-white/15 bg-white/5 text-white hover:bg-white/10 backdrop-blur-md">
+        <Button size="lg" variant="outline" className="rounded-md h-10 px-4 text-[13px] font-medium border-white/15 bg-white/5 text-white hover:bg-white/10">
           查看套餐
         </Button>
       </a>
       <a href="/contact">
-        <Button size="lg" className="rounded-lg h-11 px-5 text-[13px] font-medium bg-[#5e6ad2] text-white hover:bg-[#7173f3] shadow-purple">
+        <Button size="lg" className="rounded-md h-10 px-4 text-[13px] font-medium bg-[#5e6ad2] text-white hover:bg-[#7173f3]">
           {service.ctaLabel}
         </Button>
       </a>
@@ -86,28 +93,22 @@ const startingPrice = startingTier
   </div>
 </section>
 
-<section class="py-16 bg-[#0e0e10] border-t border-white/5">
-  <div class="container mx-auto max-w-5xl px-4">
-    <h2 class="text-2xl md:text-[28px] leading-[1.2] font-semibold text-white text-center tracking-[-0.015em]">核心亮点</h2>
-    <p class="mt-2.5 text-center text-zinc-400 text-[14px]">为什么选择 {service.name}</p>
-    <div class="mt-10 grid gap-4 sm:grid-cols-2">
+<section class="bg-[#08090a] pb-20 border-t border-white/5">
+  <div class="container mx-auto max-w-5xl px-4 pt-20">
+    <h2 class="text-2xl md:text-[28px] leading-[1.2] font-semibold text-white text-left tracking-[-0.025em]">核心亮点</h2>
+    <p class="mt-2 text-zinc-400 text-[14px]">为什么选择 {service.name}</p>
+    <div class="mt-8 grid gap-3 sm:grid-cols-2">
       {service.highlights.map((h) => (
-        <div class="card rounded-xl p-6 hover:border-[#5e6ad2]/50 transition-all">
+        <div class="card rounded-md p-5 hover:border-[#5e6ad2]/50 transition-all">
           <div class="flex items-center gap-3">
-            <div class="shrink-0 h-10 w-10 rounded-lg bg-[#5e6ad2]/15 border border-[#5e6ad2]/25 flex items-center justify-center">
-              <Icon name={h.icon} class="text-[#5e6ad2]" size={20} />
+            <div class="shrink-0 h-9 w-9 rounded-md bg-[#5e6ad2]/15 border border-[#5e6ad2]/25 flex items-center justify-center">
+              <Icon name={h.icon} class="text-[#5e6ad2]" size={18} />
             </div>
             <h3 class="text-[15px] font-semibold text-white tracking-tight">{h.title}</h3>
           </div>
-          <p class="mt-3.5 text-[13.5px] text-zinc-400 leading-relaxed">{h.description}</p>
+          <p class="mt-3 text-[13.5px] text-zinc-400 leading-relaxed">{h.description}</p>
         </div>
       ))}
-    </div>
-
-    <div class="mt-12 text-center">
-      <a href="/pricing" class="text-[13px] font-medium text-[#5e6ad2] hover:text-[#c4c5f5] transition-colors">
-        查看完整套餐对比 →
-      </a>
     </div>
   </div>
 </section>

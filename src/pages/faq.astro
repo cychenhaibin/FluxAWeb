@@ -7,18 +7,24 @@ const faqEntry = await getEntry('faq', 'faq');
 const items = faqEntry?.data ?? [];
 ---
 <BaseLayout title="常见问题 - FluxA">
-  <section class="py-24 bg-[#08090a] ">
-    <div class="container mx-auto max-w-3xl px-4">
-      <div class="text-center">
-        <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[12px] text-zinc-300 mb-5 backdrop-blur-md">
-          <span class="h-1.5 w-1.5 rounded-full bg-[#5e6ad2]"></span>
-          7×24 客服
+  <section class="relative bg-[#08090a] pt-32 pb-12 overflow-hidden">
+    <div class="container mx-auto max-w-6xl px-4">
+      <div class="flex items-end justify-between gap-8">
+        <h1 class="text-[clamp(2.5rem,6.5vw,5rem)] leading-[0.95] font-semibold text-white tracking-[-0.04em] text-balance max-w-3xl">常见问题</h1>
+        <div class="hidden md:flex items-center gap-1.5 text-[13px] text-zinc-400 shrink-0 pb-3">
+          <span class="px-1.5 py-0.5 rounded-md bg-[#5e6ad2] text-white text-[11px] font-medium uppercase tracking-wider">FAQ</span>
         </div>
-        <h1 class="text-4xl md:text-[56px] font-semibold text-white tracking-[-0.025em] leading-[1.1] text-balance">常见问题</h1>
-        <p class="mt-5 text-base md:text-lg text-zinc-400">下单、账户、续费、退款——这里有你想问的</p>
       </div>
+      <p class="mt-6 text-[15px] md:text-base text-zinc-400 leading-relaxed text-pretty max-w-2xl">
+        8 个常见问题 · 5 个分类。<br />
+        下单、账户、续费、退款——这里有你想问的。
+      </p>
+    </div>
+  </section>
 
-      <div class="mt-10 card rounded-xl overflow-hidden divide-y divide-white/5">
+  <section class="bg-[#08090a] pb-24">
+    <div class="container mx-auto max-w-3xl px-4">
+      <div class="card rounded-md overflow-hidden divide-y divide-white/5">
         <FaqAccordion client:visible items={items} />
       </div>
     </div>
