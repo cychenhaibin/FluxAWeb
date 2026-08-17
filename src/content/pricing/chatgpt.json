@@ -5,7 +5,8 @@
       "name": "Plus 月付",
       "price": "$23",
       "period": "/ 月",
-      "originalPrice": "官方 $20 + $3 人工费",
+      "originalPrice": "$20",
+      "serviceFee": "$3",
       "features": [
         "GPT-4o 无限次对话",
         "GPT-4o mini 无限次",
@@ -21,7 +22,8 @@
       "name": "Pro 100",
       "price": "$103",
       "period": "/ 月",
-      "originalPrice": "官方 $100 + $3 人工费",
+      "originalPrice": "$100",
+      "serviceFee": "$3",
       "features": [
         "GPT-4o 无限次对话",
         "o1 pro 模式（深度推理）",
@@ -36,7 +38,8 @@
       "name": "Pro 200",
       "price": "$203",
       "period": "/ 月",
-      "originalPrice": "官方 $200 + $3 人工费",
+      "originalPrice": "$200",
+      "serviceFee": "$3",
       "features": [
         "GPT-4o 无限次对话",
         "o1 pro 模式 + 完整 o 系列模型",

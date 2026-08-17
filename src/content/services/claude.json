@@ -1,14 +1,25 @@
 {
-  "name": "Claude 充值",
   "slug": "claude",
+  "name": "Claude 充值",
   "tagline": "Anthropic 官方账号直充，Pro / Max 全档位可选",
-  "description": "Anthropic 官方账号充值服务，覆盖 Claude Pro ($20)、Max 5x ($100)、Max 20x ($200) 全档位，每档仅加 $3 人工费，到账即享 Sonnet 4.5 + Opus 4.1 全模型 / Artifacts / Projects / Claude Code 等官方全部功能。",
+  "description": "Anthropic 官方账号充值服务，覆盖 Claude Pro ($20)、Max 5x ($100)、Max 20x ($200) 全档位，每档仅加 $3 服务费，到账即享 Sonnet 4.5 + Opus 4.1 全模型 / Artifacts / Projects / Claude Code 等官方全部功能。",
   "icon": "Sparkles",
   "highlights": [
     { "title": "官方价直充", "description": "Anthropic 官方通道，权益 100% 同步", "icon": "ShieldCheck" },
     { "title": "全档位覆盖", "description": "Pro / Max 5x / Max 20x 三档可选", "icon": "Layers" },
-    { "title": "$3 人工费", "description": "每档仅加 $3 透明服务费，无隐藏费用", "icon": "BadgeDollarSign" },
+    { "title": "$3 服务费", "description": "每档仅加 $3 透明服务费，无隐藏费用", "icon": "BadgeDollarSign" },
     { "title": "5 分钟开通", "description": "下单后 5 分钟内自动开通", "icon": "Zap" }
   ],
-  "ctaLabel": "立即购买"
+  "ctaLabel": "立即购买",
+  "showcase": {
+    "badge": "CLAUDE",
+    "title": "Claude 充值",
+    "highlight": "Pro / Max 全档位",
+    "subtitle": "$23 / 月起",
+    "description": "Anthropic 官方账号直充 · Pro / Max 5x / Max 20x 全档位可选"
+  },
+  "demo": {
+    "description": "Anthropic 官方账号代充 · Pro / Max 全档位 · 5 分钟到账",
+    "url": "/services/claude"
+  }
 }

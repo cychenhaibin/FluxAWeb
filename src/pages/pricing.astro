@@ -11,7 +11,7 @@ const services = (await getCollection('services')).sort(
   (a, b) => navOrder.indexOf(a.data.slug) - navOrder.indexOf(b.data.slug)
 );
 const pricingList = await getCollection('pricing');
-const pricingByService = Object.fromEntries(pricingList.map((p) => [p.data.service.id, p.data]));
+const pricingByService = Object.fromEntries(pricingList.map((p) => [p.data.service, p.data]));
 ---
 <BaseLayout title="价格 - FluxA">
   <section class="bg-white pt-24 pb-12">

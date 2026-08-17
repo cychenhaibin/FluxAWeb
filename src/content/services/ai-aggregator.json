@@ -1,6 +1,6 @@
 {
-  "name": "AI 聚合平台",
   "slug": "ai-aggregator",
+  "name": "AI 聚合平台",
   "tagline": "GPT + Claude + Gemini + 国产大模型，统一 API / 统一 UI",
   "description": "一站式 AI 聚合平台，统一接入 GPT-4o、Claude Opus、Gemini Pro、文心一言等顶级大模型，统一 API 调用 + 统一 Web UI，支持自定义模型路由、权重、自动降级与 API 调用监控。",
   "icon": "Globe",
@@ -10,5 +10,16 @@
     { "title": "智能路由", "description": "支持自定义模型权重 + 自动降级", "icon": "Zap" },
     { "title": "企业级", "description": "SSO + 审计 + SLA 保障可选", "icon": "Headphones" }
   ],
-  "ctaLabel": "立即试用"
+  "ctaLabel": "立即试用",
+  "showcase": {
+    "badge": "AI 聚合",
+    "title": "AI 聚合平台",
+    "highlight": "统一 API · 统一 UI",
+    "subtitle": "$9.9 体验价",
+    "description": "GPT-4o + Claude Opus + Gemini Pro + 国产大模型 · 统一接入"
+  },
+  "demo": {
+    "description": "一站式 AI 聚合平台 · 统一 API + 统一 Web UI · 自定义模型路由",
+    "url": "/services/ai-aggregator"
+  }
 }

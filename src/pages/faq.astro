@@ -1,10 +1,18 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { getEntry } from 'astro:content';
 import FaqAccordion from '@/components/faq-accordion';
 
-const faqEntry = await getEntry('faq', 'faq');
-const items = faqEntry?.data ?? [];
+// FAQ Content Collection 已废弃（Phase 3 重写 schema），内联 8 条常见问题
+const items = [
+  { question: '下单后多久能开通？', answer: '大多数订单 5 分钟内自动开通，特殊情况下 30 分钟内人工处理。', category: '支付' },
+  { question: '支持哪些支付方式？', answer: '支持微信、支付宝、USDT（TRC20）。企业用户可申请对公转账。', category: '支付' },
+  { question: '账号是官方账号吗？', answer: '是。我们使用 OpenAI / Anthropic 官方账号体系，所有账号来源合规可查。', category: '账户' },
+  { question: '可以换号或退款吗？', answer: '开通前可免费换号；开通后 24 小时内非账号质量问题支持按比例退款。', category: '退款' },
+  { question: '数据安全怎么保障？', answer: '我们不存储任何客户对话数据；账户密码使用加密通道交付；客服仅在必要协助时接触账户。', category: '合规' },
+  { question: '续费有优惠吗？', answer: '季付 9 折、年付 8 折，老客户额外 95 折。', category: '支付' },
+  { question: '团队/企业有专属方案吗？', answer: '支持，10 人以上团队可申请专属折扣和管理后台。联系客服获取方案。', category: '售后' },
+  { question: 'MiniMax Max 拼车能换号或退出吗？', answer: '拼车期内可申请换号（每月 1 次免费），剩余周期可按比例退还到余额。', category: '退款' },
+];
 ---
 <BaseLayout title="常见问题 - FluxA">
   <section class="bg-white pt-24 pb-12">

@@ -1,9 +1,14 @@
 ---
-import { getEntry } from 'astro:content';
 import { Button } from '@/components/ui/button';
 
-const faqEntry = await getEntry('faq', 'faq');
-const faqs = faqEntry?.data?.slice(0, 4) ?? [];
+// 临时：FAQ Content Collection 已废弃（Phase 3 重写 schema），内联 4 条
+// Phase 5 整个 section 会被删除
+const faqs = [
+  { question: '下单后多久能开通？', answer: '大多数订单 5 分钟内自动开通，特殊情况下 30 分钟内人工处理。' },
+  { question: '支持哪些支付方式？', answer: '支持微信、支付宝、USDT（TRC20）。企业用户可申请对公转账。' },
+  { question: '账号是官方账号吗？', answer: '是。我们使用 OpenAI / Anthropic 官方账号体系，所有账号来源合规可查。' },
+  { question: '可以换号或退款吗？', answer: '开通前可免费换号；开通后 24 小时内非账号质量问题支持按比例退款。' },
+];
 ---
 <section class="py-24 bg-[#F7F8FA]">
   <div class="container mx-auto max-w-3xl px-4">

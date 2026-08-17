@@ -5,7 +5,8 @@
       "name": "体验包",
       "price": "$9.9",
       "period": "/ 一次性",
-      "originalPrice": "限时体验价",
+      "originalPrice": "",
+      "serviceFee": "",
       "features": [
         "AI 聚合平台 7 天体验",
         "GPT-4o + Claude Sonnet + Gemini + 文心一言",
@@ -20,7 +21,8 @@
       "name": "开发者包",
       "price": "$299",
       "period": "/ 一次性",
-      "originalPrice": "含 3 个月服务",
+      "originalPrice": "",
+      "serviceFee": "",
       "features": [
         "AI 聚合平台 3 个月",
         "GPT-4o + Claude Opus + Gemini Pro + 国产大模型",
@@ -36,7 +38,8 @@
       "name": "企业包",
       "price": "联系报价",
       "period": "",
-      "originalPrice": "按需定制",
+      "originalPrice": "",
+      "serviceFee": "",
       "features": [
         "AI 聚合平台 企业级",
         "全部模型 + 私有化部署可选",

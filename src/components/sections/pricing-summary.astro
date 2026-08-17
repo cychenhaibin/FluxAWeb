@@ -10,7 +10,7 @@ const representativeTiers = new Map<
   { name: string; price: string; period: string; originalPrice: string; ctaLabel: string }
 >();
 for (const entry of pricingEntries) {
-  const slug = entry.data.service.id;
+  const slug = entry.data.service;
   const tier = entry.data.tiers.find((t) => t.recommended) ?? entry.data.tiers[0];
   representativeTiers.set(slug, {
     name: tier.name,

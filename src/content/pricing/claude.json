@@ -5,7 +5,8 @@
       "name": "Pro 月付",
       "price": "$23",
       "period": "/ 月",
-      "originalPrice": "官方 $20 + $3 人工费",
+      "originalPrice": "$20",
+      "serviceFee": "$3",
       "features": [
         "Sonnet 4.5 + Opus 4.1 全模型",
         "Artifacts / Projects / Canvas",
@@ -20,7 +21,8 @@
       "name": "Max 5x",
       "price": "$103",
       "period": "/ 月",
-      "originalPrice": "官方 $100 + $3 人工费",
+      "originalPrice": "$100",
+      "serviceFee": "$3",
       "features": [
         "5x Pro 用量（实测约 8.33x）",
         "Opus 4 优先通道",
@@ -35,7 +37,8 @@
       "name": "Max 20x",
       "price": "$203",
       "period": "/ 月",
-      "originalPrice": "官方 $200 + $3 人工费",
+      "originalPrice": "$200",
+      "serviceFee": "$3",
       "features": [
         "20x Pro 用量",
         "Opus 4 满血体验",
