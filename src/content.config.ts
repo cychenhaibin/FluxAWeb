@@ -2,8 +2,9 @@ import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 // ──────────────────────────────────────────────────────────────
-// FluxA — minimaxi.com 1:1 复刻 Content Collection schema
-// 4 块业务数据驱动：services + pricing
+// FluxA — content collection schema
+// 4 services: chatgpt / claude / minimax (Max 拼车) / ai-aggregator
+// Each backed by services/<slug>.json + pricing/<slug>.json
 // ──────────────────────────────────────────────────────────────
 
 const services = defineCollection({
