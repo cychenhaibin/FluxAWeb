@@ -1,0 +1,54 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const positions = [
+  { title: '高级前端工程师', team: '工程', location: '远程 / 北京', desc: '负责 FluxA 官网、AI 聚合平台的前端架构与开发，React + Astro + Tailwind 经验优先。' },
+  { title: 'AI 应用工程师', team: 'AI', location: '远程 / 上海', desc: '基于 LLM 构建智能客服、订单自动化、知识库系统，需要 Prompt Engineering + RAG 经验。' },
+  { title: '客户成功经理', team: '客户成功', location: '远程', desc: '负责企业客户的接入培训、续费、技术支持，需要 B2B SaaS 客户成功经验。' },
+  { title: '内容运营', team: '运营', location: '远程', desc: '负责 FluxA 公众号、博客、行业动态的内容创作，需要 AI / SaaS 行业背景。' },
+];
+---
+<BaseLayout title="加入我们 - FluxA">
+  <section class="bg-white pt-24 pb-12">
+    <div class="container-fluid text-center max-w-4xl mx-auto">
+      <h1 class="heading-display text-[clamp(2.5rem,7vw,5rem)] text-balance">
+        加入 <span class="gradient-pink-orange-text">FluxA</span>
+      </h1>
+      <p class="mt-6 text-[18px] md:text-[20px] text-[#6E7782] leading-relaxed max-w-2xl mx-auto">
+        远程友好 · 弹性工作 · 与顶尖团队一起构建 AI 服务
+      </p>
+    </div>
+  </section>
+
+  <section class="pb-24 bg-white">
+    <div class="container-fluid max-w-4xl">
+      <h2 class="heading-display text-[clamp(1.75rem,4vw,2.5rem)] text-balance">
+        开放 <span class="gradient-purple-text">职位</span>
+      </h2>
+      <div class="mt-10 space-y-3">
+        {positions.map((p) => (
+          <div class="rounded-3xl bg-white border border-[#E4E7EB] p-6 md:p-7 hover:border-[#181E25] transition-colors">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+              <div>
+                <h3 class="text-[18px] font-bold text-[#181E25] tracking-tight">{p.title}</h3>
+                <div class="mt-1.5 flex items-center gap-3 text-[12px] text-[#6E7782]">
+                  <span class="inline-flex items-center h-6 px-2.5 rounded-full bg-[#F7F4FF] text-[#7A27FF] font-semibold">{p.team}</span>
+                  <span>{p.location}</span>
+                </div>
+                <p class="mt-3 text-[14px] text-[#6E7782] leading-relaxed max-w-2xl">
+                  {p.desc}
+                </p>
+              </div>
+              <a
+                href={`mailto:careers@fluxa.example.com?subject=申请：${p.title}`}
+                class="shrink-0 inline-flex items-center justify-center h-10 px-5 rounded-full border border-[#E4E7EB] bg-white text-[#181E25] text-[13px] font-medium hover:border-[#181E25] transition-colors"
+              >
+                申请 →
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

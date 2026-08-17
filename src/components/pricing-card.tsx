@@ -7,12 +7,15 @@ interface Tier {
   price: string;
   period: string;
   originalPrice?: string;
+  serviceFee?: string;
   features: string[];
   recommended: boolean;
   ctaLabel: string;
 }
 
 export function PricingCard({ tier }: { tier: Tier }) {
+  const hasOriginal = Boolean(tier.originalPrice);
+  const hasFee = Boolean(tier.serviceFee);
   return (
     <div
       className={`relative rounded-3xl p-8 transition-all flex flex-col ${
@@ -27,13 +30,27 @@ export function PricingCard({ tier }: { tier: Tier }) {
         </Badge>
       )}
       <h3 className={`text-[20px] font-bold tracking-tight ${tier.recommended ? 'text-white' : 'text-[#181E25]'}`}>{tier.name}</h3>
-      <div className="mt-5 flex items-baseline gap-1">
-        <span className={`text-[48px] font-bold tracking-[-0.025em] tnum leading-none ${tier.recommended ? 'text-white' : 'text-[#181E25]'}`}>{tier.price}</span>
-        <span className={`text-[14px] ${tier.recommended ? 'text-white/80' : 'text-[#6E7782]'}`}>{tier.period}</span>
+
+      {/* 两栏布局: 左 大字价格 / 右 官方价 + 服务费 (minimaxi.com 风格) */}
+      <div className="mt-5 grid grid-cols-[1fr_auto] items-end gap-4">
+        <div>
+          <div className={`text-[48px] font-bold tracking-[-0.025em] tnum leading-none ${tier.recommended ? 'text-white' : 'text-[#181E25]'}`}>
+            {tier.price}
+          </div>
+          {tier.period && (
+            <div className={`mt-1 text-[13px] ${tier.recommended ? 'text-white/80' : 'text-[#6E7782]'}`}>
+              {tier.period}
+            </div>
+          )}
+        </div>
+        {(hasOriginal || hasFee) && (
+          <div className={`text-right text-[12px] tnum space-y-0.5 ${tier.recommended ? 'text-white/80' : 'text-[#6E7782]'}`}>
+            {hasOriginal && <div>官方 ${tier.originalPrice}</div>}
+            {hasFee && <div>服务费 ${tier.serviceFee}</div>}
+          </div>
+        )}
       </div>
-      {tier.originalPrice && (
-        <div className={`mt-2 text-[12px] tnum ${tier.recommended ? 'text-white/80' : 'text-[#6E7782]'}`}>{tier.originalPrice}</div>
-      )}
+
       <ul className={`mt-7 space-y-3 text-[14px] flex-1 ${tier.recommended ? 'text-white/95' : 'text-[#181E25]'}`}>
         {tier.features.map((f, i) => (
           <li key={i} className="flex gap-2.5">

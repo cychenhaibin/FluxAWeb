@@ -1,0 +1,44 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const posts = [
+  { slug: 'fast-fulfillment', title: '5 分钟极速到账：我们的订单系统重构之路', date: '2026-07-01', tag: '工程实践', summary: '我们重构了订单系统，实现 5 分钟极速到账，特殊情况下 30 分钟内人工处理。' },
+  { slug: 'transparent-pricing', title: '$3 服务费透明计费：为什么我们只收这么多', date: '2026-06-20', tag: '价格政策', summary: '我们坚持透明计费，每单仅 $3 服务费，无隐藏费用，所有渠道一视同仁。' },
+  { slug: 'o1-pro-mode', title: 'OpenAI o1 pro 模式正式支持', date: '2026-06-10', tag: '技术', summary: 'Pro 100 套餐已正式支持 o1 pro 深度推理模式，欢迎体验。' },
+  { slug: 'sonnet-4-5', title: 'Anthropic Sonnet 4.5 发布', date: '2026-05-25', tag: '行业', summary: 'Sonnet 4.5 已正式发布，Max 5x/20x 套餐同步支持。' },
+];
+---
+<BaseLayout title="博客 - FluxA">
+  <section class="bg-white pt-24 pb-12">
+    <div class="container-fluid text-center max-w-4xl mx-auto">
+      <h1 class="heading-display text-[clamp(2.5rem,7vw,5rem)] text-balance">
+        FluxA <span class="gradient-purple-text">博客</span>
+      </h1>
+      <p class="mt-6 text-[18px] md:text-[20px] text-[#6E7782] leading-relaxed max-w-2xl mx-auto">
+        工程实践 / 价格政策 / 行业资讯 / 技术解读
+      </p>
+    </div>
+  </section>
+
+  <section class="pb-24 bg-white">
+    <div class="container-fluid max-w-4xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {posts.map((p) => (
+          <a
+            href={`/blog/${p.slug}`}
+            class="group block rounded-3xl bg-white border border-[#E4E7EB] p-6 hover:border-[#181E25] transition-all"
+          >
+            <div class="text-[11px] uppercase tracking-[0.2em] text-[#7A27FF] font-semibold">{p.tag}</div>
+            <h2 class="mt-2 text-[20px] font-bold text-[#181E25] tracking-tight text-balance group-hover:text-[#7A27FF] transition-colors">
+              {p.title}
+            </h2>
+            <p class="mt-2 text-[14px] text-[#6E7782] leading-relaxed text-pretty">
+              {p.summary}
+            </p>
+            <div class="mt-4 text-[12px] text-[#6E7782]">{p.date}</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

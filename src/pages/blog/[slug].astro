@@ -1,0 +1,37 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  // 内联文章清单（与 news.astro 保持一致）
+  const posts = [
+    { slug: 'fast-fulfillment', title: '5 分钟极速到账：我们的订单系统重构之路', date: '2026-07-01', tag: '工程实践', summary: '我们重构了订单系统，实现 5 分钟极速到账，特殊情况下 30 分钟内人工处理。', content: '我们最近完成了订单系统的全面重构，将自动开通时间从 30 分钟压缩到 5 分钟。' },
+    { slug: 'transparent-pricing', title: '$3 服务费透明计费：为什么我们只收这么多', date: '2026-06-20', tag: '价格政策', summary: '我们坚持透明计费，每单仅 $3 服务费，无隐藏费用，所有渠道一视同仁。', content: '很多用户问我们为什么只收 $3 服务费。这个价格是基于真实成本的合理利润。' },
+    { slug: 'o1-pro-mode', title: 'OpenAI o1 pro 模式正式支持', date: '2026-06-10', tag: '技术', summary: 'Pro 100 套餐已正式支持 o1 pro 深度推理模式，欢迎体验。', content: 'o1 pro 模式是 OpenAI 的深度推理模型，适合复杂分析场景。' },
+    { slug: 'sonnet-4-5', title: 'Anthropic Sonnet 4.5 发布', date: '2026-05-25', tag: '行业', summary: 'Sonnet 4.5 已正式发布，Max 5x/20x 套餐同步支持。', content: 'Sonnet 4.5 在编码、推理、agent 任务上全面提升。' },
+  ];
+  return posts.map((p) => ({ params: { slug: p.slug }, props: { post: p } }));
+}
+
+const { post } = Astro.props;
+---
+<BaseLayout title={`${post.title} - FluxA 博客`} description={post.summary}>
+  <article class="bg-white pt-20 pb-24">
+    <div class="container-fluid max-w-3xl">
+      <a href="/news" class="inline-flex items-center text-[14px] text-[#6E7782] hover:text-[#181E25] transition-colors mb-8">
+        ← 返回行业动态
+      </a>
+      <div class="text-[11px] uppercase tracking-[0.2em] text-[#7A27FF] font-semibold">{post.tag}</div>
+      <h1 class="mt-3 heading-display text-[clamp(2rem,5vw,3.5rem)] text-balance">
+        {post.title}
+      </h1>
+      <div class="mt-5 text-[14px] text-[#6E7782]">{post.date} · FluxA 团队</div>
+      <p class="mt-10 text-[18px] md:text-[20px] text-[#181E25] leading-relaxed text-pretty">
+        {post.summary}
+      </p>
+      <div class="mt-10 prose prose-lg max-w-none text-[#181E25]">
+        <p>{post.content}</p>
+        <p class="mt-5">更多内容正在整理中，敬请期待。</p>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

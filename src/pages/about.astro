@@ -1,0 +1,108 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const values = [
+  {
+    icon: 'ShieldCheck',
+    title: '透明定价',
+    desc: '官方价 + 仅 $3 服务费，所有套餐一视同仁，无隐藏费用。',
+  },
+  {
+    icon: 'Zap',
+    title: '极速体验',
+    desc: '5 分钟内自动开通，特殊情况下 30 分钟内人工处理。',
+  },
+  {
+    icon: 'Headphones',
+    title: '7×24 客服',
+    desc: '真人客服在线响应，紧急工单 5 分钟内回复。',
+  },
+];
+
+const stats = [
+  { num: '2000+', label: '服务 AI 团队' },
+  { num: '5min', label: '极速到账' },
+  { num: '7×24', label: '真人客服' },
+  { num: '$3', label: '透明服务费' },
+];
+---
+<BaseLayout title="关于我们 - FluxA" description="FluxA 致力于为开发者和团队提供稳定、极速、可观测的 AI 服务。">
+  <!-- Hero -->
+  <section class="bg-white pt-24 pb-12">
+    <div class="container-fluid text-center max-w-4xl mx-auto">
+      <h1 class="heading-display text-[clamp(3rem,7vw,6rem)] text-balance">
+        关于 <span class="gradient-purple-text">FluxA</span>
+      </h1>
+      <p class="mt-6 text-[18px] md:text-[20px] text-[#6E7782] leading-relaxed max-w-2xl mx-auto">
+        AI 服务，一站搞定
+      </p>
+    </div>
+  </section>
+
+  <!-- 公司介绍 -->
+  <section class="bg-white pb-12">
+    <div class="container-fluid max-w-3xl">
+      <p class="text-[16px] md:text-[17px] text-[#181E25] leading-[1.8]">
+        FluxA 成立于 2026 年，是一家专注于 AI 服务交付的团队。
+      </p>
+      <p class="mt-5 text-[15px] md:text-[16px] text-[#6E7782] leading-[1.8]">
+        我们从 ChatGPT / Claude 官方价直充起步，逐步扩展到 MiniMax Max 拼车（Claude Max 团队账号拼车）和自营 AI 聚合 API 平台，覆盖开发者、创业团队、企业客户对 AI 服务的全部需求。
+      </p>
+      <p class="mt-5 text-[15px] md:text-[16px] text-[#6E7782] leading-[1.8]">
+        我们坚持透明计费（官方价 + 仅 $3 服务费）、极速交付（5 分钟到账）、7×24 真人客服，让 AI 服务像水电一样即开即用。
+      </p>
+    </div>
+  </section>
+
+  <!-- 4 数字统计 -->
+  <section class="py-16 bg-[#F7F8FA] border-y border-[#E4E7EB]">
+    <div class="container-fluid">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+        {stats.map((s) => (
+          <div class="text-center">
+            <div class="text-[clamp(2rem,4vw,3rem)] font-bold text-[#181E25] tracking-[-0.02em] tnum leading-none">
+              {s.num}
+            </div>
+            <div class="mt-2 text-[12px] text-[#6E7782]">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 价值卡 -->
+  <section class="py-24 bg-white">
+    <div class="container-fluid max-w-5xl">
+      <h2 class="heading-display text-[clamp(2rem,5vw,3.5rem)] text-center text-balance">
+        我们的 <span class="gradient-pink-orange-text">价值观</span>
+      </h2>
+      <div class="mt-14 grid grid-cols-1 md:grid-cols-3 gap-5">
+        {values.map((v) => (
+          <div class="rounded-3xl bg-white border border-[#E4E7EB] p-7 hover:border-[#181E25] transition-colors">
+            <div class="inline-flex h-12 w-12 rounded-2xl gradient-purple items-center justify-center text-white">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                {v.icon === 'ShieldCheck' && <><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></>}
+                {v.icon === 'Zap' && <><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></>}
+                {v.icon === 'Headphones' && <><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3" /></>}
+              </svg>
+            </div>
+            <h3 class="mt-5 text-[18px] font-bold text-[#181E25] tracking-tight">{v.title}</h3>
+            <p class="mt-2 text-[14px] text-[#6E7782] leading-relaxed">{v.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-white">
+    <div class="container-fluid text-center max-w-2xl">
+      <a
+        href="/contact"
+        class="inline-flex items-center justify-center h-12 px-8 rounded-full bg-[#181E25] text-white text-[15px] font-medium hover:bg-[#0a0d12] transition-colors min-w-[160px]"
+      >
+        联系商务
+      </a>
+    </div>
+  </section>
+</BaseLayout>
